@@ -3,9 +3,7 @@
   "globals": {   
     "window": true,
     "browser": true,
-    "node": true,
-    "atob": "readable",
-    "FormData": "readable"
+    "node": true
   },
   "rules": {
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
