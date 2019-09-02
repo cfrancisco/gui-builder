@@ -1,16 +1,14 @@
-import React from 'react';
-
+import React from "react";
 
 function applyTheme(WrappedComponent, hookStyle) {
-    return (props) => {
-        const classes = hookStyle();
-        console.log("Button",WrappedComponent);
-        return (
-            <WrappedComponent className={classes.root} {...props}>
-    {props.children} 
-    </WrappedComponent>
+  return props => {
+    const classes = hookStyle();
+    return (
+      <WrappedComponent className={classes.root} {...props}>
+        {props.children}
+      </WrappedComponent>
     );
-}
+  };
 }
 
 export default applyTheme;
