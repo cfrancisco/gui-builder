@@ -1,12 +1,15 @@
 {
   "extends": "airbnb",
-  "globals": {   
+  "globals": {
     "window": true,
     "browser": true,
-    "node": true
+    "node": true,
+    "document": true
   },
   "rules": {
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/jsx-filename-extension": [1, {
+      "extensions": [".js", ".jsx"]
+    }],
     "indent": ["error", 4],
     "react/jsx-indent": ["error", 4],
     "react/jsx-indent-props": ["error", 4],

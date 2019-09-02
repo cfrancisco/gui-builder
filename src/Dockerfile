@@ -1,6 +1,5 @@
 # stage: 1
-FROM node:latest as basis
-
+FROM node:10 as basis
 # Create app directory
 WORKDIR /app
 

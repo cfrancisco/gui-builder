@@ -1,14 +1,27 @@
-import React from "react";
-import { makeStyles } from "@material-ui/styles";
-import applyTheme from "./../utils";
-import styles from "./_styles";
+import React from 'react';
+import { makeStyles } from '@material-ui/styles';
+import PropTypes from 'prop-types';
+import applyTheme from '../utils';
+import styles from './_styles';
 
 const useStyles = makeStyles(styles);
 
 function customButton(props) {
-  return <button {...props}>{props.children}</button>;
+    const { children } = props;
+    return (
+        <button type="button" {...props}>
+            {children}
+        </button>
+    );
 }
 
-const CustomButton = applyTheme(customButton, useStyles);
+customButton.propTypes = {
+    children: PropTypes.shape({}),
+};
 
-export default CustomButton;
+customButton.defaultProps = {
+    children: '',
+};
+
+
+export default applyTheme(customButton, useStyles);

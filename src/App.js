@@ -1,23 +1,19 @@
-import React, { Component } from "react";
-import { createMuiTheme } from "@material-ui/core/styles";
-import { ThemeProvider } from "@material-ui/styles";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import Main from "./Pages/Main";
-import myStyles from "./theme";
+import React from 'react';
+import { createMuiTheme } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/styles';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Main from './Pages/Main';
+import myStyles from './theme';
 
 const miTheme = createMuiTheme(myStyles);
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
+const App = () => (
+    <div className="App">
         <CssBaseline />
         <ThemeProvider theme={miTheme}>
-          <Main />
+            <Main />
         </ThemeProvider>
-      </div>
-    );
-  }
-}
+    </div>
+);
 
 export default App;
