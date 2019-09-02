@@ -7,12 +7,34 @@
     "document": true
   },
   "rules": {
-    "react/jsx-filename-extension": [1, {
-      "extensions": [".js", ".jsx"]
-    }],
-    "indent": ["error", 4],
-    "react/jsx-indent": ["error", 4],
-    "react/jsx-indent-props": ["error", 4],
+    "react/jsx-props-no-spreading": [
+      {
+        "html": "enforce",
+        "custom": "ignore",
+        "exceptions": []
+      }
+    ],
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [
+          ".js",
+          ".jsx"
+        ]
+      }
+    ],
+    "indent": [
+      "error",
+      4
+    ],
+    "react/jsx-indent": [
+      "error",
+      4
+    ],
+    "react/jsx-indent-props": [
+      "error",
+      4
+    ],
     "import/extensions": "off",
     "import/no-unresolved": "off",
     "class-methods-use-this": 0,
