@@ -1,7 +1,6 @@
 import React from 'react';
-import withStyles from '@material-ui/styles/withStyles';
+import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import PropTypes from 'prop-types';
 import Topbar from '../Components/Topbar/Topbar';
 
 const styles = theme => ({
@@ -18,8 +17,11 @@ const styles = theme => ({
     },
 });
 
-const Cards = (props) => {
-    const { classes } = props;
+const useStyles = makeStyles(styles);
+
+const Cards = () => {
+    const classes = useStyles();
+
     return (
         <>
             <Topbar />
@@ -38,9 +40,5 @@ const Cards = (props) => {
     );
 };
 
-Cards.propTypes = {
-    props: PropTypes.shape({}).isRequired,
-};
 
-
-export default withStyles(styles)(Cards);
+export default Cards;

@@ -9,6 +9,7 @@ export default () => (
             <Route exact path="/" component={Main} />
             {/* <Route exact path="/signup" component={Signup} /> */}
             <Route exact path="/cards" component={Cards} />
+            {/* <Route exact path="/maps" component={Maps} /> */}
         </Switch>
     </HashRouter>
 );
