@@ -20,7 +20,7 @@ customButton.propTypes = {
 };
 
 customButton.defaultProps = {
-    children: '',
+    children: {},
 };
 
 

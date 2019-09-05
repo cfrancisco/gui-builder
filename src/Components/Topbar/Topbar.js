@@ -38,17 +38,6 @@ const useStyles = makeStyles(theme => ({
         },
 
     },
-    tabContainer: {
-        marginLeft: 32,
-        [theme.breakpoints.down('sm')]: {
-            display: 'none',
-        },
-    },
-    tabItem: {
-        paddingTop: 20,
-        paddingBottom: 20,
-        minWidth: 'auto',
-    },
 }));
 
 const Topbar = ({ handleDrawerToggle, open }) => {
@@ -87,7 +76,7 @@ const Topbar = ({ handleDrawerToggle, open }) => {
 };
 
 Topbar.propTypes = {
-    handleDrawerToggle: PropTypes.shape({}).isRequired,
+    handleDrawerToggle: PropTypes.func.isRequired,
     open: PropTypes.bool.isRequired,
 };
 

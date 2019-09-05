@@ -24,15 +24,10 @@ const LayoutBase = (props) => {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
 
-    function handleDrawerOpen() {
-        setOpen(true);
-    }
-
     function handleDrawerToggle() {
         console.log('handleDrawerToggle', open);
         setOpen(!open);
     }
-
 
     function handleDrawerClose() {
         setOpen(false);
