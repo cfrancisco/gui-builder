@@ -14,17 +14,17 @@ const Menu = [
     },
     {
         label: 'Maps',
-        pathname: '/Maps',
+        pathname: '/maps',
         icon: null,
     },
     {
         label: 'Forms',
-        pathname: '/Forms',
+        pathname: '/forms',
         icon: null,
     },
     {
-        label: 'About',
-        pathname: '/About',
+        label: 'Cards',
+        pathname: '/cards',
         icon: null,
     },
 ];

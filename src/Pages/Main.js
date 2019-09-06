@@ -5,7 +5,6 @@ import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import Loader from '../Components/Loader/Loader';
 import { DojotButton, CleanButton, CustomButton } from '../Components/Button';
-import LayoutBase from './LayoutBase';
 
 function Checkboxes() {
     return (
@@ -36,7 +35,4 @@ const Main = () => (
     </Container>
 );
 
-const MainPage = () => (
-    <LayoutBase><Main /></LayoutBase>
-);
-export default MainPage;
+export default Main;

@@ -1,7 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import Topbar from '../Components/Topbar/Topbar';
 
 const styles = theme => ({
     root: {
@@ -23,22 +22,18 @@ const Cards = () => {
     const classes = useStyles();
 
     return (
-        <>
-            <Topbar />
-            <div className={classes.root}>
-                <Grid container justify="center">
-                    <Grid spacing={24} alignItems="center" justify="center" container className={classes.grid}>
-                        <Grid item xs={12}>
-                            Sample
-                            {/* <SectionHeader title="Cards" subtitle="One page with a list of a collection" /> */}
-                            {/* <CardItem /> */}
-                        </Grid>
+        <div className={classes.root}>
+            <Grid container justify="center">
+                <Grid spacing={24} alignItems="center" justify="center" container className={classes.grid}>
+                    <Grid item xs={12}>
+                        Sample
+                        {/* <SectionHeader title="Cards" subtitle="One page with a list of a collection" /> */}
+                        {/* <CardItem /> */}
                     </Grid>
                 </Grid>
-            </div>
-        </>
+            </Grid>
+        </div>
     );
 };
-
 
 export default Cards;
