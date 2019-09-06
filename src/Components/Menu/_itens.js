@@ -10,22 +10,22 @@ const Menu = [
     {
         label: 'Dashboard',
         pathname: '/dashboard',
-        icon: null,
+        icon: <InboxIcon />,
     },
     {
         label: 'Maps',
         pathname: '/maps',
-        icon: null,
+        icon: <InboxIcon />,
     },
     {
         label: 'Forms',
         pathname: '/forms',
-        icon: null,
+        icon: <InboxIcon />,
     },
     {
         label: 'Cards',
         pathname: '/cards',
-        icon: null,
+        icon: <InboxIcon />,
     },
 ];
 

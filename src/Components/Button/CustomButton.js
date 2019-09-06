@@ -16,7 +16,10 @@ function customButton(props) {
 }
 
 customButton.propTypes = {
-    children: PropTypes.shape({}),
+    children: PropTypes.oneOfType([
+        PropTypes.arrayOf(PropTypes.node),
+        PropTypes.node,
+    ]),
 };
 
 customButton.defaultProps = {

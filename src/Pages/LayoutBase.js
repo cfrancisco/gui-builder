@@ -25,7 +25,6 @@ const LayoutBase = (props) => {
     const [open, setOpen] = React.useState(false);
 
     function handleDrawerToggle() {
-        console.log('handleDrawerToggle', open);
         setOpen(!open);
     }
 
@@ -50,7 +49,10 @@ const LayoutBase = (props) => {
 
 
 LayoutBase.propTypes = {
-    children: PropTypes.element.isRequired,
+    children: PropTypes.oneOfType([
+        PropTypes.arrayOf(PropTypes.node),
+        PropTypes.node,
+    ]).isRequired,
 };
 
 export default LayoutBase;
