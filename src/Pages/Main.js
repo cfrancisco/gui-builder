@@ -3,8 +3,12 @@ import { Button } from '@material-ui/core';
 import Checkbox from '@material-ui/core/Checkbox';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
+import { DatePicker } from 'antd';
 import Loader from '../Components/Loader/Loader';
+import Avatar from '../Components/Avatar/Avatar';
 import { DojotButton, CleanButton, CustomButton } from '../Components/Button';
+import 'antd/dist/antd.css';
+
 
 function Checkboxes() {
     return (
@@ -14,6 +18,10 @@ function Checkboxes() {
             <Checkbox defaultChecked color="secondary" />
         </>
     );
+}
+
+function onChange() {
+    // console.log(date, dateString);
 }
 
 
@@ -31,6 +39,8 @@ const Main = () => (
         <DojotButton a="x">DojotButton</DojotButton>
         <CustomButton a="x">CustomButton</CustomButton>
         <Button> Material Button</Button>
+        <DatePicker onChange={onChange} />
+        <Avatar />
         <Loader />
     </Container>
 );

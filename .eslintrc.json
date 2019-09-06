@@ -4,7 +4,8 @@
     "window": true,
     "browser": true,
     "node": true,
-    "document": true
+    "document": true,
+    "FileReader": true
   },
   "rules": {
     "react/jsx-props-no-spreading": [
