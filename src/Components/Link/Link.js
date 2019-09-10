@@ -7,15 +7,16 @@ const Link = ({ active, children, onClick }) => {
     }
 
     return (
-        <a
-            href=""
-            onClick={e => {
-                e.preventDefault();
-                onClick();
+        <button
+            type="button"
+            onClick={onClick}
+            disabled={active}
+            style={{
+                marginLeft: '4px',
             }}
         >
             {children}
-        </a>
+        </button>
     );
 };
 
