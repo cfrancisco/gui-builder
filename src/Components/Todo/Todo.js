@@ -1,14 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { ListItem, ListItemText } from '@material-ui/core';
+
+function ListItemLink(props) {
+    return <ListItem button component="a" {...props} />;
+}
+
 const Todo = ({ onClick, completed, text }) => (
-    <li
-        type="button"
+    <ListItemLink
         onClick={onClick}
-        style={{ textDecoration: completed ? 'line-through' : 'none' }}
+        style={{ padding: '0' }}
     >
-        {text}
-    </li>
+        <ListItemText
+            primary={text}
+            style={{ textDecoration: completed ? 'line-through' : 'none' }}
+        />
+    </ListItemLink>
 );
 
 Todo.propTypes = {

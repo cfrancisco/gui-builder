@@ -1,5 +1,6 @@
 import React from 'react';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
+import List from '@material-ui/icons/List';
 
 const Menu = [
     {
@@ -26,6 +27,11 @@ const Menu = [
         label: 'Cards',
         pathname: '/cards',
         icon: <InboxIcon />,
+    },
+    {
+        label: 'Todo List',
+        pathname: '/todo',
+        icon: <List />,
     },
 ];
 
