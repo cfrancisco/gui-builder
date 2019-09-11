@@ -29,7 +29,6 @@ const AddTodo = ({ dispatch }) => {
                     <Input
                         id="todo-text"
                         label="Todo"
-                        // value=""
                         inputRef={node => (input = node)}
                         margin="normal"
                     />
