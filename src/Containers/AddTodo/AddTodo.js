@@ -1,5 +1,5 @@
 import React from 'react';
-import { Input } from '@material-ui/core';
+import { TextField } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import { connect } from 'react-redux';
 
@@ -26,7 +26,7 @@ const AddTodo = ({ dispatch }) => {
                 spacing={2}
             >
                 <Grid item xs={3}>
-                    <Input
+                    <TextField
                         id="todo-text"
                         label="Todo"
                         inputRef={node => (input = node)}
