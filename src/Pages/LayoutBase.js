@@ -9,14 +9,26 @@ import Menu from '../Components/Menu/Menu';
 const useStyles = makeStyles(theme => ({
     root: {
         display: 'flex',
+        flexGrow: 1,
+
     },
-    drawerHeader: {
+    content: {
         display: 'flex',
-        alignItems: 'center',
-        padding: theme.spacing(0, 1),
-        ...theme.mixins.toolbar,
-        justifyContent: 'flex-end',
+        width: '100%',
     },
+    containerBase: {
+        flexGrow: 1,
+        marginTop: 70,
+        width: 'calc(100% - 240px)',
+        display: 'flex',
+    },
+    container100:
+    {
+        flexGrow: 1,
+        marginTop: 70,
+        display: 'flex',
+        width: '100%',
+    }
 }));
 
 
@@ -37,13 +49,13 @@ const LayoutBase = (props) => {
         <div className={classes.root}>
             <CssBaseline />
             <Topbar open={open} handleDrawerToggle={handleDrawerToggle} />
-            <Menu open={open} handleDrawerClose={handleDrawerClose} />
-
-            <div className={classes.drawerHeader} />
-            <Container>
-                {children}
-            </Container>
-        </div>
+            <div className={classes.content}>
+                <Menu open={open} handleDrawerClose={handleDrawerClose} />
+                <Container className={open ? classes.containerBase : classes.container100}>
+                    {children}
+                </Container>
+            </div>
+        </div >
     );
 };
 

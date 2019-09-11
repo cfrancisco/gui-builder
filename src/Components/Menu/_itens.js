@@ -1,32 +1,48 @@
 import React from 'react';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
 import List from '@material-ui/icons/List';
+import Inbox from '@material-ui/icons/MoveToInbox';
+import Dashboard from '@material-ui/icons/Dashboard';
+import Map from '@material-ui/icons/Map';
+import Circles from '@material-ui/icons/ScatterPlot';
+import Notes from '@material-ui/icons/Notes';
+
+// uses https://www.npmjs.com/package/@material-ui/icons to find the icons
 
 const Menu = [
     {
         label: 'Home',
         pathname: '/',
-        icon: <InboxIcon />,
+        icon: <Inbox />,
     },
     {
         label: 'Dashboard',
         pathname: '/dashboard',
-        icon: <InboxIcon />,
+        icon: <Dashboard />,
     },
     {
         label: 'Maps',
         pathname: '/maps',
-        icon: <InboxIcon />,
+        icon: <Map />,
+    },
+    {
+        label: 'To do list',
+        pathname: '/Todolist',
+        icon: <Notes />,
+    },
+    {
+        label: 'Bit',
+        pathname: '/external',
+        icon: <Circles />,
     },
     {
         label: 'Forms',
         pathname: '/forms',
-        icon: <InboxIcon />,
+        icon: <Inbox />,
     },
     {
         label: 'Cards',
         pathname: '/cards',
-        icon: <InboxIcon />,
+        icon: <Inbox />,
     },
     {
         label: 'Todo List',
