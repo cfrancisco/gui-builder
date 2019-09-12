@@ -15,19 +15,19 @@ const styles = theme => ({
     },
     gridItem: {
         minheight: 250,
-        alignItems: "stretch",
+        alignItems: 'stretch',
 
     },
     grid: {
-        alignItems: "stretch",
+        alignItems: 'stretch',
         [theme.breakpoints.down('sm')]: {
             width: 'calc(100% - 20px)'
         },
     },
     paper: {
-        height: "100%",
+        height: '100%',
         padding: theme.spacing(3),
-        overflow: "hidden",
+        overflow: 'hidden',
         textAlign: 'left',
         color: theme.palette.text.secondary,
     },
@@ -52,54 +52,56 @@ const External = () => {
 
     return (
         <div className={classes.root}>
-            <Grid container justify="center">
-                <Grid spacing={4} alignItems="center" justify="center" container className={classes.grid}>
-                    <Grid className={classes.gridItem} item xs={12} md={4}>
-                        <Card className={classes.card}>
-                            <CardContent>
-                                <Typography className={classes.title} color="textSecondary" gutterBottom>
-                                    Word of the Day
+            <Grid spacing={4}
+                alignItems="center"
+                justify="center"
+                container
+                className={classes.grid}>
+                <Grid className={classes.gridItem} item xs={12} md={4}>
+                    <Card className={classes.card}>
+                        <CardContent>
+                            <Typography className={classes.title} color="textSecondary" gutterBottom>
+                                Word of the Day
         </Typography>
-                                <Typography variant="h5" component="h2">
-                                    be
+                            <Typography variant="h5" component="h2">
+                                be
           {bull}
-                                    nev
+                                nev
           {bull}o{bull}
-                                    lent
+                                lent
         </Typography>
-                                <Typography className={classes.pos} color="textSecondary">
-                                    adjective
+                            <Typography className={classes.pos} color="textSecondary">
+                                adjective
         </Typography>
-                                <Typography variant="body2" component="p">
-                                    well meaning and kindly.
+                            <Typography variant="body2" component="p">
+                                well meaning and kindly.
           <br />
-                                    {'"a benevolent smile"'}
-                                </Typography>
-                            </CardContent>
-                            <CardActions>
-                                <Button size="small">Learn More</Button>
-                            </CardActions>
-                        </Card>
-                    </Grid>
-                    <Grid className={classes.gridItem} item xs={12} md={8}>
-                        <Paper className={classes.paper}>
-                            <div className={classes.box}>
-                                <Typography style={{ textTransform: 'uppercase' }} color='secondary' gutterBottom>
-                                    Another box
+                                {'"a benevolent smile"'}
+                            </Typography>
+                        </CardContent>
+                        <CardActions>
+                            <Button size="small">Learn More</Button>
+                        </CardActions>
+                    </Card>
+                </Grid>
+                <Grid className={classes.gridItem} item xs={12} md={8}>
+                    <Paper className={classes.paper}>
+                        <div className={classes.box}>
+                            <Typography style={{ textTransform: 'uppercase' }} color='secondary' gutterBottom>
+                                Another box
                     </Typography>
-                                <Typography variant="body1" gutterBottom>
-                                    A default box
+                            <Typography variant="body1" gutterBottom>
+                                A default box
                     </Typography>
-                            </div>
-                        </Paper>
-                    </Grid>
-                    <Grid className={classes.gridItem} item xs={12}>
-                        <Paper className={classes.paper}>
-                            <div>
-                                Full box
+                        </div>
+                    </Paper>
+                </Grid>
+                <Grid className={classes.gridItem} item xs={12}>
+                    <Paper className={classes.paper}>
+                        <div>
+                            Full box
                                     </div>
-                        </Paper>
-                    </Grid>
+                    </Paper>
                 </Grid>
             </Grid>
         </div>

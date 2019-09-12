@@ -36,6 +36,13 @@
       "error",
       4
     ],
+    "quotes": [
+      2,
+      "single",
+      {
+        "avoidEscape": true
+      }
+    ],
     "import/extensions": "off",
     "import/no-unresolved": "off",
     "class-methods-use-this": 0,

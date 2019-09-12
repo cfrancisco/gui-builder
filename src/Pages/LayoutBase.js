@@ -10,7 +10,6 @@ const useStyles = makeStyles(theme => ({
     root: {
         display: 'flex',
         flexGrow: 1,
-
     },
     content: {
         display: 'flex',
@@ -19,15 +18,7 @@ const useStyles = makeStyles(theme => ({
     containerBase: {
         flexGrow: 1,
         marginTop: 70,
-        width: 'calc(100% - 240px)',
         display: 'flex',
-    },
-    container100:
-    {
-        flexGrow: 1,
-        marginTop: 70,
-        display: 'flex',
-        width: '100%',
     }
 }));
 
@@ -51,7 +42,8 @@ const LayoutBase = (props) => {
             <Topbar open={open} handleDrawerToggle={handleDrawerToggle} />
             <div className={classes.content}>
                 <Menu open={open} handleDrawerClose={handleDrawerClose} />
-                <Container className={open ? classes.containerBase : classes.container100}>
+                <Container
+                    className={classes.containerBase}>
                     {children}
                 </Container>
             </div>

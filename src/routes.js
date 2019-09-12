@@ -14,7 +14,6 @@ export default () => (
                 {/* <Route exact path="/signup" component={Signup} /> */}
                 <Route exact path="/external" component={External} />
                 <Route exact path="/cards" component={Cards} />
-                {/* <Route exact path="/maps" component={Maps} /> */}
                 <Route exact path="/todo" component={TodoList} />
                 {/* <Route exact path="/maps" component={Maps} /> */}
             </LayoutBase>

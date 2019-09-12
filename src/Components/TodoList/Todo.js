@@ -1,10 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
 import { ListItem, ListItemText } from '@material-ui/core';
 
 function ListItemLink(props) {
-    return <ListItem button component="a" {...props} />;
+    return <ListItem button {...props} />;
 }
 
 const Todo = ({ onClick, completed, text }) => (
