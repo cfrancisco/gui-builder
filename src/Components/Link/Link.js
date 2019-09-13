@@ -4,7 +4,15 @@ import Link from '@material-ui/core/Link';
 
 const LinkButton = ({ active = false, children, onClick }) => {
     if (active) {
-        return (<span>{children}</span>);
+        return (
+        <span
+            style={{
+                marginLeft: '6px',
+                marginRight: '6px',
+            }}
+        >
+            {children}
+        </span>);
     }
 
     return (
