@@ -64,7 +64,8 @@ const DashboardLayout = (props) => {
     };
 
     const generateDOM = () => {
-        // Generating the items with properties from the layout, rather than pass the layout directly
+        // Generating the items with properties from the layout,
+        // rather than pass the layout directly
         const layout = items;
         return layout.map(el => (
             <div key={el.i} data-grid={el}>

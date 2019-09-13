@@ -6,7 +6,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Topbar from '../Components/Topbar/Topbar';
 import Menu from '../Components/Menu/Menu';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(() => ({
     root: {
         display: 'flex',
         flexGrow: 1,
@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
         flexGrow: 1,
         marginTop: 70,
         display: 'flex',
-    }
+    },
 }));
 
 
@@ -43,11 +43,12 @@ const LayoutBase = (props) => {
             <div className={classes.content}>
                 <Menu open={open} handleDrawerClose={handleDrawerClose} />
                 <Container
-                    className={classes.containerBase}>
+                    className={classes.containerBase}
+                >
                     {children}
                 </Container>
             </div>
-        </div >
+        </div>
     );
 };
 
