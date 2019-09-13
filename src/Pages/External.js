@@ -11,7 +11,7 @@ import CardContent from '@material-ui/core/CardContent';
 const styles = theme => ({
     root: {
         flexGrow: 1,
-        paddingTop: 20
+        paddingTop: 20,
     },
     gridItem: {
         minheight: 250,
@@ -21,7 +21,7 @@ const styles = theme => ({
     grid: {
         alignItems: 'stretch',
         [theme.breakpoints.down('sm')]: {
-            width: 'calc(100% - 20px)'
+            width: 'calc(100% - 20px)',
         },
     },
     paper: {
@@ -52,30 +52,34 @@ const External = () => {
 
     return (
         <div className={classes.root}>
-            <Grid spacing={4}
+            <Grid
+                spacing={4}
                 alignItems="center"
                 justify="center"
                 container
-                className={classes.grid}>
+                className={classes.grid}
+            >
                 <Grid className={classes.gridItem} item xs={12} md={4}>
                     <Card className={classes.card}>
                         <CardContent>
                             <Typography className={classes.title} color="textSecondary" gutterBottom>
                                 Word of the Day
-        </Typography>
+                            </Typography>
                             <Typography variant="h5" component="h2">
                                 be
-          {bull}
+                                {bull}
                                 nev
-          {bull}o{bull}
+                                {bull}
+                                o
+                                {bull}
                                 lent
-        </Typography>
+                            </Typography>
                             <Typography className={classes.pos} color="textSecondary">
                                 adjective
-        </Typography>
+                            </Typography>
                             <Typography variant="body2" component="p">
                                 well meaning and kindly.
-          <br />
+                                <br />
                                 {'"a benevolent smile"'}
                             </Typography>
                         </CardContent>
@@ -87,12 +91,12 @@ const External = () => {
                 <Grid className={classes.gridItem} item xs={12} md={8}>
                     <Paper className={classes.paper}>
                         <div className={classes.box}>
-                            <Typography style={{ textTransform: 'uppercase' }} color='secondary' gutterBottom>
+                            <Typography style={{ textTransform: 'uppercase' }} color="secondary" gutterBottom>
                                 Another box
-                    </Typography>
+                            </Typography>
                             <Typography variant="body1" gutterBottom>
                                 A default box
-                    </Typography>
+                            </Typography>
                         </div>
                     </Paper>
                 </Grid>
@@ -100,7 +104,7 @@ const External = () => {
                     <Paper className={classes.paper}>
                         <div>
                             Full box
-                                    </div>
+                        </div>
                     </Paper>
                 </Grid>
             </Grid>
