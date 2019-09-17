@@ -1,7 +1,13 @@
 import React from 'react';
+import FlowerSpinner from '@bit/bondz.react-epic-spinners.flower-spinner';
 
-function _Loader() {
-    return <div />;
+function Loader() {
+    return (
+        <FlowerSpinner
+            color="#000000"
+            size={100}
+        />
+    );
 }
 
-export default _Loader;
+export default Loader;
