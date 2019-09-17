@@ -9,6 +9,7 @@
   },
   "rules": {
     "react/jsx-props-no-spreading": [
+      2,
       {
         "html": "enforce",
         "custom": "ignore",
@@ -35,6 +36,13 @@
     "react/jsx-indent-props": [
       "error",
       4
+    ],
+    "quotes": [
+      2,
+      "single",
+      {
+        "avoidEscape": true
+      }
     ],
     "import/extensions": "off",
     "import/no-unresolved": "off",

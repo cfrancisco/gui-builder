@@ -4,6 +4,8 @@ import Cards from './Pages/Cards';
 import Main from './Pages/Main';
 import LayoutBase from './Pages/LayoutBase';
 import TodoList from './Pages/TodoList';
+import External from './Pages/External';
+import Dashboard from './Pages/Dashboard';
 
 export default () => (
     <HashRouter>
@@ -11,9 +13,10 @@ export default () => (
             <LayoutBase>
                 <Route exact path="/" component={Main} />
                 {/* <Route exact path="/signup" component={Signup} /> */}
+                <Route exact path="/external" component={External} />
                 <Route exact path="/cards" component={Cards} />
-                {/* <Route exact path="/maps" component={Maps} /> */}
                 <Route exact path="/todo" component={TodoList} />
+                <Route exact path="/dashboard" component={Dashboard} />
                 {/* <Route exact path="/maps" component={Maps} /> */}
             </LayoutBase>
 
