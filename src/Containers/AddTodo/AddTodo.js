@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import {
     TextField,
     FormControl,
@@ -14,12 +13,6 @@ import { connect } from 'react-redux';
 import { addTodo } from './Action';
 
 import Button from '../../Components/Button/Button';
-
-const useStyles = makeStyles(theme => ({
-    formControl: {
-        margin: theme.spacing(3),
-    },
-}));
 
 class AddTodo extends Component {
     constructor(props) {
