@@ -25,6 +25,13 @@ const myStyles = {
         // Use the system font instead of the default Roboto font.
         fontFamily: ['"Lato"', 'sans-serif'].join(','),
     },
+    overrides: {
+        MuiButton: {
+            root: {
+                fontSize: '1rem',
+            },
+        },
+    },
 };
 
 export default myStyles;

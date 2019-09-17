@@ -38,7 +38,7 @@ const Menu = ({ open, handleDrawerClose }) => {
 
     return (
         <Drawer
-            className={classes.drawer}
+            className={open ? classes.drawer : classes.hide}
             variant="persistent"
             anchor="left"
             open={open}

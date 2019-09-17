@@ -1,36 +1,40 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
 
+import { makeStyles } from '@material-ui/core/styles';
 import { ListItem, ListItemText } from '@material-ui/core';
 
 function ListItemLink(props) {
-    return <ListItem button component="a" {...props} />;
+    return <ListItem button {...props} />;
 }
 
-const Todo = ({ onClick, completed, text, priority }) => {
+const Todo = ({
+    onClick,
+    completed,
+    text,
+    priority,
+}) => {
+    function mapPriorityToStyle() {
+        switch (priority) {
+        case 'high':
+            return 'red';
+        case 'medium':
+            return 'orange';
+        default:
+            return 'green';
+        }
+    }
 
     const useStyles = makeStyles({
         root: {
             textDecoration: completed ? 'line-through' : 'none',
-            backgroundColor: mapPriorityToStyle(priority)
+            backgroundColor: mapPriorityToStyle(),
         },
     });
 
     const classes = useStyles();
 
-    function mapPriorityToStyle(priority) {
-        switch (priority) {
-            case 'high':
-                return 'red';
-            case 'medium':
-                return 'orange';
-            default:
-                return 'green';
-        }
-    }
-
-    return (    
+    return (
         <ListItemLink
             onClick={onClick}
             priority={priority}
@@ -41,7 +45,7 @@ const Todo = ({ onClick, completed, text, priority }) => {
                 className={classes.root}
             />
         </ListItemLink>
-    )
+    );
 };
 
 Todo.propTypes = {

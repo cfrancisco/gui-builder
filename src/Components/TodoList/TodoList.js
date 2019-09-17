@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Todo from '../Todo/Todo';
+import Todo from '../TodoList/Todo';
 
 const TodoList = ({ todos, toggleTodo }) => (
     <ul style={{ padding: '0' }}>

@@ -1,11 +1,12 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import {
     TextField,
     FormControl,
     FormLabel,
     RadioGroup,
     FormControlLabel,
-    Radio
+    Radio,
 } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 
@@ -26,34 +27,30 @@ class AddTodo extends Component {
         this.handleInput = this.handleInput.bind(this);
     }
 
-    /*
-    const classes = useStyles();
-    let input;
-    
-    //used to set default value to radio buttons
-    const [value, setValue] = React.useState('low');
-    */
-
     handleSubmit(event) {
-        if (!this.state.input.trim()) {
+        const { input, priority } = this.state;
+        if (!input.trim()) {
             return;
-        } else {
-            this.setState({input: event.target.value});
         }
-        this.props.dispatch(addTodo(this.state.input, this.state.priority));
-        this.setState({input: ''});
+
+        this.setState({ input: event.target.value });
+
+        const { dispatch } = this.props;
+        dispatch(addTodo(input, priority));
+        this.setState({ input: '' });
         event.preventDefault();
     }
 
     handleInput(event) {
-        this.setState({input: event.target.value});
+        this.setState({ input: event.target.value });
     }
-    
+
     handleChange(event) {
-        this.setState({priority: event.target.value});
+        this.setState({ priority: event.target.value });
     }
-    
+
     render() {
+        const { input, priority } = this.state;
         return (
             <form
                 onSubmit={this.handleSubmit}
@@ -66,7 +63,7 @@ class AddTodo extends Component {
                         <TextField
                             id="todo-text"
                             label="Todo"
-                            value={this.state.input}
+                            value={input}
                             onChange={this.handleInput}
                             margin="normal"
                         />
@@ -75,25 +72,25 @@ class AddTodo extends Component {
                     <Grid item xs={3}>
                         <FormControl component="fieldset">
                             <FormLabel component="legend">Prioridade</FormLabel>
-                            <RadioGroup aria-label="priority" name="prioriry" value={this.state.priority} onChange={this.handleChange}>
-                            <FormControlLabel
-                                value="low"
-                                control={<Radio color="primary" />}
-                                label="Baixa"
-                                labelPlacement="end"
-                            />
-                            <FormControlLabel
-                                value="medium"
-                                control={<Radio color="primary" />}
-                                label="Média"
-                                labelPlacement="end"
-                            />
-                            <FormControlLabel
-                                value="high"
-                                control={<Radio color="primary" />}
-                                label="Alta"
-                                labelPlacement="end"
-                            />
+                            <RadioGroup aria-label="priority" name="prioriry" value={priority} onChange={this.handleChange}>
+                                <FormControlLabel
+                                    value="low"
+                                    control={<Radio color="primary" />}
+                                    label="Baixa"
+                                    labelPlacement="end"
+                                />
+                                <FormControlLabel
+                                    value="medium"
+                                    control={<Radio color="primary" />}
+                                    label="Média"
+                                    labelPlacement="end"
+                                />
+                                <FormControlLabel
+                                    value="high"
+                                    control={<Radio color="primary" />}
+                                    label="Alta"
+                                    labelPlacement="end"
+                                />
                             </RadioGroup>
                         </FormControl>
                     </Grid>
@@ -105,5 +102,9 @@ class AddTodo extends Component {
         );
     }
 }
+
+AddTodo.propTypes = {
+    dispatch: PropTypes.func.isRequired,
+};
 
 export default connect()(AddTodo);
