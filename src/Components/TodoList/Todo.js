@@ -27,8 +27,10 @@ const Todo = ({
 
     const useStyles = makeStyles({
         root: {
-            textDecoration: 'line-through',
             backgroundColor: mapPriorityToStyle(),
+        },
+        completed: {
+            textDecoration: 'line-through',
         },
     });
 
@@ -38,7 +40,7 @@ const Todo = ({
         <ListItemLink
             onClick={onClick}
             priority={priority}
-            className={completed ? classes.root : ''}
+            className={completed ? classes.completed : ''}
         >
             <ListItemText
                 primary={text}
