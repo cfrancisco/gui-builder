@@ -28,24 +28,24 @@ class AddTodo extends Component {
     }
 
     handleSubmit(event) {
+        event.preventDefault();
         const { input, priority } = this.state;
         if (!input.trim()) {
             return;
         }
 
-        this.setState({ input: event.target.value });
-
         const { dispatch } = this.props;
         dispatch(addTodo(input, priority));
         this.setState({ input: '' });
-        event.preventDefault();
     }
 
     handleInput(event) {
+        event.preventDefault();
         this.setState({ input: event.target.value });
     }
 
     handleChange(event) {
+        event.preventDefault();
         this.setState({ priority: event.target.value });
     }
 
@@ -59,6 +59,7 @@ class AddTodo extends Component {
                     container
                     spacing={2}
                 >
+                    <Grid item xs={2} />
                     <Grid item xs={3}>
                         <TextField
                             id="todo-text"
@@ -68,8 +69,7 @@ class AddTodo extends Component {
                             margin="normal"
                         />
                     </Grid>
-
-                    <Grid item xs={3}>
+                    <Grid item xs={2}>
                         <FormControl component="fieldset">
                             <FormLabel component="legend">Prioridade</FormLabel>
                             <RadioGroup aria-label="priority" name="prioriry" value={priority} onChange={this.handleChange}>
@@ -97,6 +97,7 @@ class AddTodo extends Component {
                     <Grid item xs={3}>
                         <Button type="submit" size="small">Add Todo</Button>
                     </Grid>
+                    <Grid item xs={2} />
                 </Grid>
             </form>
         );
