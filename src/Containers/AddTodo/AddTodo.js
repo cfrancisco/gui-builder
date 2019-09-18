@@ -11,7 +11,7 @@ import {
 import Grid from '@material-ui/core/Grid';
 
 import { connect } from 'react-redux';
-import { addTodo } from './Action';
+import addTodo from './Action';
 
 import Button from '../../Components/Button/Button';
 
