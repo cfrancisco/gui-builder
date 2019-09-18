@@ -1,29 +1,41 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Button from '@material-ui/core/Button';
 
-const Link = ({ active, children, onClick }) => {
+const LinkButton = ({ active = false, children, onClick }) => {
     if (active) {
-        return (<span>{children}</span>);
+        return (
+            <span
+                style={{
+                    marginLeft: '6px',
+                    marginRight: '6px',
+                }}
+            >
+                {children}
+            </span>
+        );
     }
 
     return (
-        <button
-            type="button"
+        <Button
+            component="button"
             onClick={onClick}
             disabled={active}
             style={{
-                marginLeft: '4px',
+                marginLeft: '6px',
+                marginRight: '6px',
+                textDecoration: 'underline',
             }}
         >
             {children}
-        </button>
+        </Button>
     );
 };
 
-Link.propTypes = {
+Button.propTypes = {
     active: PropTypes.bool.isRequired,
     children: PropTypes.node.isRequired,
     onClick: PropTypes.func.isRequired,
-}
+};
 
-export default Link;
+export default LinkButton;

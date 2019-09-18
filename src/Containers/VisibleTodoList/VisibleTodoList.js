@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { toggleTodo, VisibilityFilters } from '../../actions';
+import { toggleTodo, VisibilityFilters } from './Action';
 import TodoList from '../../Components/TodoList/TodoList';
 
 const getVisibleTodos = (todos, filter) => {
@@ -10,6 +10,12 @@ const getVisibleTodos = (todos, filter) => {
         return todos.filter(t => t.completed);
     case VisibilityFilters.SHOW_ACTIVE:
         return todos.filter(t => !t.completed);
+    case VisibilityFilters.SHOW_HIGH:
+        return todos.filter(t => t.priority === 'high');
+    case VisibilityFilters.SHOW_MEDIUM:
+        return todos.filter(t => t.priority === 'medium');
+    case VisibilityFilters.SHOW_LOW:
+        return todos.filter(t => t.priority === 'low');
     default:
         throw new Error(`Unknown filter: ${filter}`);
     }
