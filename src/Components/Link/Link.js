@@ -1,22 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Link from '@material-ui/core/Link';
+import Button from '@material-ui/core/Button';
 
 const LinkButton = ({ active = false, children, onClick }) => {
     if (active) {
         return (
-        <span
-            style={{
-                marginLeft: '6px',
-                marginRight: '6px',
-            }}
-        >
-            {children}
-        </span>);
+            <span
+                style={{
+                    marginLeft: '6px',
+                    marginRight: '6px',
+                }}
+            >
+                {children}
+            </span>
+        );
     }
 
     return (
-        <Link
+        <Button
             component="button"
             onClick={onClick}
             disabled={active}
@@ -27,14 +28,14 @@ const LinkButton = ({ active = false, children, onClick }) => {
             }}
         >
             {children}
-        </Link>
+        </Button>
     );
 };
 
-Link.propTypes = {
+Button.propTypes = {
     active: PropTypes.bool.isRequired,
     children: PropTypes.node.isRequired,
     onClick: PropTypes.func.isRequired,
-}
+};
 
 export default LinkButton;

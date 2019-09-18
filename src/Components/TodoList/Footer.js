@@ -4,13 +4,12 @@ import FilterLink from '../../Containers/FilterLink/FilterLink';
 import { VisibilityFilters } from '../../Containers/VisibleTodoList/Action';
 
 const Footer = () => (
-    
     <Grid
         container
         spacing={2}
     >
-        <Grid item xs={3} />
-        <Grid item xs={6}>
+        <Grid item xs={2} />
+        <Grid item xs={8}>
             <span>Show:</span>
             <FilterLink filter={VisibilityFilters.SHOW_ALL}>All</FilterLink>
             <FilterLink filter={VisibilityFilters.SHOW_ACTIVE}>Active</FilterLink>
@@ -19,7 +18,7 @@ const Footer = () => (
             <FilterLink filter={VisibilityFilters.SHOW_MEDIUM}>Medium Priority</FilterLink>
             <FilterLink filter={VisibilityFilters.SHOW_LOW}>Low Priority</FilterLink>
         </Grid>
-        <Grid item xs={3} />
+        <Grid item xs={2} />
     </Grid>
 );
 
