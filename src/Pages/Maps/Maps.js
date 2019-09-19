@@ -6,7 +6,7 @@ import {
 } from 'react-leaflet';
 import L from 'leaflet';
 import Paper from '@material-ui/core/Paper';
-import CustomMap from '../Components/CustomMap/CustomMap';
+import CustomMap from '../../Components/CustomMap/CustomMap';
 import 'leaflet/dist/leaflet.css';
 
 const iconRetinaUrl = require('leaflet/dist/images/marker-icon-2x.png');
@@ -19,7 +19,7 @@ delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({ iconRetinaUrl, iconUrl, shadowUrl });
 
 
-const styles = theme => ({
+const styles = (theme) => ({
     root: {
         flexGrow: 1,
         paddingTop: 20,
@@ -62,7 +62,7 @@ const Maps = () => {
 
     useEffect(() => {
         // to avoid missing dependency
-        const addMarker = i => ({
+        const addMarker = (i) => ({
             title: String(i + 1),
             latLng: {
                 lat: center[0] + 0.001 * i,
@@ -91,7 +91,7 @@ const Maps = () => {
                                 attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                                 url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
                             />
-                            {markersData.map(pos => (
+                            {markersData.map((pos) => (
                                 <Marker
                                     key={pos.title}
                                     position={pos.latLng}

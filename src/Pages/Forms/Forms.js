@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 
-const styles = theme => ({
+const styles = (theme) => ({
     root: {
         flexGrow: 1,
         backgroundColor: theme.palette.grey.A500,
@@ -18,7 +18,7 @@ const styles = theme => ({
 
 const useStyles = makeStyles(styles);
 
-const Cards = () => {
+const Forms = () => {
     const classes = useStyles();
 
     return (
@@ -27,8 +27,6 @@ const Cards = () => {
                 <Grid spacing={10} alignItems="center" justify="center" container className={classes.grid}>
                     <Grid item xs={12}>
                         Sample
-                        {/* <SectionHeader title="Cards" subtitle="One page with a list of a collection" /> */}
-                        {/* <CardItem /> */}
                     </Grid>
                 </Grid>
             </Grid>
@@ -36,4 +34,4 @@ const Cards = () => {
     );
 };
 
-export default Cards;
+export default Forms;

@@ -2,12 +2,12 @@ import React from 'react';
 import {
     Button, Checkbox, List, ListItem, ListItemText, Divider,
 } from '@material-ui/core';
-import { DatePicker } from 'antd';
-import Loader from '../Components/Loader/Loader';
-import Avatar from '../Components/Avatar/Avatar';
-import { DojotButton, CleanButton, CustomButton } from '../Components/Button';
-import 'antd/dist/antd.css';
 import { makeStyles } from '@material-ui/core/styles';
+import { DatePicker } from 'antd';
+import Loader from '../../Components/Loader/Loader';
+import Avatar from '../../Components/Avatar/Avatar';
+import { DojotButton, CleanButton, CustomButton } from '../../Components/Button';
+import 'antd/dist/antd.css';
 
 
 function Checkboxes() {
@@ -25,7 +25,7 @@ function onChange() {
 }
 
 
-const styles = theme => ({
+const styles = (theme) => ({
     root: {
         width: '100%',
         maxWidth: 360,

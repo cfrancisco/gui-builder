@@ -5,7 +5,7 @@ import 'react-resizable/css/styles.css';
 import { makeStyles } from '@material-ui/core/styles';
 import Fab from '@material-ui/core/Fab';
 import CloseIcon from '@material-ui/icons/Close';
-import Button from '../Components/Button/Button';
+import Button from '../../Components/Button/Button';
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
@@ -49,7 +49,7 @@ const DashboardLayout = (props) => {
         },
     };
 
-    const [items, setItems] = React.useState([0, 1, 2, 3, 4].map(i => ({
+    const [items, setItems] = React.useState([0, 1, 2, 3, 4].map((i) => ({
         i: i.toString(),
         x: i * 2,
         y: Math.floor(i / 6),
@@ -59,7 +59,7 @@ const DashboardLayout = (props) => {
     const [newCounter, setNewCounter] = React.useState(0);
 
     const onRemoveItem = (el) => {
-        const xItems = items.filter(item => item.i !== el.i);
+        const xItems = items.filter((item) => item.i !== el.i);
         setItems(xItems);
     };
 
@@ -67,7 +67,7 @@ const DashboardLayout = (props) => {
         // Generating the items with properties from the layout,
         // rather than pass the layout directly
         const layout = items;
-        return layout.map(el => (
+        return layout.map((el) => (
             <div key={el.i} data-grid={el}>
                 <span className="text">{el.i}</span>
                 <Fab size="small" color="secondary" onClick={() => onRemoveItem(el)} aria-label="remove" className={classes.fab}>
