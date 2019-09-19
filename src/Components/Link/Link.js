@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 
 const LinkButton = ({ active = false, children, onClick }) => {
-
     const useStyles = makeStyles({
         activeItem: {
             marginLeft: '6px',
