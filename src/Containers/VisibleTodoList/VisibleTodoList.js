@@ -7,26 +7,26 @@ const getVisibleTodos = (todos, filter) => {
     case VisibilityFilters.SHOW_ALL:
         return todos;
     case VisibilityFilters.SHOW_COMPLETED:
-        return todos.filter(t => t.completed);
+        return todos.filter((t) => t.completed);
     case VisibilityFilters.SHOW_ACTIVE:
-        return todos.filter(t => !t.completed);
+        return todos.filter((t) => !t.completed);
     case VisibilityFilters.SHOW_HIGH:
-        return todos.filter(t => t.priority === 'high');
+        return todos.filter((t) => t.priority === 'high');
     case VisibilityFilters.SHOW_MEDIUM:
-        return todos.filter(t => t.priority === 'medium');
+        return todos.filter((t) => t.priority === 'medium');
     case VisibilityFilters.SHOW_LOW:
-        return todos.filter(t => t.priority === 'low');
+        return todos.filter((t) => t.priority === 'low');
     default:
         throw new Error(`Unknown filter: ${filter}`);
     }
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
     todos: getVisibleTodos(state.todos, state.visibilityFilter),
 });
 
-const mapDispatchToProps = dispatch => ({
-    toggleTodo: id => dispatch(toggleTodo(id)),
+const mapDispatchToProps = (dispatch) => ({
+    toggleTodo: (id) => dispatch(toggleTodo(id)),
 });
 
 export default connect(

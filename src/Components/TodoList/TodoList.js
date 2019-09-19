@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Todo from '../TodoList/Todo';
+import Todo from './Todo';
 
 const TodoList = ({ todos, toggleTodo }) => (
     <ul style={{ padding: '0' }}>
-        {todos.map(todo => (
+        {todos.map((todo) => (
             <Todo
                 key={todo.id}
                 {...todo}
