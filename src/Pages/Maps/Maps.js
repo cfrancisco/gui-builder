@@ -6,7 +6,7 @@ import {
 } from 'react-leaflet';
 import L from 'leaflet';
 import Paper from '@material-ui/core/Paper';
-import CustomMap from '../Components/CustomMap/CustomMap';
+import CustomMap from '../../Components/CustomMap/CustomMap';
 import 'leaflet/dist/leaflet.css';
 
 const iconRetinaUrl = require('leaflet/dist/images/marker-icon-2x.png');
