@@ -1,8 +1,6 @@
-let nextTodoId = 0;
-
-const addTodo = (text, priority) => ({
+const addTodo = (text, priority, nextTodoId) => ({
     type: 'ADD_TODO',
-    id: nextTodoId++,
+    id: nextTodoId,
     text,
     priority,
 });
