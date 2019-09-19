@@ -3,8 +3,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import PropTypes from 'prop-types';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Topbar from '../Components/Topbar/Topbar';
-import Menu from '../Components/Menu/Menu';
+import Topbar from '../../Components/Topbar/Topbar';
+import Menu from '../../Components/Menu/Menu';
 
 const useStyles = makeStyles(() => ({
     root: {
