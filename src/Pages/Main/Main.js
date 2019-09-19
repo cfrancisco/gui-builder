@@ -25,7 +25,7 @@ function onChange() {
 }
 
 
-const styles = theme => ({
+const styles = (theme) => ({
     root: {
         width: '100%',
         maxWidth: 360,
