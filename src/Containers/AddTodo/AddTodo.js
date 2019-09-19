@@ -38,7 +38,7 @@ class AddTodo extends Component {
         const { dispatch } = this.props;
         dispatch(addTodo(input, priority, nextTodoId));
 
-        this.setState(prevState => ({
+        this.setState((prevState) => ({
             input: '',
             nextTodoId: prevState.nextTodoId + 1,
         }));
