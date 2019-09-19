@@ -4,7 +4,6 @@ npm-debug.log
 public/*
 dist/*
 src/components/*
-src/__snapshots__/*
 nohup.out
 .vscode/launch.json
 # Logs

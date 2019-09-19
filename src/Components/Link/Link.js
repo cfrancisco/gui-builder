@@ -1,15 +1,25 @@
 import React from 'react';
+
+import { makeStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 
 const LinkButton = ({ active = false, children, onClick }) => {
+
+    const useStyles = makeStyles({
+        activeItem: {
+            marginLeft: '6px',
+            marginRight: '6px',
+            textDecoration: 'underline',
+        },
+    });
+
+    const classes = useStyles();
+
     if (active) {
         return (
             <span
-                style={{
-                    marginLeft: '6px',
-                    marginRight: '6px',
-                }}
+                className={classes.activeItem}
             >
                 {children}
             </span>
@@ -21,11 +31,7 @@ const LinkButton = ({ active = false, children, onClick }) => {
             component="button"
             onClick={onClick}
             disabled={active}
-            style={{
-                marginLeft: '6px',
-                marginRight: '6px',
-                textDecoration: 'underline',
-            }}
+            className={classes.activeItem}
         >
             {children}
         </Button>
