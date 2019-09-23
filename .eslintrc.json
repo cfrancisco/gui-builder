@@ -42,14 +42,6 @@
     ],
     "import/extensions": "off",
     "import/no-unresolved": "off",
-    "class-methods-use-this": 0,
-    "camelcase": [
-      "error",
-      {
-        "properties": "never",
-        "ignoreDestructuring": true
-      }
-    ],
     "arrow-parens": [
       2,
       "always"
