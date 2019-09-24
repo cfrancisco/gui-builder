@@ -21,6 +21,7 @@ class AddTodo extends Component {
         this.state = {
             priority: '',
             input: '',
+            nextTodoId: 0,
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -29,14 +30,18 @@ class AddTodo extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        const { input, priority } = this.state;
+        const { input, priority, nextTodoId } = this.state;
         if (!input.trim()) {
             return;
         }
 
         const { dispatch } = this.props;
-        dispatch(addTodo(input, priority));
-        this.setState({ input: '' });
+        dispatch(addTodo(input, priority, nextTodoId));
+
+        this.setState((prevState) => ({
+            input: '',
+            nextTodoId: prevState.nextTodoId + 1,
+        }));
     }
 
     handleInput(event) {

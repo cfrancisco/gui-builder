@@ -20,6 +20,7 @@
     "eslint-plugin-react": "^7.14.3",
     "formik": "^1.5.8",
     "formik-material-ui": "^0.0.22",
+    "jest": "^24.9.0",
     "leaflet": "^1.5.1",
     "prop-types": "^15.7.2",
     "react": "^16.9.0",
@@ -30,6 +31,8 @@
     "react-resizable": "^1.8.0",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.1.1",
+    "redux": "^4.0.4",
+    "react-test-renderer": "^16.9.0",
     "redux": "^4.0.4",
     "yup": "^0.27.0"
   },
