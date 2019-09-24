@@ -12,6 +12,7 @@ import Grid from '@material-ui/core/Grid';
 
 import { connect } from 'react-redux';
 import addTodo from './Action';
+import I18nProvider from '../../Components/i18nProvider/i18nProvider';
 
 import Button from '../../Components/Button/Button';
 
@@ -68,7 +69,7 @@ class AddTodo extends Component {
                     <Grid item xs={3}>
                         <TextField
                             id="todo-text"
-                            label="Todo"
+                            label={<I18nProvider term="device.title_sidebar.new_attr" />}
                             value={input}
                             onChange={this.handleInput}
                             margin="normal"
@@ -93,14 +94,17 @@ class AddTodo extends Component {
                                 <FormControlLabel
                                     value="high"
                                     control={<Radio color="primary" />}
-                                    label="Alta"
+                                    label={<I18nProvider term="device.attributes" />}
                                     labelPlacement="end"
                                 />
                             </RadioGroup>
                         </FormControl>
+                        
                     </Grid>
                     <Grid item xs={3}>
-                        <Button type="submit" size="small">Add Todo</Button>
+                        <Button type="submit" size="small">
+                            <I18nProvider term="device.title" />
+                        </Button>
                     </Grid>
                     <Grid item xs={2} />
                 </Grid>
