@@ -5,37 +5,41 @@ import Dashboard from '@material-ui/icons/Dashboard';
 import Map from '@material-ui/icons/Map';
 import Circles from '@material-ui/icons/ScatterPlot';
 
+import config from '../../config';
+
+const language = config.language ? config.language.urlLang : config.defaultLanguage.urlLang;
+
 // uses https://www.npmjs.com/package/@material-ui/icons to find the icons
 
 const Menu = [
     {
         label: 'Home',
-        pathname: '/',
+        pathname: `/${language}`,
         icon: <Inbox />,
     },
     {
         label: 'Dashboard',
-        pathname: '/dashboard',
+        pathname: `/dashboard/${language}`,
         icon: <Dashboard />,
     },
     {
         label: 'Maps',
-        pathname: '/maps',
+        pathname: `/maps/${language}`,
         icon: <Map />,
     },
     {
         label: 'Forms',
-        pathname: '/forms',
+        pathname: `/forms/${language}`,
         icon: <Inbox />,
     },
     {
         label: 'Cards',
-        pathname: '/external',
+        pathname: `/external/${language}`,
         icon: <Circles />,
     },
     {
         label: 'Todo List',
-        pathname: '/todo',
+        pathname: `/todo/${language}`,
         icon: <List />,
     },
 ];
