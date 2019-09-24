@@ -1,0 +1,62 @@
+{
+    "device": {
+        "title": "Devices",
+        "subtitle": "device manager",
+        "alts": {
+            "details": "See details",
+            "edition": "Edit device"
+        },
+        "alerts": {
+            "create": "Device created.",
+            "update": "Device updated.",
+            "remove": "Device removed.",
+            "create_template_first": "Create a template first",
+            "view_device_information": "View device information"
+        },
+        "header": {
+            "new": {
+                "label": "New Device",
+                "alt": "Create a new device"
+            },
+            "filter": {
+                "alt": "Show search bar",
+                "alt2": "Show search bar"
+            }
+        },
+        "return_details": "Return to device details",
+        "return_list": "Return to device list",
+        "title_sidebar": {
+            "new_attr": "new attribute",
+            "edit_attr": "edit attribute",
+            "default": "manage template"
+        },
+        "btn": {
+            "new_metadata": {
+                "label": "New Metadata"
+            },
+            "new_attr": {
+                "label": "New Attribute"
+            },
+            "new_conf": {
+                "label": "New Configuration"
+            }
+        },
+        "device": "device",
+        "selected_templates": "Selected Templates",
+        "manage_attributes": "Manage Attributes",
+        "manage_template": "manage template",
+        "attribute": "attribute",
+        "select_template": "Select a template",
+        "attributes": "attributes",
+        "dynamic_attributes": "Dynamic attributes",
+        "select_attribute": "Select an attribute to be displayed.",
+        "meta_attributes": "Meta Attributes",
+        "no_devices_shown": "No devices to be shown",
+        "no_configured_devices": "No configured devices",
+        "manage_firmware": "Manage Firmware",
+        "invalid_data": "Invalid data",
+        "no_data_received": "No data received",
+        "no_data_avaliable": "No data available",
+        "device_id": "Device ID"
+    }
+}
