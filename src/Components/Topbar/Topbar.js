@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 
 const drawerWidth = 240;
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
     appBar: {
         transition: theme.transitions.create(['margin', 'width'], {
             easing: theme.transitions.easing.sharp,

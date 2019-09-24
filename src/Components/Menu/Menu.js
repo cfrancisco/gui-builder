@@ -15,7 +15,7 @@ import Itens from './_itens';
 
 const drawerWidth = 240;
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
     menuButton: {
         marginRight: theme.spacing(2),
     },
@@ -52,7 +52,7 @@ const Menu = ({ open, handleDrawerClose }) => {
                 </IconButton>
             </div>
             <List>
-                {Itens.map(item => (
+                {Itens.map((item) => (
                     <ListItem
                         button
                         key={item.label}
