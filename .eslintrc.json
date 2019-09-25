@@ -50,6 +50,10 @@
         "ignoreDestructuring": true
       }
     ],
+    "arrow-parens": [
+      2,
+      "always"
+    ],
     "no-underscore-dangle": 0
   }
 }

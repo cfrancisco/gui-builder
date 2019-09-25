@@ -5,4 +5,5 @@ const addTodo = (text, priority, nextTodoId) => ({
     priority,
 });
 
+
 export default addTodo;
