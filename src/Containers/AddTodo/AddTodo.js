@@ -66,6 +66,7 @@ class AddTodo extends Component {
                     spacing={2}
                 >
                     <Grid item xs={2} />
+
                     <Grid item xs={3}>
                         <TextField
                             id="todo-text"
@@ -75,6 +76,7 @@ class AddTodo extends Component {
                             margin="normal"
                         />
                     </Grid>
+
                     <Grid item xs={2}>
                         <FormControl component="fieldset">
                             <FormLabel component="legend">Prioridade</FormLabel>
@@ -99,13 +101,14 @@ class AddTodo extends Component {
                                 />
                             </RadioGroup>
                         </FormControl>
-                        
                     </Grid>
+
                     <Grid item xs={3}>
                         <Button type="submit" size="small">
                             <I18nProvider term="device.title" />
                         </Button>
                     </Grid>
+
                     <Grid item xs={2} />
                 </Grid>
             </form>
