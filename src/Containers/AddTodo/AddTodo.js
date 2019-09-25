@@ -101,6 +101,10 @@ class AddTodo extends Component {
                                 />
                             </RadioGroup>
                         </FormControl>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 8c59ddf45a9d38c074445b5b3fb83d7c994ce20e
                     </Grid>
 
                     <Grid item xs={3}>
