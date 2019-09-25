@@ -1,10 +1,5 @@
 {
     "language": {
-        "urlLang": "pt",
-        "code": "pt-BR"
-    },
-    "defaultLanguage": {
-        "urlLang": "en",
         "code": "en-US"
     }
 }
