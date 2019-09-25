@@ -18,7 +18,6 @@ describe('Testing functions of internacionalization component', () => {
     beforeEach(() => jest.resetModules());
 
     test('Both locale files must have the same keys', () => {
-
         const ptKeys = getDeepKeys(ptBR);
         const enKeys = getDeepKeys(enUS);
 
