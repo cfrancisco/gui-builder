@@ -2,6 +2,9 @@ import PropTypes from 'prop-types';
 import intl from 'react-intl-universal';
 import ptBR from './locales/pt-BR.json';
 import enUS from './locales/en-US.json';
+import config from '../../config';
+
+const language = config.language ? config.language.code : window.navigator.language;
 
 const i18nProvider = ({ term }) => {
     const locales = {
@@ -9,15 +12,8 @@ const i18nProvider = ({ term }) => {
         'en-US': enUS,
     };
 
-    const currentLocaleArray = window.location.href.split('/');
-    const currentLocale = currentLocaleArray[currentLocaleArray.length - 1] === 'en' ? 'en-US' : 'pt-BR';
-
-    // const localeArray = JSON.parse(JSON.stringify(ptBR));
-    const keys = Object.keys(ptBR);
-    console.log(keys);
-
     intl.init({
-        currentLocale,
+        currentLocale: language,
         locales,
     });
 
