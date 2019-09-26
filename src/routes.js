@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, HashRouter, Switch } from 'react-router-dom';
 import Forms from './Pages/Forms/Forms';
 import Main from './Pages/Main/Main';
-import LayoutBase from './Containers/Layout/LayoutBase';
+import LayoutBase from './Components/Layout/LayoutBase';
 import TodoList from './Pages/TodoList/TodoList';
 import External from './Pages/External/External';
 import Dashboard from './Pages/Dashboard/Dashboard';
