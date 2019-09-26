@@ -5,9 +5,9 @@ import {
 } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
-import I18nProvider from '../Components/i18nProvider/i18nProvider';
-import ptBR from '../Components/i18nProvider/locales/pt/devices.json';
-import enUS from '../Components/i18nProvider/locales/en/devices.json';
+import I18nProvider from '../../i18nProvider';
+import devicesPTBR from '../pt/devices.json';
+import devicesENUS from '../en/devices.json';
 
 configure({ adapter: new Adapter() });
 
@@ -27,8 +27,8 @@ describe('Testing functions of internacionalization component', () => {
     beforeEach(() => jest.resetModules());
 
     test('Both locale files must have the same keys', () => {
-        const ptKeys = getDeepKeys(ptBR);
-        const enKeys = getDeepKeys(enUS);
+        const ptKeys = getDeepKeys(devicesPTBR);
+        const enKeys = getDeepKeys(devicesENUS);
 
         expect(ptKeys).toEqual(enKeys);
     });

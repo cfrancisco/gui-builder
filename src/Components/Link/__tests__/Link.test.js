@@ -1,7 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 
-import Link from '../Components/Link/Link';
+import Link from '../Link';
 
 it('Link with href attribute should render correctly', () => {
     const tree = renderer
