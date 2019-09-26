@@ -1,11 +1,19 @@
-import React from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { WidthProvider, Responsive } from 'react-grid-layout';
 import 'react-grid-layout/css/styles.css';
 import 'react-resizable/css/styles.css';
-import { makeStyles } from '@material-ui/core/styles';
 import Fab from '@material-ui/core/Fab';
+import withStyles from '@material-ui/styles/withStyles';
 import CloseIcon from '@material-ui/icons/Close';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import CustomMap from '../../Components/CustomMap/CustomMap';
+
 import Button from '../../Components/Button/Button';
+import Avatar from '../../Components/Avatar/Avatar';
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
@@ -13,10 +21,14 @@ const ResponsiveReactGridLayout = WidthProvider(Responsive);
  * This layout demonstrates how to use a grid with a dynamic number of elements.
  */
 
-const styles = () => ({
+const styles = (theme) => ({
     root: {
         flexGrow: 1,
         paddingTop: 20,
+    },
+    formControl: {
+        margin: theme.spacing(1),
+        minWidth: 200,
     },
     fab: {
         position: 'absolute',
@@ -27,84 +39,177 @@ const styles = () => ({
         width: '100%',
         background: '#eee',
         '& .react-grid-item': {
+            padding: '1px',
             border: '2px solid #c7c7c7',
             'font-size': '17px',
-            padding: '12px',
             'font-weight': '800',
             background: '#f5f5f5',
         },
     },
 });
 
-const useStyles = makeStyles(styles);
 
-const DashboardLayout = (props) => {
-    const classes = useStyles();
-    const configs = {
-        breakpoints: {
-            lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0,
-        },
-        cols: {
-            lg: 12, md: 10, sm: 6, xs: 4, xxs: 2,
-        },
-    };
+class DashboardLayout extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            items: [0, 1, 2, 3, 4].map((i) => ({
+                i: i.toString(),
+                x: i * 2,
+                y: Math.floor(i / 6),
+                w: 1 + Math.floor(Math.random() * 2),
+                h: 1 + Math.floor(Math.random() * 2),
+            })),
+            values: { element: '' },
+            newCounter: 0,
+            layoutElement: [],
+        };
 
-    const [items, setItems] = React.useState([0, 1, 2, 3, 4].map((i) => ({
-        i: i.toString(),
-        x: i * 2,
-        y: Math.floor(i / 6),
-        w: 1 + Math.floor(Math.random() * 2),
-        h: 1 + Math.floor(Math.random() * 2),
-    })));
-    const [newCounter, setNewCounter] = React.useState(0);
+        this.generateDOM = this.generateDOM.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        this.onRemoveItem = this.onRemoveItem.bind(this);
+        this.onAddItem = this.onAddItem.bind(this);
 
-    const onRemoveItem = (el) => {
-        const xItems = items.filter((item) => item.i !== el.i);
-        setItems(xItems);
-    };
+        this.configs = {
+            breakpoints: {
+                lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0,
+            },
+            cols: {
+                lg: 12, md: 10, sm: 6, xs: 4, xxs: 2,
+            },
+        };
+    }
 
-    const generateDOM = () => {
-        // Generating the items with properties from the layout,
-        // rather than pass the layout directly
-        const layout = items;
-        return layout.map((el) => (
-            <div key={el.i} data-grid={el}>
-                <span className="text">{el.i}</span>
-                <Fab size="small" color="secondary" onClick={() => onRemoveItem(el)} aria-label="remove" className={classes.fab}>
-                    <CloseIcon />
-                </Fab>
-            </div>
-        ));
-    };
+    // const classes = useStyles();
+    componentDidMount() {
+        const layout = [];
+        const { items } = this.state;
+        items.forEach((el) => {
+            layout.push(
+                this.generateDOM(el,
+                    <span className="text">{el.i}</span>),
+            );
+        });
+        this.setState({ layoutElement: layout });
+    }
 
 
-    const onAddItem = () => {
-        // Add a new item. It must have a unique key!
-        const xItems = items.concat({
+    onRemoveItem(event, index) {
+        //     const index = event.target.dataset.itemKey;
+        //   console.log('items', items, layoutElement, newCounter);
+        const { layoutElement, items } = this.state;
+        const xItems = items.filter((item) => item.i !== index);
+        const newLayout = layoutElement.filter((item) => item.key !== index);
+        this.setState({ layoutElement: newLayout, items: xItems });
+    }
+
+    onAddItem() {
+        const {
+            values, newCounter, layoutElement, items,
+        } = this.state;
+        const newPoints = {
             i: `n${newCounter}`,
             x: 2,
             y: Infinity, // puts it at the bottom
             w: 2,
             h: 2,
+        };
+        let el;
+
+        if (values.element === 'map') {
+            el = <CustomMap />;
+        }
+        if (values.element === 'graph') {
+            el = <CustomMap />;
+        }
+        if (values.element === 'table') {
+            el = <CustomMap />;
+        }
+        if (values.element === 'empty') {
+            el = <br />;
+        }
+        if (values.element === 'avatar') {
+            el = <Avatar />;
+        }
+
+        this.setState({
+            layoutElement:
+                [...layoutElement,
+                    this.generateDOM(newPoints, el),
+                ],
+            newCounter: newCounter + 1,
+            items: items.concat(newPoints),
         });
-        // Increment the counter to ensure key is always unique.
-        setNewCounter(newCounter + 1);
-        setItems(xItems);
-    };
+    }
 
 
-    return (
-        <div className={classes.root}>
-            <Button onClick={onAddItem} type="button" size="small">Add Item</Button>
-            <ResponsiveReactGridLayout
-                {...configs}
-                className={classes.reactGridLayout}
-                {...props}
-            >
-                {generateDOM()}
-            </ResponsiveReactGridLayout>
-        </div>
-    );
+    generateDOM(el, elem) {
+        const { classes } = this.props;
+        return (
+            <div key={el.i} data-grid={el}>
+                {elem}
+                <Fab
+                    inputProps={{
+                        name: 'MyName',
+                        role: 'MyRole',
+                    }}
+                    size="small"
+                    color="secondary"
+                    onClick={(e) => this.onRemoveItem(e, el.i)}
+                    aria-label="remove"
+                    className={classes.fab}
+                >
+                    <CloseIcon />
+                </Fab>
+            </div>
+        );
+    }
+
+    handleChange(event) {
+        const { values } = this.state;
+        values[event.target.name] = event.target.value;
+        this.setState({ values });
+    }
+
+    render() {
+        const { values, configs, layoutElement } = this.state;
+        const { classes } = this.props;
+        return (
+            <div className={classes.root}>
+                <FormControl className={classes.formControl}>
+                    <InputLabel htmlFor="addElement">New Element</InputLabel>
+                    <Select
+                        value={values.element}
+                        onChange={this.handleChange}
+                        inputProps={{
+                            name: 'element',
+                            id: 'addElement',
+                        }}
+                    >
+                        <MenuItem value="map">Map</MenuItem>
+                        <MenuItem value="avatar">Avatar</MenuItem>
+                        <MenuItem value="graph">Graph</MenuItem>
+                        <MenuItem value="table">Table</MenuItem>
+                        <MenuItem value="empty">Box</MenuItem>
+                    </Select>
+                    <Button onClick={this.onAddItem} type="button" size="small">Add Item</Button>
+                </FormControl>
+                <br />
+                <ResponsiveReactGridLayout
+                    {...configs}
+                    className={classes.reactGridLayout}
+                    {...this.props}
+                >
+                    {layoutElement}
+                </ResponsiveReactGridLayout>
+            </div>
+        );
+    }
+}
+
+
+DashboardLayout.propTypes = {
+    classes: PropTypes.shape({}).isRequired,
 };
 
-export default DashboardLayout;
+export default withStyles(styles)(DashboardLayout);
