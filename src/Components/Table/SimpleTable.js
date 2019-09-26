@@ -7,14 +7,9 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import styles from './_styles';
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-        width: '100%',
-        marginTop: theme.spacing(3),
-        overflowX: 'auto',
-    },
-}));
+const useStyles = makeStyles(styles);
 
 const SimpleTable = ({ header, data }) => {
     const classes = useStyles();

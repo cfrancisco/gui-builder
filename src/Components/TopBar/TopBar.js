@@ -12,30 +12,9 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import Typography from '@material-ui/core/Typography';
-import configs from '../../settings';
+import styles from './_styles';
 
-const useStyles = makeStyles((theme) => ({
-    appBar: {
-        transition: theme.transitions.create(['margin', 'width'], {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.leavingScreen,
-        }),
-    },
-    appBarShift: {
-        width: `calc(100% - ${configs.drawerWidth}px)`,
-        marginLeft: configs.drawerWidth,
-        transition: theme.transitions.create(['margin', 'width'], {
-            easing: theme.transitions.easing.easeOut,
-            duration: theme.transitions.duration.enteringScreen,
-        }),
-    },
-    menuButton: {
-        marginRight: theme.spacing(2),
-    },
-    title: {
-        flexGrow: 1,
-    },
-}));
+const useStyles = makeStyles(styles);
 
 const TopBar = ({ handleDrawerToggle, open }) => {
     const classes = useStyles();

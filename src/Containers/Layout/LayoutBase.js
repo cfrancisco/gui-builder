@@ -4,7 +4,7 @@ import Container from '@material-ui/core/Container';
 import PropTypes from 'prop-types';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import clsx from 'clsx';
-import Topbar from '../../Components/Topbar/Topbar';
+import TopBar from '../../Components/TopBar/TopBar';
 import Menu from '../../Components/Menu/Menu';
 import configs from '../../settings';
 
@@ -50,7 +50,7 @@ const LayoutBase = (props) => {
     return (
         <div className={classes.root}>
             <CssBaseline />
-            <Topbar open={open} handleDrawerToggle={handleDrawerToggle} />
+            <TopBar open={open} handleDrawerToggle={handleDrawerToggle} />
             <div className={classes.content}>
                 <Menu open={open} handleDrawerClose={handleDrawerClose} />
                 <Container
