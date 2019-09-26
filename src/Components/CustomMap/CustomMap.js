@@ -6,8 +6,8 @@ import Util from '../../utils';
 
 const CustomMap = ({ markersData, center, zoom }) => {
     // create map
-    const sid = Util.sid();
-    const mapRef = useRef(sid);
+    const mapid = Util.sid();
+    const mapRef = useRef(mapid);
     const xCenter = center || [49.8419, 24.0315];
     const xZoom = zoom || 16;
     const style = {
@@ -16,7 +16,7 @@ const CustomMap = ({ markersData, center, zoom }) => {
     };
 
     useEffect(() => {
-        mapRef.current = L.map(sid, {
+        mapRef.current = L.map(mapid, {
             center: xCenter,
             zoom: xZoom,
             layers: [
@@ -26,7 +26,7 @@ const CustomMap = ({ markersData, center, zoom }) => {
                 }),
             ],
         });
-    }, [xCenter, xZoom, sid]);
+    }, [xCenter, xZoom]);
 
     // add layer
     const layerRef = useRef(null);
@@ -47,7 +47,7 @@ const CustomMap = ({ markersData, center, zoom }) => {
         [markersData],
     );
 
-    return <div ref={mapRef} id={sid} style={style} />;
+    return <div ref={mapRef} id={mapid} style={style} />;
 };
 
 CustomMap.propTypes = {

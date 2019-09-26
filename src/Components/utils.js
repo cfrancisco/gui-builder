@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function applyTheme(WrappedComponent, hookStyle) {
+function applyStyle(WrappedComponent, hookStyle) {
     return (props) => {
         const classes = hookStyle();
         const { children } = props;
@@ -13,8 +13,8 @@ function applyTheme(WrappedComponent, hookStyle) {
     };
 }
 
-applyTheme.propTypes = {
+applyStyle.propTypes = {
     WrappedComponent: PropTypes.element,
 };
 
-export default applyTheme;
+export default applyStyle;

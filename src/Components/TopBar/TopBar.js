@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const Topbar = ({ handleDrawerToggle, open }) => {
+const TopBar = ({ handleDrawerToggle, open }) => {
     const classes = useStyles();
     const [auth] = useState(true);
     const [anchorEl, setAnchorEl] = useState(null);
@@ -113,10 +113,10 @@ const Topbar = ({ handleDrawerToggle, open }) => {
     );
 };
 
-Topbar.propTypes = {
+TopBar.propTypes = {
     handleDrawerToggle: PropTypes.func.isRequired,
     open: PropTypes.bool.isRequired,
 };
 
 
-export default Topbar;
+export default TopBar;

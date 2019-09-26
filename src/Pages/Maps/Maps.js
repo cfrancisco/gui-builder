@@ -61,7 +61,6 @@ const Maps = () => {
     const [markersData, setMarkersData] = useState([]);
 
     useEffect(() => {
-        // to avoid missing dependency
         const addMarker = (i) => ({
             title: String(i + 1),
             latLng: {
@@ -75,7 +74,7 @@ const Maps = () => {
             auxMarker.push(addMarker(i));
         });
         setMarkersData(auxMarker);
-    }, [center]);
+    }, []);
 
     return (
         <div className={classes.root}>
