@@ -70,7 +70,7 @@ class AddTodo extends Component {
                     <Grid item xs={3}>
                         <TextField
                             id="todo-text"
-                            label={<I18nProvider term="device.title_sidebar.new_attr" />}
+                            label={<I18nProvider subject="certificates" term="title_cert" />}
                             value={input}
                             onChange={this.handleInput}
                             margin="normal"
@@ -96,7 +96,7 @@ class AddTodo extends Component {
                                 <FormControlLabel
                                     value="high"
                                     control={<Radio color="primary" />}
-                                    label={<I18nProvider term="device.attributes" />}
+                                    label={<I18nProvider subject="devices" term="attributes" />}
                                     labelPlacement="end"
                                 />
                             </RadioGroup>
@@ -105,7 +105,7 @@ class AddTodo extends Component {
 
                     <Grid item xs={3}>
                         <Button type="submit" size="small">
-                            <I18nProvider term="device.title" />
+                            <I18nProvider subject="devices" term="title" />
                         </Button>
                     </Grid>
 
