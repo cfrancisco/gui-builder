@@ -1,15 +1,13 @@
 import React from 'react';
 import {
-    mount,
     shallow,
-    render,
     configure,
 } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
 import I18nProvider from '../Components/i18nProvider/i18nProvider';
-import ptBR from '../Components/i18nProvider/locales/pt-BR.json';
-import enUS from '../Components/i18nProvider/locales/en-US.json';
+import ptBR from '../Components/i18nProvider/locales/pt/devices.json';
+import enUS from '../Components/i18nProvider/locales/en/devices.json';
 
 configure({ adapter: new Adapter() });
 
@@ -36,7 +34,7 @@ describe('Testing functions of internacionalization component', () => {
     });
 
     test('i18n must return an string with no traduction founded', () => {
-        const translate = shallow(<I18nProvider term="device.title_sidebar.new_attr" />);
+        const translate = shallow(<I18nProvider subject="devices" term="title_sidebar.new_attr" />);
 
         expect(translate).toMatchObject({});
     });
