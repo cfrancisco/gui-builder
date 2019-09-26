@@ -3,10 +3,13 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import PropTypes from 'prop-types';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import clsx from 'clsx';
 import Topbar from '../../Components/Topbar/Topbar';
 import Menu from '../../Components/Menu/Menu';
+import configs from '../../settings';
 
-const useStyles = makeStyles(() => ({
+
+const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
         flexGrow: 1,
@@ -16,10 +19,18 @@ const useStyles = makeStyles(() => ({
         width: '100%',
     },
     containerBase: {
-        flexGrow: 1,
+        transition: theme.transitions.create(['width'], {
+            easing: theme.transitions.easing.sharp,
+            duration: theme.transitions.duration.enteringScreen,
+        }),
+        width: '100%',
         marginTop: 70,
         display: 'flex',
     },
+    containerBaseShift: {
+        width: `calc(100% - ${configs.drawerWidth}px)`,
+    },
+
 }));
 
 
@@ -43,7 +54,9 @@ const LayoutBase = (props) => {
             <div className={classes.content}>
                 <Menu open={open} handleDrawerClose={handleDrawerClose} />
                 <Container
-                    className={classes.containerBase}
+                    className={clsx(classes.containerBase, {
+                        [classes.containerBaseShift]: open,
+                    })}
                 >
                     {children}
                 </Container>

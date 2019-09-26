@@ -3,6 +3,7 @@ import {
     Button, Checkbox, List, ListItem, ListItemText, Divider,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
 import { DatePicker } from 'antd';
 import Loader from '../../Components/Loader/Loader';
 import Avatar from '../../Components/Avatar/Avatar';
@@ -55,6 +56,15 @@ const Main = () => {
             </ListItem>
             <ListItem>
                 <Button> Material Button</Button>
+            </ListItem>
+            <ListItem>
+                <TextField
+                    id="standard-name"
+                    label="Name"
+                    className={classes.textField}
+                    defaultValue="Name"
+                    margin="normal"
+                />
             </ListItem>
             <ListItem>
                 <DatePicker onChange={onChange} />

@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button should render correctly without any props 1`] = `undefined`;
+
+exports[`CustomButton should render correctly without any props 1`] = `
+<customButton
+  className="makeStyles-root-1"
+>
+  <Component />
+</customButton>
+`;

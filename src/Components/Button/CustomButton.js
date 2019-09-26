@@ -19,6 +19,7 @@ customButton.propTypes = {
     children: PropTypes.oneOfType([
         PropTypes.arrayOf(PropTypes.node),
         PropTypes.node,
+        PropTypes.string,
     ]),
 };
 

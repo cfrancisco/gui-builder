@@ -10,12 +10,16 @@
     "antd": "^3.23.2",
     "clsx": "^1.0.4",
     "enzyme": "^3.10.0",
-    "eslint": "^6.3.0",
-    "eslint-config-airbnb": "^17.1.0",
+    "enzyme-adapter-react-16": "^1.14.0",
+    "enzyme-to-json": "^3.4.0",
+    "eslint": "6.1.0",
+    "eslint-config-airbnb": "18.0.1",
     "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.14.0",
-    "eslint-plugin-jsx-a11y": "^6.1.1",
-    "eslint-plugin-react": "^7.11.1",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.14.3",
+    "formik": "^1.5.8",
+    "formik-material-ui": "^0.0.22",
     "jest": "^24.9.0",
     "leaflet": "^1.5.1",
     "prop-types": "^15.7.2",
@@ -27,8 +31,8 @@
     "react-resizable": "^1.8.0",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.1.1",
-    "react-test-renderer": "^16.9.0",
-    "redux": "^4.0.4"
+    "redux": "^4.0.4",
+    "yup": "^0.27.0"
   },
   "scripts": {
     "start": "PORT=9200 react-scripts start",
@@ -49,5 +53,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "eslint-plugin-react-hooks": "^1.7.0"
   }
 }

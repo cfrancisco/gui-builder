@@ -1,14 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import AppBar from '@material-ui/core/AppBar';
-import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
+import Badge from '@material-ui/core/Badge';
+import MenuItem from '@material-ui/core/MenuItem';
+import Menu from '@material-ui/core/Menu';
+import MailIcon from '@material-ui/icons/Mail';
 import MenuIcon from '@material-ui/icons/Menu';
+import AccountCircle from '@material-ui/icons/AccountCircle';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-
-const drawerWidth = 240;
+import Typography from '@material-ui/core/Typography';
+import configs from '../../settings';
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
@@ -18,8 +22,8 @@ const useStyles = makeStyles((theme) => ({
         }),
     },
     appBarShift: {
-        width: `calc(100% - ${drawerWidth}px)`,
-        marginLeft: drawerWidth,
+        width: `calc(100% - ${configs.drawerWidth}px)`,
+        marginLeft: configs.drawerWidth,
         transition: theme.transitions.create(['margin', 'width'], {
             easing: theme.transitions.easing.easeOut,
             duration: theme.transitions.duration.enteringScreen,
@@ -30,16 +34,22 @@ const useStyles = makeStyles((theme) => ({
     },
     title: {
         flexGrow: 1,
-        paddingLeft: 24,
-        [theme.breakpoints.up('md')]: {
-            paddingTop: '1.5em',
-        },
-
     },
 }));
 
 const Topbar = ({ handleDrawerToggle, open }) => {
     const classes = useStyles();
+    const [auth] = useState(true);
+    const [anchorEl, setAnchorEl] = useState(null);
+    const openProfileMenu = Boolean(anchorEl);
+
+    const handleMenu = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
 
     return (
         <AppBar
@@ -58,8 +68,47 @@ const Topbar = ({ handleDrawerToggle, open }) => {
                 >
                     <MenuIcon />
                 </IconButton>
-                <Button color="inherit">Login</Button>
+                <Typography variant="h6" className={classes.title}>
+                    GUI Builder
+                </Typography>
+                {auth && (
+                    <>
+                        <IconButton aria-label="show 4 new mails" color="inherit">
+                            <Badge badgeContent={4} color="secondary">
+                                <MailIcon />
+                            </Badge>
+                        </IconButton>
+                        <IconButton
+                            aria-label="Current User"
+                            aria-controls="menu-appbar"
+                            aria-haspopup="true"
+                            onClick={handleMenu}
+                            color="inherit"
+                        >
+                            <AccountCircle />
+                        </IconButton>
+                        <Menu
+                            id="menu-appbar"
+                            anchorEl={anchorEl}
+                            anchorOrigin={{
+                                vertical: 'top',
+                                horizontal: 'right',
+                            }}
+                            keepMounted
+                            transformOrigin={{
+                                vertical: 'top',
+                                horizontal: 'right',
+                            }}
+                            open={openProfileMenu}
+                            onClose={handleClose}
+                        >
+                            <MenuItem onClick={handleClose}>Profile</MenuItem>
+                            <MenuItem onClick={handleClose}>My account</MenuItem>
+                        </Menu>
+                    </>
+                )}
             </Toolbar>
+
         </AppBar>
     );
 };
