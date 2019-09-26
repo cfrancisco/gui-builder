@@ -39,7 +39,8 @@
   "scripts": {
     "start": "PORT=9200 react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test"
+    "test": "react-scripts test",
+    "test-all": "jest --config ./jest.config.json"
   },
   "eslintConfig": {
     "extends": "react-app"
