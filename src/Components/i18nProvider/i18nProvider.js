@@ -1,15 +1,38 @@
 import PropTypes from 'prop-types';
 import intl from 'react-intl-universal';
-import ptBR from './locales/pt-BR.json';
-import enUS from './locales/en-US.json';
+// import ptBR from './devices/locales/pt-BR.json';
+// import enUS from './devices/locales/en-US.json';
 import config from '../../config';
 
-const language = config.language ? config.language.code : window.navigator.language;
+const i18nProvider = ({ subject, term }) => {
+    const lang = config.language ? config.language.code : window.navigator.language;
+    let language = '';
 
-const i18nProvider = ({ term }) => {
+    switch (lang) {
+    case 'pt':
+        language = 'pt-BR';
+        break;
+    case 'pt-pt':
+        language = 'pt-BR';
+        break;
+    case 'en':
+        language = 'en-US';
+        break;
+    default:
+        language = 'en-US';
+    }
+
+    let localeBasePath = '';
+
+    if (language === 'pt-BR') {
+        localeBasePath = './locales/pt';
+    } else {
+        localeBasePath = './locales/en';
+    }
+
     const locales = {
-        'pt-BR': ptBR,
-        'en-US': enUS,
+        'pt-BR': require(`${localeBasePath}/${subject}.json`),
+        'en-US': require(`${localeBasePath}/${subject}.json`),
     };
 
     intl.init({
@@ -17,10 +40,11 @@ const i18nProvider = ({ term }) => {
         locales,
     });
 
-    return intl.getHTML(term).d('Esta tradução não existe');
+    return intl.getHTML(term).d(term);
 };
 
 i18nProvider.propTypes = {
+    subject: PropTypes.string.isRequired,
     term: PropTypes.string.isRequired,
 };
 
