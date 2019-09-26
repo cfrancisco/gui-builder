@@ -3,11 +3,6 @@ import L from 'leaflet';
 import PropTypes from 'prop-types';
 import Util from '../../utils';
 
-const style = {
-    width: '100%',
-    height: '100%',
-};
-
 
 const CustomMap = ({ markersData, center, zoom }) => {
     // create map
@@ -15,6 +10,10 @@ const CustomMap = ({ markersData, center, zoom }) => {
     const mapRef = useRef(sid);
     const xCenter = center || [49.8419, 24.0315];
     const xZoom = zoom || 16;
+    const style = {
+        width: '100%',
+        height: '100%',
+    };
 
     useEffect(() => {
         mapRef.current = L.map(sid, {
@@ -27,7 +26,7 @@ const CustomMap = ({ markersData, center, zoom }) => {
                 }),
             ],
         });
-    }, [xCenter, xZoom]);
+    }, [xCenter, xZoom, sid]);
 
     // add layer
     const layerRef = useRef(null);
