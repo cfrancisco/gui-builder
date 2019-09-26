@@ -5,7 +5,7 @@ import Link from '../Link';
 
 it('Link should render correctly', () => {
     const tree = renderer
-        .create(<Link />)
+        .create(<Link href="cpqd.com.br" />)
         .toJSON();
     expect(tree).toMatchSnapshot();
 });

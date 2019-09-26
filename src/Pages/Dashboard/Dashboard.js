@@ -188,6 +188,7 @@ class DashboardLayout extends Component {
                     <Select
                         value={values.element}
                         onChange={this.handleChange}
+                        label="Add a new Element"
                         inputProps={{
                             name: 'element',
                             id: 'addElement',
@@ -216,7 +217,7 @@ class DashboardLayout extends Component {
 
 
 DashboardLayout.propTypes = {
-    classes: PropTypes.shape({}).isRequired,
+    classes: PropTypes.objectOf(PropTypes.shape).isRequired,
 };
 
 export default withStyles(styles)(DashboardLayout);
