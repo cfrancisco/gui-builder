@@ -13,12 +13,12 @@ export default () => (
         <Switch>
             <LayoutBase>
                 <Route exact path="/" component={Main} />
-                {/* <Route exact path="/signup" component={Signup} /> */}
                 <Route exact path="/external" component={External} />
                 <Route exact path="/forms" component={Forms} />
                 <Route exact path="/todo" component={TodoList} />
                 <Route exact path="/dashboard" component={Dashboard} />
                 <Route exact path="/maps" component={Maps} />
+                {/* <Route exact path="" component={Page404} /> */}
             </LayoutBase>
 
         </Switch>

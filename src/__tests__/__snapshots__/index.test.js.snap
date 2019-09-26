@@ -1,0 +1,111 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DojotButton should render without any props 1`] = `
+<Component>
+  <WithStyles(ForwardRef(Button))
+    className="makeStyles-root-1"
+  >
+    <ForwardRef(Button)
+      className="makeStyles-root-1"
+      classes={
+        Object {
+          "colorInherit": "MuiButton-colorInherit",
+          "contained": "MuiButton-contained",
+          "containedPrimary": "MuiButton-containedPrimary",
+          "containedSecondary": "MuiButton-containedSecondary",
+          "disabled": "Mui-disabled",
+          "focusVisible": "Mui-focusVisible",
+          "fullWidth": "MuiButton-fullWidth",
+          "label": "MuiButton-label",
+          "outlined": "MuiButton-outlined",
+          "outlinedPrimary": "MuiButton-outlinedPrimary",
+          "outlinedSecondary": "MuiButton-outlinedSecondary",
+          "root": "MuiButton-root",
+          "sizeLarge": "MuiButton-sizeLarge",
+          "sizeSmall": "MuiButton-sizeSmall",
+          "text": "MuiButton-text",
+          "textPrimary": "MuiButton-textPrimary",
+          "textSecondary": "MuiButton-textSecondary",
+        }
+      }
+    >
+      <WithStyles(ForwardRef(ButtonBase))
+        className="MuiButton-root makeStyles-root-1 MuiButton-text"
+        component="button"
+        disabled={false}
+        focusRipple={true}
+        focusVisibleClassName="Mui-focusVisible"
+        type="button"
+      >
+        <ForwardRef(ButtonBase)
+          className="MuiButton-root makeStyles-root-1 MuiButton-text"
+          classes={
+            Object {
+              "disabled": "Mui-disabled",
+              "focusVisible": "Mui-focusVisible",
+              "root": "MuiButtonBase-root",
+            }
+          }
+          component="button"
+          disabled={false}
+          focusRipple={true}
+          focusVisibleClassName="Mui-focusVisible"
+          type="button"
+        >
+          <button
+            className="MuiButtonBase-root MuiButton-root makeStyles-root-1 MuiButton-text"
+            disabled={false}
+            onBlur={[Function]}
+            onDragLeave={[Function]}
+            onFocus={[Function]}
+            onKeyDown={[Function]}
+            onKeyUp={[Function]}
+            onMouseDown={[Function]}
+            onMouseLeave={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+            onTouchMove={[Function]}
+            onTouchStart={[Function]}
+            tabIndex={0}
+            type="button"
+          >
+            <span
+              className="MuiButton-label"
+            />
+            <NoSsr>
+              <WithStyles(undefined)
+                center={false}
+              >
+                <ForwardRef(TouchRipple)
+                  center={false}
+                  classes={
+                    Object {
+                      "child": "MuiTouchRipple-child",
+                      "childLeaving": "MuiTouchRipple-childLeaving",
+                      "childPulsate": "MuiTouchRipple-childPulsate",
+                      "ripple": "MuiTouchRipple-ripple",
+                      "ripplePulsate": "MuiTouchRipple-ripplePulsate",
+                      "rippleVisible": "MuiTouchRipple-rippleVisible",
+                      "root": "MuiTouchRipple-root",
+                    }
+                  }
+                >
+                  <span
+                    className="MuiTouchRipple-root"
+                  >
+                    <TransitionGroup
+                      childFactory={[Function]}
+                      component={null}
+                      exit={true}
+                    />
+                  </span>
+                </ForwardRef(TouchRipple)>
+              </WithStyles(undefined)>
+            </NoSsr>
+          </button>
+        </ForwardRef(ButtonBase)>
+      </WithStyles(ForwardRef(ButtonBase))>
+    </ForwardRef(Button)>
+  </WithStyles(ForwardRef(Button))>
+</Component>
+`;
