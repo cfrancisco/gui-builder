@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -13,18 +14,14 @@ const useStyles = makeStyles((theme) => ({
         marginTop: theme.spacing(3),
         overflowX: 'auto',
     },
-    table: {
-        minWidth: 650,
-    },
 }));
 
-const SimpleTable = (header, data) => {
+const SimpleTable = ({ header, data }) => {
     const classes = useStyles();
-    console.log('header, data', header, data);
 
     return (
         <Paper className={classes.root}>
-            <Table className={classes.table}>
+            <Table>
                 <TableHead>
                     <TableRow>
                         {header.map((item) => (
@@ -44,6 +41,19 @@ const SimpleTable = (header, data) => {
             </Table>
         </Paper>
     );
+};
+
+SimpleTable.propTypes = {
+    header: PropTypes.arrayOf(
+        PropTypes.string,
+    ).isRequired,
+    data: PropTypes.arrayOf(
+        PropTypes.arrayOf(
+            PropTypes.oneOfType([
+                PropTypes.string,
+                PropTypes.number]),
+        ),
+    ).isRequired,
 };
 
 export default SimpleTable;

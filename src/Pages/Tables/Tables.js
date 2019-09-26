@@ -10,11 +10,7 @@ const styles = (theme) => ({
         backgroundColor: theme.palette.grey.A500,
         overflow: 'hidden',
         marginTop: 20,
-        padding: 20,
-        paddingBottom: 200,
-    },
-    grid: {
-        width: 1000,
+        padding: theme.spacing(3),
     },
 });
 
@@ -34,11 +30,11 @@ const Tables = () => {
     ];
     return (
         <div className={classes.root}>
-            <Grid spacing={10} alignItems="center" justify="center" container className={classes.grid}>
-                <Grid item xs={12}>
+            <Grid spacing={10} alignItems="center" justify="center" container>
+                <Grid item xs={12} md={12}>
                     <SimpleTable header={header} data={data} />
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={12} md={12}>
                     Complex Table
                 </Grid>
             </Grid>

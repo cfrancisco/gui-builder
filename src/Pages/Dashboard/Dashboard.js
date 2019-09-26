@@ -14,6 +14,7 @@ import CustomMap from '../../Components/CustomMap/CustomMap';
 
 import Button from '../../Components/Button/Button';
 import Avatar from '../../Components/Avatar/Avatar';
+import SimpleTable from '../../Components/Table/SimpleTable';
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
@@ -40,6 +41,7 @@ const styles = (theme) => ({
         background: '#eee',
         '& .react-grid-item': {
             padding: '1px',
+            overflow: 'auto',
             border: '2px solid #c7c7c7',
             'font-size': '17px',
             'font-weight': '800',
@@ -78,9 +80,18 @@ class DashboardLayout extends Component {
                 lg: 12, md: 10, sm: 6, xs: 4, xxs: 2,
             },
         };
+        this.header = [
+            'Dessert (g)', 'Calories (g)', 'Fat (g)',
+        ];
+        this.data = [
+            ['Frozen yoghurt', 159, 60, 4],
+            ['Ice cream sandwich', 237, 37],
+            ['Eclair', 262, 16.0],
+            ['Cupcake', 305, 3.7],
+            ['Gingerbread', 356, 3.9],
+        ];
     }
 
-    // const classes = useStyles();
     componentDidMount() {
         const layout = [];
         const { items } = this.state;
@@ -123,7 +134,7 @@ class DashboardLayout extends Component {
             el = <CustomMap />;
         }
         if (values.element === 'table') {
-            el = <CustomMap />;
+            el = <SimpleTable data={this.data} header={this.header} />;
         }
         if (values.element === 'empty') {
             el = <br />;
@@ -149,10 +160,6 @@ class DashboardLayout extends Component {
             <div key={el.i} data-grid={el}>
                 {elem}
                 <Fab
-                    inputProps={{
-                        name: 'MyName',
-                        role: 'MyRole',
-                    }}
                     size="small"
                     color="secondary"
                     onClick={(e) => this.onRemoveItem(e, el.i)}
