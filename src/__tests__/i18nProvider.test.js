@@ -1,6 +1,17 @@
-// import I18nProvider from '../Components/i18nProvider/i18nProvider';
+import React from 'react';
+import {
+    mount,
+    shallow,
+    render,
+    configure,
+} from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+
+import I18nProvider from '../Components/i18nProvider/i18nProvider';
 import ptBR from '../Components/i18nProvider/locales/pt-BR.json';
 import enUS from '../Components/i18nProvider/locales/en-US.json';
+
+configure({ adapter: new Adapter() });
 
 function getDeepKeys(obj) {
     let keys = [];
@@ -22,5 +33,11 @@ describe('Testing functions of internacionalization component', () => {
         const enKeys = getDeepKeys(enUS);
 
         expect(ptKeys).toEqual(enKeys);
+    });
+
+    test('i18n must return an string with no traduction founded', () => {
+        const translate = shallow(<I18nProvider term="device.title_sidebar.new_attr" />);
+
+        expect(translate).toMatchObject({});
     });
 });

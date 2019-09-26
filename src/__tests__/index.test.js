@@ -2,7 +2,7 @@ import React from 'react';
 import { configure, mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import toJson from 'enzyme-to-json';
-import { DojotButton } from './index';
+import { DojotButton } from '../Components/Button/index';
 
 
 configure({ adapter: new Adapter() });
