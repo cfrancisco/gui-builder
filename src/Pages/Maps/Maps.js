@@ -8,6 +8,7 @@ import L from 'leaflet';
 import Paper from '@material-ui/core/Paper';
 import CustomMap from '../../Components/CustomMap/CustomMap';
 import 'leaflet/dist/leaflet.css';
+import styles from './_styles';
 
 const iconRetinaUrl = require('leaflet/dist/images/marker-icon-2x.png');
 const iconUrl = require('leaflet/dist/images/marker-icon.png');
@@ -17,36 +18,6 @@ const shadowUrl = require('leaflet/dist/images/marker-shadow.png');
 // in order to avoid use CDN request (via <link>)
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({ iconRetinaUrl, iconUrl, shadowUrl });
-
-
-const styles = (theme) => ({
-    root: {
-        flexGrow: 1,
-        paddingTop: 20,
-    },
-    leaflet: {
-        height: '100%',
-        width: '100%',
-    },
-    gridItem: {
-        height: '250px',
-        width: '250px',
-        alignItems: 'stretch',
-
-    },
-    paper: {
-        height: '100%',
-        width: '100%',
-        padding: theme.spacing(1),
-        overflow: 'hidden',
-    },
-    grid: {
-        alignItems: 'stretch',
-        [theme.breakpoints.down('sm')]: {
-            width: 'calc(100% - 20px)',
-        },
-    },
-});
 
 const useStyles = makeStyles(styles);
 

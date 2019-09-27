@@ -6,6 +6,7 @@ import { Formik, Field, Form } from 'formik';
 import { TextField } from 'formik-material-ui';
 import * as Yup from 'yup';
 import { DojotButton } from '../../Components/Button';
+import styles from './_styles';
 
 //
 // More info: https://jaredpalmer.com/formik/docs/guides/validation
@@ -30,21 +31,6 @@ const ranges = [
     },
 ];
 
-
-const styles = (theme) => ({
-    root: {
-        flexGrow: 1,
-        backgroundColor: theme.palette.grey.A500,
-        overflow: 'hidden',
-        marginTop: 20,
-        padding: 20,
-        paddingBottom: 200,
-    },
-    grid: {
-        width: 1000,
-    },
-});
-
 const useStyles = makeStyles(styles);
 
 const Forms = () => {
@@ -53,9 +39,13 @@ const Forms = () => {
     // https://jaredpalmer.com/formik/docs/api/formik#onsubmit-values-values-formikbag-formikbag-void
     return (
         <div className={classes.root}>
-            <Grid spacing={10} alignItems="center" justify="center" container className={classes.grid}>
+            <Grid
+                spacing={10}
+                alignItems="center"
+                justify="center"
+                container
+            >
                 <Grid item xs={12}>
-
                     <Formik
                         initialValues={{
                             email: '',

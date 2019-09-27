@@ -1,9 +1,9 @@
-const styles = {
+const styles = (theme) => ({
     activeItem: {
-        marginLeft: '6px',
-        marginRight: '6px',
+        marginLeft: theme.spacing(1),
+        marginRight: theme.spacing(1),
         textDecoration: 'underline',
     },
-};
+});
 
 export default styles;

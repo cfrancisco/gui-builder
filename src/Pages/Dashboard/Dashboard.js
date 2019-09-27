@@ -15,41 +15,13 @@ import CustomMap from '../../Components/CustomMap/CustomMap';
 import Button from '../../Components/Button/Button';
 import Avatar from '../../Components/Avatar/Avatar';
 import SimpleTable from '../../Components/Table/SimpleTable';
+import styles from './_styles';
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
 /**
  * This layout demonstrates how to use a grid with a dynamic number of elements.
  */
-
-const styles = (theme) => ({
-    root: {
-        flexGrow: 1,
-        paddingTop: 20,
-    },
-    formControl: {
-        margin: theme.spacing(1),
-        minWidth: 200,
-    },
-    fab: {
-        position: 'absolute',
-        right: '10px',
-        top: '10px',
-    },
-    reactGridLayout: {
-        width: '100%',
-        background: '#eee',
-        '& .react-grid-item': {
-            padding: '1px',
-            overflow: 'auto',
-            border: '2px solid #c7c7c7',
-            'font-size': '17px',
-            'font-weight': '800',
-            background: '#f5f5f5',
-        },
-    },
-});
-
 
 class DashboardLayout extends Component {
     constructor(props) {
