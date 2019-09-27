@@ -1,15 +1,19 @@
 import PropTypes from 'prop-types';
 import intl from 'react-intl-universal';
-// import ptBR from './devices/locales/pt-BR.json';
-// import enUS from './devices/locales/en-US.json';
 import config from '../../config';
 
-const i18nProvider = ({ subject, term }) => {
+const i18nProvider = ({ localeObj, termKey }) => {
     const lang = config.language ? config.language.code : window.navigator.language;
     let language = '';
+    const localesArray = Object.values(localeObj.default);
+    const localePT = Object.values(localesArray)[0];
+    const localeEN = Object.values(localesArray)[1];
 
     switch (lang) {
     case 'pt':
+        language = 'pt-BR';
+        break;
+    case 'pt-BR':
         language = 'pt-BR';
         break;
     case 'pt-pt':
@@ -22,17 +26,9 @@ const i18nProvider = ({ subject, term }) => {
         language = 'en-US';
     }
 
-    let localeBasePath = '';
-
-    if (language === 'pt-BR') {
-        localeBasePath = './locales/pt';
-    } else {
-        localeBasePath = './locales/en';
-    }
-
     const locales = {
-        'pt-BR': require(`${localeBasePath}/${subject}.json`),
-        'en-US': require(`${localeBasePath}/${subject}.json`),
+        'pt-BR': localePT,
+        'en-US': localeEN,
     };
 
     intl.init({
@@ -40,12 +36,11 @@ const i18nProvider = ({ subject, term }) => {
         locales,
     });
 
-    return intl.getHTML(term).d(term);
+    return intl.getHTML(termKey).d(termKey);
 };
 
 i18nProvider.propTypes = {
-    subject: PropTypes.string.isRequired,
-    term: PropTypes.string.isRequired,
+    termKey: PropTypes.string.isRequired,
 };
 
 export default i18nProvider;

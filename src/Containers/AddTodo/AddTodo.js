@@ -12,9 +12,10 @@ import Grid from '@material-ui/core/Grid';
 
 import { connect } from 'react-redux';
 import addTodo from './Action';
-import I18nProvider from '../../Components/i18nProvider/i18nProvider';
-
 import Button from '../../Components/Button/Button';
+
+import I18nProvider from '../../Components/i18nProvider/i18nProvider';
+import * as locales from './locales/AddTodo';
 
 class AddTodo extends Component {
     constructor(props) {
@@ -24,12 +25,9 @@ class AddTodo extends Component {
             input: '',
             nextTodoId: 0,
         };
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleInput = this.handleInput.bind(this);
     }
 
-    handleSubmit(event) {
+    handleSubmit = (event) => {
         event.preventDefault();
         const { input, priority, nextTodoId } = this.state;
         if (!input.trim()) {
@@ -45,12 +43,12 @@ class AddTodo extends Component {
         }));
     }
 
-    handleInput(event) {
+    handleInput = (event) => {
         event.preventDefault();
         this.setState({ input: event.target.value });
     }
 
-    handleChange(event) {
+    handleChange = (event) => {
         event.preventDefault();
         this.setState({ priority: event.target.value });
     }
@@ -70,7 +68,12 @@ class AddTodo extends Component {
                     <Grid item xs={3}>
                         <TextField
                             id="todo-text"
-                            label={<I18nProvider subject="certificates" term="title_cert" />}
+                            label={
+                                <I18nProvider
+                                    localeObj={locales}
+                                    termKey="title"
+                                />
+                            }
                             value={input}
                             onChange={this.handleInput}
                             margin="normal"
@@ -96,7 +99,10 @@ class AddTodo extends Component {
                                 <FormControlLabel
                                     value="high"
                                     control={<Radio color="primary" />}
-                                    label={<I18nProvider subject="devices" term="attributes" />}
+                                    label={<I18nProvider 
+                                        localeObj={locales}
+                                        termKey="attributes"
+                                        />}
                                     labelPlacement="end"
                                 />
                             </RadioGroup>
@@ -105,7 +111,10 @@ class AddTodo extends Component {
 
                     <Grid item xs={3}>
                         <Button type="submit" size="small">
-                            <I18nProvider subject="devices" term="title" />
+                            <I18nProvider 
+                                localeObj={locales}
+                                termKey="title" 
+                            />
                         </Button>
                     </Grid>
 
