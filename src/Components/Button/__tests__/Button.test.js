@@ -7,10 +7,7 @@ import { CustomButton } from '../index';
 configure({ adapter: new Adapter() });
 
 describe('CustomButton', () => {
-    /**
-     * Checks whether the CustomButton renders correctly without any props
-     */
-    it('should render correctly without any props', () => {
+    it('snapshot renders', () => {
         const wrapper = shallow(<CustomButton />);
         expect(toJson(wrapper)).toMatchSnapshot();
     });

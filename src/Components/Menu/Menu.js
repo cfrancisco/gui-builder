@@ -12,23 +12,9 @@ import ListItemText from '@material-ui/core/ListItemText';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Itens from './_itens';
-import configs from '../../settings';
+import styles from './_styles';
 
-const useStyles = makeStyles((theme) => ({
-    menuButton: {
-        marginRight: theme.spacing(2),
-    },
-    hide: {
-        display: 'none',
-    },
-    drawer: {
-        width: configs.drawerWidth,
-        flexShrink: 0,
-    },
-    drawerPaper: {
-        width: configs.drawerWidth,
-    },
-}));
+const useStyles = makeStyles(styles);
 
 
 const Menu = ({ open, handleDrawerClose }) => {

@@ -1,21 +1,22 @@
 import React, { useEffect, useRef } from 'react';
 import L from 'leaflet';
 import PropTypes from 'prop-types';
-
-const style = {
-    width: '100%',
-    height: '300px',
-};
+import Util from '../../utils';
 
 
 const CustomMap = ({ markersData, center, zoom }) => {
     // create map
-    const mapRef = useRef(null);
+    const mapid = Util.sid();
+    const mapRef = useRef(mapid);
     const xCenter = center || [49.8419, 24.0315];
     const xZoom = zoom || 16;
+    const style = {
+        width: '100%',
+        height: '100%',
+    };
 
     useEffect(() => {
-        mapRef.current = L.map('map', {
+        mapRef.current = L.map(mapid, {
             center: xCenter,
             zoom: xZoom,
             layers: [
@@ -46,7 +47,7 @@ const CustomMap = ({ markersData, center, zoom }) => {
         [markersData],
     );
 
-    return <div id="map" style={style} />;
+    return <div ref={mapRef} id={mapid} style={style} />;
 };
 
 CustomMap.propTypes = {
@@ -58,11 +59,18 @@ CustomMap.propTypes = {
                 lng: PropTypes.number.isRequired,
             }).isRequired,
         }),
-    ).isRequired,
+    ),
     center: PropTypes.arrayOf(
         PropTypes.number,
-    ).isRequired,
-    zoom: PropTypes.number.isRequired,
+    ),
+    zoom: PropTypes.number,
 };
+
+CustomMap.defaultProps = {
+    markersData: [],
+    zoom: 12,
+    center: [49.8419, 24.0315],
+};
+
 
 export default CustomMap;
