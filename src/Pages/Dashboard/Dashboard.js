@@ -104,7 +104,15 @@ class DashboardLayout extends Component {
         this.setState({ layoutElement: layout });
     }
 
-
+    /**
+     * Function used to remove and item from Dashboard component. Receive an
+     * event of click and the index of element. Return a state with the
+     * new layout of Dashboard
+     *
+     * @param {*} event
+     * @param {*} index
+     * @memberof DashboardLayout
+     */
     onRemoveItem(event, index) {
         //     const index = event.target.dataset.itemKey;
         //   console.log('items', items, layoutElement, newCounter);
@@ -114,9 +122,19 @@ class DashboardLayout extends Component {
         this.setState({ layoutElement: newLayout, items: xItems });
     }
 
+    /**
+     * Adds an item to Dashboard. Updates the state with new layout,
+     * increases the number of elements and concatenates a new item
+     * into an array
+     *
+     * @memberof DashboardLayout
+     */
     onAddItem() {
         const {
-            values, newCounter, layoutElement, items,
+            values,
+            newCounter,
+            layoutElement,
+            items,
         } = this.state;
         const newPoints = {
             i: `n${newCounter}`,
