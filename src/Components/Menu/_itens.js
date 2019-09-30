@@ -29,6 +29,11 @@ const Menu = [
         icon: <Inbox />,
     },
     {
+        label: 'Tables',
+        pathname: '/tables',
+        icon: <Inbox />,
+    },
+    {
         label: 'Cards',
         pathname: '/external',
         icon: <Circles />,
