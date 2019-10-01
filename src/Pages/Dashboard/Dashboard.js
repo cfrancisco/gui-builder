@@ -38,6 +38,8 @@ class DashboardLayout extends Component {
             })),
             values: { element: '' },
             newCounter: 0,
+            header: [],
+            data: [],
             layoutElement: [],
         };
 
@@ -62,19 +64,18 @@ class DashboardLayout extends Component {
                 xxs: 2,
             },
         };
-        this.header = [];
-        this.data = [];
     }
 
     componentDidMount() {
         const getUsers = async () => {
-            this.header = ['id', 'email', 'first_name', 'last_name', 'avatar'];
+            const header = ['id', 'email', 'first_name', 'last_name', 'avatar'];
             const dt = await Users.getUsers();
-            this.data = [];
-            dt.forEach((i) => this.data.push([i.email,
+            const data = [];
+            dt.forEach((i) => data.push([i.email,
                 i.first_name,
                 i.id,
                 i.last_name]));
+            this.setState({ header, data });
         };
 
         this.data = getUsers();
@@ -117,6 +118,8 @@ class DashboardLayout extends Component {
             newCounter,
             layoutElement,
             items,
+            data,
+            header,
         } = this.state;
         const newPoints = {
             i: `n${newCounter}`,
@@ -134,8 +137,8 @@ class DashboardLayout extends Component {
             el = <CustomMap />;
         }
         if (values.element === 'table') {
-            console.log('this.data', this.data);
-            el = <SimpleTable data={this.data} header={this.header} />;
+            console.log('this.data', data);
+            el = <SimpleTable data={data} header={header} />;
         }
         if (values.element === 'empty') {
             el = <br />;
