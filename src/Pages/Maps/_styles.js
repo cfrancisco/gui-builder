@@ -9,7 +9,6 @@ const styles = (theme) => ({
     },
     gridItem: {
         height: '250px',
-        width: '250px',
         alignItems: 'stretch',
 
     },
