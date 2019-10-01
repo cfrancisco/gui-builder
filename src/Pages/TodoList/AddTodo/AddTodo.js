@@ -25,9 +25,11 @@ class AddTodo extends Component {
             input: '',
             nextTodoId: 0,
         };
+
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleSubmit = (event) => {
+    handleSubmit(event) {
         event.preventDefault();
         const { input, priority, nextTodoId } = this.state;
         if (!input.trim()) {
