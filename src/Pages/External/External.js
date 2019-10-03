@@ -7,42 +7,7 @@ import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-
-const styles = (theme) => ({
-    root: {
-        flexGrow: 1,
-        paddingTop: 20,
-    },
-    gridItem: {
-        minheight: 250,
-        alignItems: 'stretch',
-
-    },
-    grid: {
-        alignItems: 'stretch',
-        [theme.breakpoints.down('sm')]: {
-            width: 'calc(100% - 20px)',
-        },
-    },
-    paper: {
-        height: '100%',
-        padding: theme.spacing(3),
-        overflow: 'hidden',
-        textAlign: 'left',
-        color: theme.palette.text.secondary,
-    },
-    bullet: {
-        display: 'inline-block',
-        margin: '0 2px',
-        transform: 'scale(0.8)',
-    },
-    title: {
-        fontSize: 14,
-    },
-    pos: {
-        marginBottom: 12,
-    },
-});
+import styles from './_styles';
 
 const useStyles = makeStyles(styles);
 

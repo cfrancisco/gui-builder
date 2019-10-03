@@ -16,40 +16,14 @@ import Button from '../../Components/Button/Button';
 import Avatar from '../../Components/Avatar/Avatar';
 import SimpleTable from '../../Components/Table/SimpleTable';
 
+import Users from '../../Services/Users';
+import styles from './_styles';
+
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
 /**
  * This layout demonstrates how to use a grid with a dynamic number of elements.
  */
-
-const styles = (theme) => ({
-    root: {
-        flexGrow: 1,
-        paddingTop: 20,
-    },
-    formControl: {
-        margin: theme.spacing(1),
-        minWidth: 200,
-    },
-    fab: {
-        position: 'absolute',
-        right: '10px',
-        top: '10px',
-    },
-    reactGridLayout: {
-        width: '100%',
-        background: '#eee',
-        '& .react-grid-item': {
-            padding: '1px',
-            overflow: 'auto',
-            border: '2px solid #c7c7c7',
-            'font-size': '17px',
-            'font-weight': '800',
-            background: '#f5f5f5',
-        },
-    },
-});
-
 
 class DashboardLayout extends Component {
     constructor(props) {
@@ -64,6 +38,8 @@ class DashboardLayout extends Component {
             })),
             values: { element: '' },
             newCounter: 0,
+            header: [],
+            data: [],
             layoutElement: [],
         };
 
@@ -74,32 +50,40 @@ class DashboardLayout extends Component {
 
         this.configs = {
             breakpoints: {
-                lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0,
+                lg: 1200,
+                md: 996,
+                sm: 768,
+                xs: 480,
+                xxs: 0,
             },
             cols: {
-                lg: 12, md: 10, sm: 6, xs: 4, xxs: 2,
+                lg: 12,
+                md: 10,
+                sm: 6,
+                xs: 4,
+                xxs: 2,
             },
         };
-        this.header = [
-            'Dessert (g)', 'Calories (g)', 'Fat (g)',
-        ];
-        this.data = [
-            ['Frozen yoghurt', 159, 60, 4],
-            ['Ice cream sandwich', 237, 37],
-            ['Eclair', 262, 16.0],
-            ['Cupcake', 305, 3.7],
-            ['Gingerbread', 356, 3.9],
-        ];
     }
 
+    getUsers = async () => {
+        const header = ['id', 'email', 'first_name', 'last_name', 'avatar'];
+        let dt = await Users.getUsers();
+        const data = dt.map((i) => {
+            return [i.email,
+            i.first_name,
+            i.id,
+            i.last_name]
+        });
+        this.setState({ header, data });
+    };
+
     componentDidMount() {
+        this.data = this.getUsers();
         const layout = [];
         const { items } = this.state;
         items.forEach((el) => {
-            layout.push(
-                this.generateDOM(el,
-                    <span className="text">{el.i}</span>),
-            );
+            layout.push(this.generateDOM(el, <span className="text">{el.i}</span>));
         });
         this.setState({ layoutElement: layout });
     }
@@ -135,6 +119,8 @@ class DashboardLayout extends Component {
             newCounter,
             layoutElement,
             items,
+            data,
+            header,
         } = this.state;
         const newPoints = {
             i: `n${newCounter}`,
@@ -152,7 +138,7 @@ class DashboardLayout extends Component {
             el = <CustomMap />;
         }
         if (values.element === 'table') {
-            el = <SimpleTable data={this.data} header={this.header} />;
+            el = <SimpleTable data={data} header={header} />;
         }
         if (values.element === 'empty') {
             el = <br />;
@@ -162,15 +148,11 @@ class DashboardLayout extends Component {
         }
 
         this.setState({
-            layoutElement:
-                [...layoutElement,
-                    this.generateDOM(newPoints, el),
-                ],
+            layoutElement: [...layoutElement, this.generateDOM(newPoints, el)],
             newCounter: newCounter + 1,
             items: items.concat(newPoints),
         });
     }
-
 
     generateDOM(el, elem) {
         const { classes } = this.props;
@@ -218,7 +200,9 @@ class DashboardLayout extends Component {
                         <MenuItem value="table">Table</MenuItem>
                         <MenuItem value="empty">Box</MenuItem>
                     </Select>
-                    <Button onClick={this.onAddItem} type="button" size="small">Add Item</Button>
+                    <Button onClick={this.onAddItem} type="button" size="small">
+                        Add Item
+                    </Button>
                 </FormControl>
                 <br />
                 <ResponsiveReactGridLayout
@@ -232,7 +216,6 @@ class DashboardLayout extends Component {
         );
     }
 }
-
 
 DashboardLayout.propTypes = {
     classes: PropTypes.objectOf(PropTypes.shape).isRequired,

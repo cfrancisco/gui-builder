@@ -2,17 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import SimpleTable from '../../Components/Table/SimpleTable';
-
-
-const styles = (theme) => ({
-    root: {
-        flexGrow: 1,
-        backgroundColor: theme.palette.grey.A500,
-        overflow: 'hidden',
-        marginTop: 20,
-        padding: theme.spacing(3),
-    },
-});
+import styles from './_styles';
 
 const useStyles = makeStyles(styles);
 

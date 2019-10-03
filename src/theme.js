@@ -28,7 +28,19 @@ const myStyles = {
     overrides: {
         MuiButton: {
             root: {
+                background: 'linear-gradient(45deg, #6b91fe 30%, #53c7ff 90%)',
+                border: 0,
+                borderRadius: 3,
+                color: 'white',
+                height: 48,
+                boxShadow: '0 3px 5px 2px rgba(105, 137, 255, 0.3)',
+                padding: '0 24px',
                 fontSize: '1rem',
+            },
+        },
+        MuiCssBaseline: {
+            '@global': {
+                '@font-face': 'Raleway',
             },
         },
     },
