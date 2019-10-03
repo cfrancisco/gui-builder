@@ -66,19 +66,20 @@ class DashboardLayout extends Component {
         };
     }
 
-    componentDidMount() {
-        const getUsers = async () => {
-            const header = ['id', 'email', 'first_name', 'last_name', 'avatar'];
-            const dt = await Users.getUsers();
-            const data = [];
-            dt.forEach((i) => data.push([i.email,
-                i.first_name,
-                i.id,
-                i.last_name]));
-            this.setState({ header, data });
-        };
+    getUsers = async () => {
+        const header = ['id', 'email', 'first_name', 'last_name', 'avatar'];
+        let dt = await Users.getUsers();
+        const data = dt.map((i) => {
+            return [i.email,
+            i.first_name,
+            i.id,
+            i.last_name]
+        });
+        this.setState({ header, data });
+    };
 
-        this.data = getUsers();
+    componentDidMount() {
+        this.data = this.getUsers();
         const layout = [];
         const { items } = this.state;
         items.forEach((el) => {
@@ -137,7 +138,6 @@ class DashboardLayout extends Component {
             el = <CustomMap />;
         }
         if (values.element === 'table') {
-            console.log('this.data', data);
             el = <SimpleTable data={data} header={header} />;
         }
         if (values.element === 'empty') {
