@@ -6,7 +6,7 @@ import {
 import Adapter from 'enzyme-adapter-react-16';
 
 import I18nProvider from '../i18nProvider';
-import * as locales from '../../../Containers/AddTodo/locales/AddTodo';
+import * as locales from '../../../Pages/TodoList/AddTodo/locales/AddTodo';
 
 configure({ adapter: new Adapter() });
 

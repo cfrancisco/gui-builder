@@ -9,6 +9,7 @@ import Loader from '../../Components/Loader/Loader';
 import Avatar from '../../Components/Avatar/Avatar';
 import { DojotButton, CleanButton, CustomButton } from '../../Components/Button';
 import 'antd/dist/antd.css';
+import styles from './_styles';
 
 
 function Checkboxes() {
@@ -25,14 +26,6 @@ function onChange() {
     // console.log(date, dateString);
 }
 
-
-const styles = (theme) => ({
-    root: {
-        width: '100%',
-        maxWidth: 360,
-        backgroundColor: theme.palette.background.paper,
-    },
-});
 const useStyles = makeStyles(styles);
 
 const Main = () => {
