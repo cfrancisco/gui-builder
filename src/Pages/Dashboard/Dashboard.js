@@ -12,6 +12,12 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import CustomMap from '../../Components/CustomMap/CustomMap';
 
+
+import LineChart from '../../Components/Charts/LineChart/LineChart';
+import BarChart from '../../Components/Charts/BarChart/BarChart';
+import PieChart from '../../Components/Charts/PieChart/PieChart';
+import RadarChart from '../../Components/Charts/RadarChart/RadarChart';
+
 import Button from '../../Components/Button/Button';
 import Avatar from '../../Components/Avatar/Avatar';
 import SimpleTable from '../../Components/Table/SimpleTable';
@@ -50,6 +56,49 @@ const styles = (theme) => ({
     },
 });
 
+const lineChartDataset = [
+    {
+        label: 'Temperatura',
+        data: [
+            { label: '05/06', value: 19 },
+            { label: '06/06', value: 26 },
+            { label: '07/06', value: 31 },
+        ],
+    },
+    {
+        label: 'Umidade',
+        data: [
+            { label: '05/06', value: 40 },
+            { label: '06/06', value: 32 },
+            { label: '07/06', value: 19 },
+        ],
+    },
+];
+
+const barChartDataset = [
+    {
+        label: 'LineDataset01',
+        data: [
+            { label: 'data01', value: 1 },
+            { label: 'data02', value: 13 },
+            { label: 'data03', value: 6 },
+        ],
+    },
+    {
+        label: 'LineDataset02',
+        data: [
+            { label: 'data01', value: 6 },
+            { label: 'data02', value: 1 },
+            { label: 'data03', value: -3 },
+        ],
+    },
+];
+
+const pieChartDataset = [
+    { label: 'Protocolo A', value: 9 },
+    { label: 'Protocolo B', value: 13 },
+    { label: 'Protocolo C', value: 6 },
+];
 
 class DashboardLayout extends Component {
     constructor(props) {
@@ -135,6 +184,7 @@ class DashboardLayout extends Component {
             newCounter,
             layoutElement,
             items,
+            childKey = 0,
         } = this.state;
         const newPoints = {
             i: `n${newCounter}`,
@@ -148,8 +198,41 @@ class DashboardLayout extends Component {
         if (values.element === 'map') {
             el = <CustomMap />;
         }
-        if (values.element === 'graph') {
-            el = <CustomMap />;
+        if (values.element === 'linechart') {
+            el = (
+                <LineChart
+                    childKey={childKey}
+                    data={lineChartDataset}
+                    title="Gráfico de Linhas"
+                />
+            );
+        }
+        if (values.element === 'barchart') {
+            el = (
+                <BarChart
+                    childKey={childKey}
+                    data={lineChartDataset}
+                    title="Gráfico de Barras"
+                />
+            );
+        }
+        if (values.element === 'piechart') {
+            el = (
+                <PieChart
+                    childKey={childKey}
+                    data={pieChartDataset}
+                    title="Gráfico de Pizza"
+                />
+            );
+        }
+        if (values.element === 'radarchart') {
+            el = (
+                <RadarChart
+                    childKey={childKey}
+                    data={lineChartDataset}
+                    title="Gráfico de Radar"
+                />
+            );
         }
         if (values.element === 'table') {
             el = <SimpleTable data={this.data} header={this.header} />;
@@ -161,14 +244,15 @@ class DashboardLayout extends Component {
             el = <Avatar />;
         }
 
-        this.setState({
+        this.setState((prevState) => ({
             layoutElement:
                 [...layoutElement,
                     this.generateDOM(newPoints, el),
                 ],
             newCounter: newCounter + 1,
             items: items.concat(newPoints),
-        });
+            childKey: prevState.childKey + 1,
+        }));
     }
 
 
@@ -214,7 +298,10 @@ class DashboardLayout extends Component {
                     >
                         <MenuItem value="map">Map</MenuItem>
                         <MenuItem value="avatar">Avatar</MenuItem>
-                        <MenuItem value="graph">Graph</MenuItem>
+                        <MenuItem value="linechart">Line Chart</MenuItem>
+                        <MenuItem value="barchart">Bar Chart</MenuItem>
+                        <MenuItem value="piechart">Pie Chart</MenuItem>
+                        <MenuItem value="radarchart">Radar Chart</MenuItem>
                         <MenuItem value="table">Table</MenuItem>
                         <MenuItem value="empty">Box</MenuItem>
                     </Select>

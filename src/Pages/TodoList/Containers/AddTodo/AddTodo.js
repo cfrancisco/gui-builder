@@ -12,9 +12,9 @@ import Grid from '@material-ui/core/Grid';
 
 import { connect } from 'react-redux';
 import addTodo from './Action';
-import Button from '../../Components/Button/Button';
+import Button from '../../../../Components/Button/Button';
 
-import I18nProvider from '../../Components/i18nProvider/i18nProvider';
+import I18nProvider from '../../../../Components/i18nProvider/i18nProvider';
 import * as locales from './locales/AddTodo';
 
 class AddTodo extends Component {
@@ -25,11 +25,9 @@ class AddTodo extends Component {
             input: '',
             nextTodoId: 0,
         };
-
-        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleSubmit(event) {
+    handleSubmit = (event) => {
         event.preventDefault();
         const { input, priority, nextTodoId } = this.state;
         if (!input.trim()) {

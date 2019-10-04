@@ -4,6 +4,8 @@ import Inbox from '@material-ui/icons/MoveToInbox';
 import Dashboard from '@material-ui/icons/Dashboard';
 import Map from '@material-ui/icons/Map';
 import Circles from '@material-ui/icons/ScatterPlot';
+import ShowChartIcon from '@material-ui/icons/ShowChart';
+import ListAltIcon from '@material-ui/icons/ListAlt';
 
 // uses https://www.npmjs.com/package/@material-ui/icons to find the icons
 
@@ -24,9 +26,14 @@ const Menu = [
         icon: <Map />,
     },
     {
+        label: 'Charts',
+        pathname: '/charts',
+        icon: <ShowChartIcon />,
+    },
+    {
         label: 'Forms',
         pathname: '/forms',
-        icon: <Inbox />,
+        icon: <ListAltIcon />,
     },
     {
         label: 'Tables',
