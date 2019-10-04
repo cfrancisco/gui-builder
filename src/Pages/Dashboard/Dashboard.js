@@ -199,7 +199,7 @@ class DashboardLayout extends Component {
             el = (
                 <BarChart
                     childKey={childKey}
-                    data={lineChartDataset}
+                    data={barChartDataset}
                     title="Gráfico de Barras"
                 />
             );
