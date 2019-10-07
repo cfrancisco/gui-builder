@@ -5,7 +5,7 @@ import Map from '@material-ui/icons/Map';
 import Circles from '@material-ui/icons/ScatterPlot';
 import ShowChartIcon from '@material-ui/icons/ShowChart';
 import ListAltIcon from '@material-ui/icons/ListAlt';
-import I18nProvider from "../i18nProvider/i18nProvider";
+import I18nProvider from '../i18nProvider/i18nProvider';
 import * as locales from './locales/Menu';
 
 // uses https://www.npmjs.com/package/@material-ui/icons to find the icons
