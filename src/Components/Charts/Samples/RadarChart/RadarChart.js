@@ -94,16 +94,17 @@ function CustomRadarChart(props) {
 }
 
 function Dataset(props) {
+    // eslint-disable-next-line no-console
     console.log('Dataset props is', props);
 }
 
 function Data(props) {
+    // eslint-disable-next-line no-console
     console.log('Data props is', props);
 }
 
 CustomRadarChart.Dataset = Dataset;
 CustomRadarChart.Data = Data;
-
 
 CustomRadarChart.defaultProps = {
     title: 'Gráfico de Barras',

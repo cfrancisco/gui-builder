@@ -64,6 +64,7 @@ function CustomPieChart(props) {
 }
 
 function Data(props) {
+    // eslint-disable-next-line no-console
     console.log('Rendering Data with props', props);
 }
 

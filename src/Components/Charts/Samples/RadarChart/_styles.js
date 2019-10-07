@@ -4,7 +4,7 @@ const styles = (theme) => ({
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        margin: '8px',
+        margin: theme.spacing(1),
     },
 });
 

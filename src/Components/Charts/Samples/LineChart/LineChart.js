@@ -104,10 +104,12 @@ function CustomLineChart(props) {
 }
 
 function Dataset(props) {
+    // eslint-disable-next-line no-console
     console.log('Dataset props is', props);
 }
 
 function Data(props) {
+    // eslint-disable-next-line no-console
     console.log('Data props is', props);
 }
 
