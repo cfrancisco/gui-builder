@@ -11,35 +11,7 @@ import styles from './_styles';
 
 const useStyles = makeStyles(styles);
 
-// const RADIAN = Math.PI / 180;
-/* const renderCustomizedLabel = ({
-    cx,
-    cy,
-    midAngle,
-    innerRadius,
-    outerRadius,
-    percent,
-}) => {
-    const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
-    const x = cx + radius * Math.cos(-midAngle * RADIAN);
-    const y = cy + radius * Math.sin(-midAngle * RADIAN);
-
-    return (
-        <text
-            x={x}
-            y={y}
-            fill="white"
-            textAnchor={x > cx ? 'start' : 'end'}
-            dominantBaseline="central"
-        >
-            {`${(percent * 100).toFixed(0)}%`}
-        </text>
-    );
-}; */
-
 function CustomPieChart(props) {
-    // console.log('Rendering mPieChart with props', props);
-
     const classes = useStyles();
 
     const {
@@ -53,15 +25,12 @@ function CustomPieChart(props) {
         primary, secondary, error,
     ];
     const colors = presetColors.map((color) => ({ stroke: color.main, fill: color.light }));
-    // const fontColor = theme.typography.subtitle1.color;
 
     // Loads data from children into a known structure
     const chartData = React.Children.map(children, (child) => {
         const { label, value } = child.props;
         return { name: label, value };
     });
-
-    // console.log('ChartData set as', chartData);
 
     return (
         <div className={classes.chartRoot}>
@@ -73,7 +42,6 @@ function CustomPieChart(props) {
                     <Pie
                         data={chartData}
                         labelLine={false}
-                        // label={renderCustomizedLabel}
                         dataKey="value"
                         margin={{
                             top: 16,

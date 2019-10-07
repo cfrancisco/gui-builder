@@ -6,22 +6,6 @@ function CustomPieChart(props) {
     const { data, title, childKey } = props;
     const [pieChartData] = useState(JSON.parse(JSON.stringify(data)));
 
-    // const [pieChartData, setPieChartData] = useState(JSON.parse(JSON.stringify(pieChart)));
-
-    /*     const resetPieChartValues = () => setPieChartData(JSON.parse(JSON.stringify(pieChart)));
-
-    const addPieChartValue = () => {
-        console.log('Adding value to pieChart');
-        const sets = pieChartData;
-        const dataSize = sets.length;
-        const randomVal = Math.round(10 * Math.random());
-        sets.push({ label: `data0${dataSize + 1}`, value: randomVal });
-        console.log('now with data:', sets);
-        return setPieChartData([...sets]);
-    }; */
-
-    console.log('Rendering with pieChart data', pieChartData);
-
     return (
         <PieChart title={title}>
             {pieChartData.map((entry) => (

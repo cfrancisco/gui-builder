@@ -231,7 +231,6 @@ class DashboardLayout extends Component {
     getUsers = async () => {
         const header = ['id', 'email', 'first_name', 'last_name', 'avatar'];
         const dt = await Users.getUsers();
-        // console.log('dt', dt);
         const data = dt.map((i) => [
             i.email,
             i.first_name,

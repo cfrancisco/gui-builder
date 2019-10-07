@@ -6,23 +6,6 @@ import { BarChart } from '../Charts';
 function CustomBarChart(props) {
     const { data, title, childKey } = props;
     const [barChartData] = useState(JSON.parse(JSON.stringify(data)));
-    // const [barChartData, setBarChartData] = useState(JSON.parse(JSON.stringify(barChart)));
-
-    // const resetBarChartValues = () => setBarChartData(JSON.parse(JSON.stringify(barChart)));
-
-    /* const addBarChartValue = () => {
-        console.log('Adding value to barChart');
-        const sets = barChartData;
-        sets.map((set) => {
-            const dataSize = set.data.length;
-            const randomVal = Math.round(10 * Math.random());
-            return set.data.push({ label: `data0${dataSize + 1}`, value: randomVal });
-        });
-        console.log('now with data:', sets);
-        setBarChartData([...sets]);
-    }; */
-
-    // console.log('Rendering with barChart data', barChartData);
 
     return (
         <BarChart title={title}>
