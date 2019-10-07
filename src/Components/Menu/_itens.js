@@ -1,5 +1,4 @@
 import React from 'react';
-import List from '@material-ui/icons/List';
 import Inbox from '@material-ui/icons/MoveToInbox';
 import Dashboard from '@material-ui/icons/Dashboard';
 import Map from '@material-ui/icons/Map';
