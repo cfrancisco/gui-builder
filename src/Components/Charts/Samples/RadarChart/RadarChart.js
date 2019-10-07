@@ -17,20 +17,18 @@ import styles from './_styles';
 const useStyles = makeStyles(styles);
 
 const parseDataset = (datasetComponent) => {
-    console.log('mapping Dataset with props', datasetComponent.props);
+    // console.log('mapping Dataset with props', datasetComponent.props);
     const { label, children } = datasetComponent.props;
     const dataA = children.map((child) => {
         const { label, value } = child.props;
         return { label, value };
     });
-    console.log('Label', label, 'has data', dataA);
+    // console.log('Label', label, 'has data', dataA);
     return { label, data: dataA };
 };
 
 function CustomRadarChart(props) {
-    console.log('CustomRadarChart props is', props);
-
-
+    // console.log('CustomRadarChart props is', props);
     const classes = useStyles();
     const {
         title,
@@ -48,7 +46,7 @@ function CustomRadarChart(props) {
     // Loads data from children into a known structure
     const datasets = React.Children.map(children, (child) => parseDataset(child));
 
-    console.log('Got datasets:', datasets);
+    // console.log('Got datasets:', datasets);
 
     let chartData = {};
 
@@ -69,7 +67,7 @@ function CustomRadarChart(props) {
         { chartLabel: dataId, ...chartData[dataId] }
     ));
 
-    console.log('ChartData finally set as', chartData);
+    // console.log('ChartData finally set as', chartData);
 
     return (
         <div className={classes.chartRoot}>

@@ -24,10 +24,9 @@ function CustomPieChart(props) {
 
     return (
         <PieChart title={title}>
-            {pieChartData.map((entry) => {
-                console.log('SET', entry);
-                return <PieChart.Data key={childKey} label={entry.label} value={entry.value} />;
-            })}
+            {pieChartData.map((entry) => (
+                <PieChart.Data key={childKey} label={entry.label} value={entry.value} />
+            ))}
         </PieChart>
     );
 }

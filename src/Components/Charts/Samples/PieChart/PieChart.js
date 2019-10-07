@@ -38,7 +38,7 @@ const useStyles = makeStyles(styles);
 }; */
 
 function CustomPieChart(props) {
-    console.log('Rendering mPieChart with props', props);
+    // console.log('Rendering mPieChart with props', props);
 
     const classes = useStyles();
 
@@ -61,7 +61,7 @@ function CustomPieChart(props) {
         return { name: label, value };
     });
 
-    console.log('ChartData set as', chartData);
+    // console.log('ChartData set as', chartData);
 
     return (
         <div className={classes.chartRoot}>

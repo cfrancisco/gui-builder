@@ -8,9 +8,9 @@ function CustomRadarChart(props) {
     const [radarChartData] = useState(JSON.parse(JSON.stringify(data)));
     // const [radarChartData, setRadarChartData] = useState(JSON.parse(JSON.stringify(radarChart)));
 
-    // const resetRadarChartValues = () => setRadarChartData(JSON.parse(JSON.stringify(radarChart)));
+    // const resetRadarChartValues = () => setRadarChartData(JSON.parse(JSON.stringify(radarChart)))
 
-/*     const addRadarChartValue = () => {
+    /*  const addRadarChartValue = () => {
         console.log('Adding value to radarChart');
         const sets = radarChartData;
         const setSize = sets[0].data.length;
@@ -31,24 +31,21 @@ function CustomRadarChart(props) {
         setRadarChartData([...sets]);
     }; */
 
-    console.log('Rendering with radarChart data', radarChartData);
+    // console.log('Rendering with radarChart data', radarChartData);
 
     return (
         <RadarChart title={title}>
-            {radarChartData.map((set) => {
-                console.log('SET', set);
-                return (
-                    <RadarChart.Dataset key={childKey} label={set.label}>
-                        {set.data.map((entry) => (
-                            <RadarChart.Data
-                                key={childKey}
-                                label={entry.label}
-                                value={entry.value}
-                            />
-                        ))}
-                    </RadarChart.Dataset>
-                );
-            })}
+            {radarChartData.map((set) => (
+                <RadarChart.Dataset key={childKey} label={set.label}>
+                    {set.data.map((entry) => (
+                        <RadarChart.Data
+                            key={childKey}
+                            label={entry.label}
+                            value={entry.value}
+                        />
+                    ))}
+                </RadarChart.Dataset>
+            ))}
         </RadarChart>
     );
 }

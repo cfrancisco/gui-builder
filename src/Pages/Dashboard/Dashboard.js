@@ -116,18 +116,6 @@ class DashboardLayout extends Component {
         };
     }
 
-    getUsers = async () => {
-        const header = ['id', 'email', 'first_name', 'last_name', 'avatar'];
-        let dt = await Users.getUsers();
-        console.log('dt', dt);
-        const data = dt.map((i) => {
-            return [i.email,
-            i.first_name,
-            i.id,
-            i.last_name]
-        });
-        this.setState({ header, data });
-    };
 
     componentDidMount() {
         this.data = this.getUsers();
@@ -140,7 +128,7 @@ class DashboardLayout extends Component {
     }
 
     /**
-     * Function used to remove and item from Dashboard component. Receive an
+     * Function used to remove an item from Dashboard component. Receive an
      * event of click and the index of element. Return a state with the
      * new layout of Dashboard
      *
@@ -239,6 +227,19 @@ class DashboardLayout extends Component {
             childKey: prevState.childKey + 1,
         }));
     }
+
+    getUsers = async () => {
+        const header = ['id', 'email', 'first_name', 'last_name', 'avatar'];
+        const dt = await Users.getUsers();
+        // console.log('dt', dt);
+        const data = dt.map((i) => [
+            i.email,
+            i.first_name,
+            i.id,
+            i.last_name,
+        ]);
+        this.setState({ header, data });
+    };
 
     generateDOM(el, elem) {
         const { classes } = this.props;

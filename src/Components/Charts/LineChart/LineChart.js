@@ -28,26 +28,23 @@ function CustomLineChart(props) {
         setLineChartData([...sets]);
     }; */
 
-    console.log('Rendering with lineChart data', lineChartData);
+    // console.log('Rendering with lineChart data', lineChartData);
 
     return (
         <LineChart title={title}>
-            {lineChartData.map((set) => {
-                console.log('SET', set);
-                return (
-                    <LineChart.Dataset key={childKey} label={set.label}>
-                        {set.data.map(
-                            (entry) => (
-                                <LineChart.Data
-                                    key={childKey}
-                                    label={entry.label}
-                                    value={entry.value}
-                                />
-                            ),
-                        )}
-                    </LineChart.Dataset>
-                );
-            })}
+            {lineChartData.map((set) => (
+                <LineChart.Dataset key={childKey} label={set.label}>
+                    {set.data.map(
+                        (entry) => (
+                            <LineChart.Data
+                                key={childKey}
+                                label={entry.label}
+                                value={entry.value}
+                            />
+                        ),
+                    )}
+                </LineChart.Dataset>
+            ))}
         </LineChart>
     );
 }

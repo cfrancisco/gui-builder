@@ -26,14 +26,14 @@ const parseDataset = (datasetComponent) => {
         return { label, value };
     });
 
-    console.log('Label', label, 'has data', dataA);
+    // console.log('Label', label, 'has data', dataA);
     return { label, data: dataA };
 };
 
 function CustomLineChart(props) {
     const classes = useStyles();
 
-    console.log('CustomLineChart props is', props);
+    // console.log('CustomLineChart props is', props);
 
     const {
         title,
@@ -52,16 +52,16 @@ function CustomLineChart(props) {
     // Loads data from children into a known structure
     const datasets = React.Children.map(children, (child) => parseDataset(child));
 
-    console.log('Got datasets:', datasets);
+    // console.log('Got datasets:', datasets);
 
     const chartData = [];
     // Currently is [ { label: set1, data: [ {}, {} ] }, { label: set2, data: [ {}, {} ] }, ... ]
     // Has to be [ { set1: val1, set2: val2 }, {set1: val3, set2: val4 }, ... ]
     datasets.forEach((set) => {
         set.data.map((entry, index) => {
-            console.log('Adding entry', entry, 'into chartData');
+            // console.log('Adding entry', entry, 'into chartData');
             if (index >= chartData.length) {
-                console.log('Must add one to chartData');
+                // console.log('Must add one to chartData');
                 chartData.push({});
             }
             chartData[index][set.label] = entry.value;
@@ -69,9 +69,9 @@ function CustomLineChart(props) {
         });
     });
 
-    console.log('ChartData set as', chartData);
+    // console.log('ChartData set as', chartData);
 
-    console.log('Chart title is', title);
+    // console.log('Chart title is', title);
     // margin={{top:40, right: 40, bottom: 24, left: 0}}
     return (
         <div className={classes.chartRoot}>

@@ -22,24 +22,21 @@ function CustomBarChart(props) {
         setBarChartData([...sets]);
     }; */
 
-    console.log('Rendering with barChart data', barChartData);
+    // console.log('Rendering with barChart data', barChartData);
 
     return (
         <BarChart title={title}>
-            {barChartData.map((set) => {
-                console.log('SET', set);
-                return (
-                    <BarChart.Dataset label={set.label} key={childKey}>
-                        {set.data.map((entry) => (
-                            <BarChart.Data
-                                label={entry.label}
-                                value={entry.value}
-                                key={childKey}
-                            />
-                        ))}
-                    </BarChart.Dataset>
-                );
-            })}
+            {barChartData.map((set) => (
+                <BarChart.Dataset label={set.label} key={childKey}>
+                    {set.data.map((entry) => (
+                        <BarChart.Data
+                            label={entry.label}
+                            value={entry.value}
+                            key={childKey}
+                        />
+                    ))}
+                </BarChart.Dataset>
+            ))}
         </BarChart>
     );
 }

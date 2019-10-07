@@ -12,13 +12,13 @@ import styles from './_styles';
 const useStyles = makeStyles(styles);
 
 const parseDataset = (datasetComponent) => {
-    console.log('mapping Dataset with props', datasetComponent.props);
+    // console.log('mapping Dataset with props', datasetComponent.props);
     const { label, children } = datasetComponent.props;
     const dataA = children.map((child) => {
         const { label, value } = child.props;
         return { label, value };
     });
-    console.log('Label', label, 'has data', dataA);
+    // console.log('Label', label, 'has data', dataA);
     return { label, data: dataA };
 };
 
@@ -40,16 +40,16 @@ function CustomBarChart(props) {
     // Loads data from children into a known structure
     const datasets = React.Children.map(children, (child) => parseDataset(child));
 
-    console.log('Got datasets:', datasets);
+    // console.log('Got datasets:', datasets);
 
     const chartData = [];
     // Currently is [ { label: set1, data: [ {}, {} ] }, { label: set2, data: [ {}, {} ] }, ... ]
     // Has to be [ { set1: val1, set2: val2 }, {set1: val3, set2: val4 }, ... ]
     datasets.forEach((set) => {
         set.data.map((entry, index) => {
-            console.log('Adding entry', entry, 'into chartData');
+            // console.log('Adding entry', entry, 'into chartData');
             if (index >= chartData.length) {
-                console.log('Must add one to chartData');
+                // console.log('Must add one to chartData');
                 chartData.push({});
             }
             chartData[index][set.label] = entry.value;
@@ -57,7 +57,7 @@ function CustomBarChart(props) {
         });
     });
 
-    console.log('ChartData set as', chartData);
+    // console.log('ChartData set as', chartData);
 
     return (
         <div className={classes.chartRoot}>
