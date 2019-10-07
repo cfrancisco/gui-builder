@@ -1,10 +1,10 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
-import * as AddTodo from './AddTodo/AddTodo';
+import AddTodo from './AddTodo/AddTodo';
 import VisibleTodoList from './VisibleTodoList/VisibleTodoList';
 import Footer from '../../Components/TodoList/Footer';
 
-const TodoListPage = () => (
+export default () => (
     <Grid
         container
         spacing={2}
@@ -20,5 +20,3 @@ const TodoListPage = () => (
         </Grid>
     </Grid>
 );
-
-export default TodoListPage;

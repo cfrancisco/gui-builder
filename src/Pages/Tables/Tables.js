@@ -44,14 +44,14 @@ const Tables = () => {
         },
     ];
 
-    const onRowAddMethod = (newData) => new Promise((resolve, reject) => {
+    const onRowAddMethod = (newData) => new Promise((resolve) => {
         const auxData = [...rawData];
         auxData.push(newData);
         setRawData(auxData);
         resolve();
     });
 
-    const onRowUpdateMethod = (newData, oldData) => new Promise((resolve, reject) => {
+    const onRowUpdateMethod = (newData, oldData) => new Promise((resolve) => {
         const auxData = [...rawData];
         const index = auxData.indexOf(oldData);
         auxData[index] = newData;
@@ -60,7 +60,7 @@ const Tables = () => {
     });
 
 
-    const onRowDeleteMethod = (oldData) => new Promise((resolve, reject) => {
+    const onRowDeleteMethod = (oldData) => new Promise((resolve) => {
         const auxData = [...rawData];
         const index = auxData.indexOf(oldData);
         auxData.splice(index, 1);
