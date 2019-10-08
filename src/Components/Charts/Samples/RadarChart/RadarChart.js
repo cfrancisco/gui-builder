@@ -16,12 +16,11 @@ import styles from './_styles';
 
 const useStyles = makeStyles(styles);
 
-const parseDataset = (datasetComponent) => {
-    const { label, children } = datasetComponent.props;
+const parseDataset = ({ props }) => {
+    const { label, children } = props;
     const dataA = children.map((child) => {
-        // eslint-disable-next-line no-shadow
-        const { label, value } = child.props;
-        return { label, value };
+        const { label: auxLabel, value } = child.props;
+        return { label: auxLabel, value };
     });
     return { label, data: dataA };
 };

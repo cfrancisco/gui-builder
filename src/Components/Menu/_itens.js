@@ -18,6 +18,7 @@ const Menu = [
         />,
         pathname: '/',
         icon: <Inbox />,
+        childKey: 1,
     },
     {
         label: <I18nProvider
@@ -26,6 +27,7 @@ const Menu = [
         />,
         pathname: '/dashboard',
         icon: <Dashboard />,
+        childKey: 2,
     },
     {
         label: <I18nProvider
@@ -34,6 +36,7 @@ const Menu = [
         />,
         pathname: '/maps',
         icon: <Map />,
+        childKey: 3,
     },
     {
         label: <I18nProvider
@@ -42,6 +45,7 @@ const Menu = [
         />,
         pathname: '/charts',
         icon: <ShowChartIcon />,
+        childKey: 4,
     },
     {
         label: <I18nProvider
@@ -50,6 +54,7 @@ const Menu = [
         />,
         pathname: '/forms',
         icon: <ListAltIcon />,
+        childKey: 5,
     },
     {
         label: <I18nProvider
@@ -58,6 +63,7 @@ const Menu = [
         />,
         pathname: '/tables',
         icon: <Inbox />,
+        childKey: 6,
     },
     {
         label: <I18nProvider
@@ -66,6 +72,7 @@ const Menu = [
         />,
         pathname: '/external',
         icon: <Circles />,
+        childKey: 7,
     },
 /*     {
         label: 'Todo List',

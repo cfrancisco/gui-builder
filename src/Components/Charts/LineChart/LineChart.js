@@ -7,6 +7,9 @@ function CustomLineChart(props) {
     const { data, title, childKey } = props;
     const [lineChartData] = useState(JSON.parse(JSON.stringify(data)));
 
+    console.log('lineChartDataStringfy', lineChartDataStringfy);
+    console.log('lineChartData', lineChartData);
+
     return (
         <LineChart title={title}>
             {lineChartData.map((set) => (
