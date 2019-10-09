@@ -13,7 +13,7 @@ function getDeepKeys(obj) {
 }
 
 
-describe('Testing functions of internacionalization component', () => { 
+describe('Testing functions of internacionalization component', () => {
     test('Both locale files must have the same keys', () => {
         const localesArray = Object.values(locales.default);
         const localePT = Object.values(localesArray)[0];
