@@ -67,12 +67,12 @@ class AddTodo extends Component {
                     <Grid item xs={3}>
                         <TextField
                             id="todo-text"
-                            label={
+                            label={(
                                 <I18nProvider
                                     localeObj={locales}
                                     termKey="title"
                                 />
-                            }
+                            )}
                             value={input}
                             onChange={this.handleInput}
                             margin="normal"
@@ -98,10 +98,12 @@ class AddTodo extends Component {
                                 <FormControlLabel
                                     value="high"
                                     control={<Radio color="primary" />}
-                                    label={<I18nProvider
-                                        localeObj={locales}
-                                        termKey="attributes"
-                                    />}
+                                    label={(
+                                        <I18nProvider
+                                            localeObj={locales}
+                                            termKey="attributes"
+                                        />
+                                    )}
                                     labelPlacement="end"
                                 />
                             </RadioGroup>

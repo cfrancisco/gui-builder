@@ -1,9 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`CustomButton should render correctly without any props 1`] = `
-<customButton
-  className="makeStyles-root-1"
->
-  <Component />
-</customButton>
-`;

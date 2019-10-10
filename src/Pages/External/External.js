@@ -45,7 +45,7 @@ const External = () => {
                             <Typography variant="body2" component="p">
                                 well meaning and kindly.
                                 <br />
-                                {'"a benevolent smile"'}
+                                {'`&quot;`a benevolent smile`&quot;`'}
                             </Typography>
                         </CardContent>
                         <CardActions>

@@ -1,14 +1,4 @@
-import React from 'react';
-import {
-    shallow,
-    configure,
-} from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-
-import I18nProvider from '../i18nProvider';
-import * as locales from '../../../Pages/TodoList/AddTodo/locales/AddTodo';
-
-configure({ adapter: new Adapter() });
+import * as locales from '../locales/Menu';
 
 function getDeepKeys(obj) {
     let keys = [];
@@ -22,9 +12,8 @@ function getDeepKeys(obj) {
     return keys;
 }
 
-describe('Testing functions of internacionalization component', () => {
-    beforeEach(() => jest.resetModules());
 
+describe('Testing functions of internacionalization component', () => {
     test('Both locale files must have the same keys', () => {
         const localesArray = Object.values(locales.default);
         const localePT = Object.values(localesArray)[0];
@@ -34,11 +23,5 @@ describe('Testing functions of internacionalization component', () => {
         const enKeys = getDeepKeys(localeEN);
 
         expect(ptKeys).toEqual(enKeys);
-    });
-
-    test('i18n must return an string with no traduction founded', () => {
-        const translate = shallow(<I18nProvider localeObj={locales} termKey="title_sidebar.new_attr" />);
-
-        expect(translate).toMatchObject({});
     });
 });

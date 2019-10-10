@@ -40,7 +40,7 @@ const Menu = ({ open, handleDrawerClose }) => {
                 {Itens.map((item) => (
                     <ListItem
                         button
-                        key={item.label}
+                        key={item.childKey}
                         component={Link}
                         to={item.pathname}
                     >
