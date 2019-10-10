@@ -5,7 +5,7 @@ import { BarChart } from '../Charts';
 
 function CustomBarChart(props) {
     const { data, title, childKey } = props;
-    const [barChartData] = useState(JSON.parse(JSON.stringify(data)));
+    const [barChartData] = useState([...data]);
 
     return (
         <BarChart title={title}>

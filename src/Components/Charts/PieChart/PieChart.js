@@ -4,7 +4,7 @@ import { PieChart } from '../Charts';
 
 function CustomPieChart(props) {
     const { data, title, childKey } = props;
-    const [pieChartData] = useState(JSON.parse(JSON.stringify(data)));
+    const [pieChartData] = useState([...data]);
 
     return (
         <PieChart title={title}>

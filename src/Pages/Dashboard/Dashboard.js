@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { WidthProvider, Responsive } from 'react-grid-layout';
 import 'react-grid-layout/css/styles.css';
 import 'react-resizable/css/styles.css';
@@ -10,6 +11,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import dashboard from './Action';
 import CustomMap from '../../Components/CustomMap/CustomMap';
 
 
@@ -143,6 +145,9 @@ class DashboardLayout extends Component {
         const xItems = items.filter((item) => item.i !== index);
         const newLayout = layoutElement.filter((item) => item.key !== index);
         this.setState({ layoutElement: newLayout, items: xItems });
+
+        const { dispatch } = this.props;
+        dispatch(dashboard(items));
     }
 
     /**
@@ -162,6 +167,7 @@ class DashboardLayout extends Component {
             data,
             header,
         } = this.state;
+
         const newPoints = {
             i: `n${newCounter}`,
             x: 2,
@@ -226,6 +232,9 @@ class DashboardLayout extends Component {
             items: items.concat(newPoints),
             childKey: prevState.childKey + 1,
         }));
+
+        const { dispatch } = this.props;
+        dispatch(dashboard(items));
     }
 
     getUsers = async () => {
@@ -308,6 +317,7 @@ class DashboardLayout extends Component {
 
 DashboardLayout.propTypes = {
     classes: PropTypes.objectOf(PropTypes.shape).isRequired,
+    dispatch: PropTypes.func.isRequired,
 };
 
-export default withStyles(styles)(DashboardLayout);
+export default connect()(withStyles(styles)(DashboardLayout));

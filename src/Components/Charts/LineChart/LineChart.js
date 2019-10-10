@@ -5,7 +5,7 @@ import { LineChart } from '../Charts';
 
 function CustomLineChart(props) {
     const { data, title, childKey } = props;
-    const [lineChartData] = useState(JSON.parse(JSON.stringify(data)));
+    const [lineChartData] = useState([...data]);
 
     return (
         <LineChart title={title}>

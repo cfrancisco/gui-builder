@@ -5,7 +5,7 @@ import { RadarChart } from '../Charts';
 
 function CustomRadarChart(props) {
     const { data, title, childKey } = props;
-    const [radarChartData] = useState(JSON.parse(JSON.stringify(data)));
+    const [radarChartData] = useState([...data]);
 
     return (
         <RadarChart title={title}>
