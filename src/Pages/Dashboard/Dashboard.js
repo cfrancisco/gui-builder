@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import { WidthProvider, Responsive } from 'react-grid-layout';
 import 'react-grid-layout/css/styles.css';
 import 'react-resizable/css/styles.css';
@@ -11,7 +10,6 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import dashboard from './Action';
 import CustomMap from '../../Components/CustomMap/CustomMap';
 
 
@@ -27,7 +25,32 @@ import SimpleTable from '../../Components/Table/SimpleTable';
 import Users from '../../Services/Users';
 import styles from './_styles';
 
+function getFromLS(key) {
+    let ls = {};
+    if (global.localStorage) {
+        try {
+            ls = JSON.parse(global.localStorage.getItem('rgl-7')) || {};
+        } catch (e) {
+            /* Ignore */
+        }
+    }
+    console.log('ls', ls);
+    return ls[key];
+}
+
+function saveToLS(key, value) {
+    if (global.localStorage) {
+        global.localStorage.setItem(
+            'rgl-7',
+            JSON.stringify({
+                [key]: value,
+            }),
+        );
+    }
+}
+
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
+const originalLayout = getFromLS('layout') || [];
 
 /**
  * This layout demonstrates how to use a grid with a dynamic number of elements.
@@ -81,24 +104,22 @@ class DashboardLayout extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            items: [0, 1, 2, 3, 4].map((i) => ({
-                i: i.toString(),
-                x: i * 2,
-                y: Math.floor(i / 6),
-                w: 1 + Math.floor(Math.random() * 2),
-                h: 1 + Math.floor(Math.random() * 2),
-            })),
+            items: JSON.parse(JSON.stringify(originalLayout)),
             values: { element: '' },
             newCounter: 0,
             header: [],
             data: [],
             layoutElement: [],
+            layout: JSON.parse(JSON.stringify(originalLayout)),
         };
 
         this.generateDOM = this.generateDOM.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.onRemoveItem = this.onRemoveItem.bind(this);
         this.onAddItem = this.onAddItem.bind(this);
+
+        this.onLayoutChange = this.onLayoutChange.bind(this);
+        this.resetLayout = this.resetLayout.bind(this);
 
         this.configs = {
             breakpoints: {
@@ -117,7 +138,6 @@ class DashboardLayout extends Component {
             },
         };
     }
-
 
     componentDidMount() {
         this.data = this.getUsers();
@@ -145,9 +165,6 @@ class DashboardLayout extends Component {
         const xItems = items.filter((item) => item.i !== index);
         const newLayout = layoutElement.filter((item) => item.key !== index);
         this.setState({ layoutElement: newLayout, items: xItems });
-
-        const { dispatch } = this.props;
-        dispatch(dashboard(items));
     }
 
     /**
@@ -232,9 +249,14 @@ class DashboardLayout extends Component {
             items: items.concat(newPoints),
             childKey: prevState.childKey + 1,
         }));
+    }
 
-        const { dispatch } = this.props;
-        dispatch(dashboard(items));
+    onLayoutChange(layout) {
+        const { onLayoutChange } = this.props;
+        /* eslint no-console: 0 */
+        saveToLS('layout', layout);
+        this.setState({ layout });
+        onLayoutChange(layout); // updates status display
     }
 
     getUsers = async () => {
@@ -248,6 +270,12 @@ class DashboardLayout extends Component {
         ]);
         this.setState({ header, data });
     };
+
+    resetLayout() {
+        this.setState({
+            layout: [],
+        });
+    }
 
     generateDOM(el, elem) {
         const { classes } = this.props;
@@ -276,6 +304,7 @@ class DashboardLayout extends Component {
     render() {
         const { values, configs, layoutElement } = this.state;
         const { classes } = this.props;
+        const { layout } = this.state;
         return (
             <div className={classes.root}>
                 <FormControl className={classes.formControl}>
@@ -307,6 +336,8 @@ class DashboardLayout extends Component {
                     {...configs}
                     className={classes.reactGridLayout}
                     {...this.props}
+                    layout={layout}
+                    onLayoutChange={this.onLayoutChange}
                 >
                     {layoutElement}
                 </ResponsiveReactGridLayout>
@@ -314,10 +345,13 @@ class DashboardLayout extends Component {
         );
     }
 }
+DashboardLayout.defaultProps = {
+    onLayoutChange() {},
+};
 
 DashboardLayout.propTypes = {
     classes: PropTypes.objectOf(PropTypes.shape).isRequired,
-    dispatch: PropTypes.func.isRequired,
+    onLayoutChange: PropTypes.func,
 };
 
-export default connect()(withStyles(styles)(DashboardLayout));
+export default (withStyles(styles)(DashboardLayout));
