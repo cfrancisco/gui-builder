@@ -12,7 +12,6 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import CustomMap from '../../Components/CustomMap/CustomMap';
 
-
 import LineChart from '../../Components/Charts/LineChart/LineChart';
 import BarChart from '../../Components/Charts/BarChart/BarChart';
 import PieChart from '../../Components/Charts/PieChart/PieChart';
@@ -21,6 +20,7 @@ import RadarChart from '../../Components/Charts/RadarChart/RadarChart';
 import Button from '../../Components/Button/Button';
 import Avatar from '../../Components/Avatar/Avatar';
 import SimpleTable from '../../Components/Table/SimpleTable';
+import Toast from '../../Components/Toast/Toast';
 
 import Users from '../../Services/Users';
 import styles from './_styles';
@@ -115,7 +115,6 @@ class DashboardLayout extends Component {
             },
         };
     }
-
 
     componentDidMount() {
         this.data = this.getUsers();
@@ -230,8 +229,9 @@ class DashboardLayout extends Component {
 
     getUsers = async () => {
         const header = ['id', 'email', 'first_name', 'last_name', 'avatar'];
-        const dt = await Users.getUsers();
-        const data = dt.map((i) => [
+        const usersData = await Users.getUsers();
+
+        const data = usersData.map((i) => [
             i.email,
             i.first_name,
             i.id,
@@ -265,8 +265,16 @@ class DashboardLayout extends Component {
     }
 
     render() {
-        const { values, configs, layoutElement } = this.state;
+        const {
+            values,
+            configs,
+            layoutElement,
+            data,
+        } = this.state;
         const { classes } = this.props;
+
+        console.log('data', data);
+
         return (
             <div className={classes.root}>
                 <FormControl className={classes.formControl}>
@@ -301,6 +309,7 @@ class DashboardLayout extends Component {
                 >
                     {layoutElement}
                 </ResponsiveReactGridLayout>
+                <Toast message="Nenhum dado retornado" open={data.length === 0} />
             </div>
         );
     }
