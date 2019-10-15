@@ -214,11 +214,11 @@ class DashboardLayout extends Component {
             el = <Avatar />;
         }
 
-        this.setState((prevState) => ({
+        this.setState({
             layoutElement: [...layoutElement, this.generateDOM(newPoints, el)],
             newCounter: newCounter + 1,
             items: items.concat(newPoints),
-        }));
+        });
     }
 
     getUsers = async () => {
@@ -266,8 +266,6 @@ class DashboardLayout extends Component {
             data,
         } = this.state;
         const { classes } = this.props;
-
-        console.log('data', data);
 
         return (
             <div className={classes.root}>
