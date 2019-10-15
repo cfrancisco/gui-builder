@@ -160,6 +160,7 @@ class DashboardLayout extends Component {
             data,
             header,
             showToast,
+            error,
         } = this.state;
         const newPoints = {
             i: `n${newCounter}`,
@@ -226,17 +227,25 @@ class DashboardLayout extends Component {
     getUsers = async () => {
         const header = ['id', 'email', 'first_name', 'last_name', 'avatar'];
         const usersData = await Users.getUsers();
-        const data = usersData.map((i) => [
-            i.email,
-            i.first_name,
-            i.id,
-            i.last_name,
-        ]);
-        this.setState({
-            header,
-            data,
-            showToast: true,
-        });
+        if (Array.isArray(usersData)) {
+            const data = usersData.map((i) => [
+                i.email,
+                i.first_name,
+                i.id,
+                i.last_name,
+            ]);
+            this.setState({
+                header,
+                data,
+                showToast: false,
+            });
+        } else {
+            this.setState({
+                data: [],
+                showToast: true,
+                error: usersData,
+            });
+        }
     };
 
     generateDOM(el, elem) {
@@ -270,6 +279,7 @@ class DashboardLayout extends Component {
             layoutElement,
             data,
             showToast,
+            error,
         } = this.state;
         const { classes } = this.props;
 
@@ -309,7 +319,7 @@ class DashboardLayout extends Component {
                 </ResponsiveReactGridLayout>
                 {
                     data.length === 0
-                        ? <Toast message="Nenhum dado retornado" open showToast /> : ''
+                        ? <Toast message={`${error}`} open showToast /> : ''
                 }
             </div>
         );
