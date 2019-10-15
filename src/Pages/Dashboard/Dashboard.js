@@ -91,6 +91,8 @@ class DashboardLayout extends Component {
             header: [],
             data: [],
             layoutElement: [],
+            showToast: false,
+            error: '',
         };
 
         this.generateDOM = this.generateDOM.bind(this);
@@ -159,8 +161,6 @@ class DashboardLayout extends Component {
             items,
             data,
             header,
-            showToast,
-            error,
         } = this.state;
         const newPoints = {
             i: `n${newCounter}`,
@@ -278,8 +278,8 @@ class DashboardLayout extends Component {
             configs,
             layoutElement,
             data,
-            showToast,
             error,
+            showToast,
         } = this.state;
         const { classes } = this.props;
 
@@ -319,7 +319,7 @@ class DashboardLayout extends Component {
                 </ResponsiveReactGridLayout>
                 {
                     data.length === 0
-                        ? <Toast message={`${error}`} open showToast /> : ''
+                        ? <Toast message={`${error}`} open showToast={showToast} /> : ''
                 }
             </div>
         );
