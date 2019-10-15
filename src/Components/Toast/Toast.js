@@ -14,8 +14,8 @@ const useStyles = makeStyles(styles);
 
 const Toast = (props) => {
     const classes = useStyles();
-    const { message } = props;
-    const [open, setOpen] = React.useState(true);
+    const { message, showToast } = props;
+    const [open, setOpen] = React.useState(showToast);
 
     const handleClose = (event, reason) => {
         if (reason === 'clickaway') {
@@ -57,7 +57,7 @@ const Toast = (props) => {
 
 Toast.propTypes = {
     message: PropTypes.string.isRequired,
-    open: PropTypes.bool.isRequired,
+    showToast: PropTypes.bool.isRequired,
 };
 
 export default Toast;

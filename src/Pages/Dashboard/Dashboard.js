@@ -136,7 +136,7 @@ class DashboardLayout extends Component {
      * @memberof DashboardLayout
      */
     onRemoveItem(event, index) {
-        //     const index = event.target.dataset.itemKey;
+        //   const index = event.target.dataset.itemKey;
         //   console.log('items', items, layoutElement, newCounter);
         const { layoutElement, items } = this.state;
         const xItems = items.filter((item) => item.i !== index);
@@ -159,6 +159,7 @@ class DashboardLayout extends Component {
             items,
             data,
             header,
+            showToast,
         } = this.state;
         const newPoints = {
             i: `n${newCounter}`,
@@ -218,20 +219,24 @@ class DashboardLayout extends Component {
             layoutElement: [...layoutElement, this.generateDOM(newPoints, el)],
             newCounter: newCounter + 1,
             items: items.concat(newPoints),
+            showToast: false,
         });
     }
 
     getUsers = async () => {
         const header = ['id', 'email', 'first_name', 'last_name', 'avatar'];
         const usersData = await Users.getUsers();
-
         const data = usersData.map((i) => [
             i.email,
             i.first_name,
             i.id,
             i.last_name,
         ]);
-        this.setState({ header, data });
+        this.setState({
+            header,
+            data,
+            showToast: true,
+        });
     };
 
     generateDOM(el, elem) {
@@ -264,6 +269,7 @@ class DashboardLayout extends Component {
             configs,
             layoutElement,
             data,
+            showToast,
         } = this.state;
         const { classes } = this.props;
 
@@ -301,7 +307,10 @@ class DashboardLayout extends Component {
                 >
                     {layoutElement}
                 </ResponsiveReactGridLayout>
-                <Toast message="Nenhum dado retornado" open={data.length === 0} />
+                {
+                    data.length === 0
+                        ? <Toast message="Nenhum dado retornado" open showToast /> : ''
+                }
             </div>
         );
     }
