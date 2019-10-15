@@ -157,7 +157,6 @@ class DashboardLayout extends Component {
             newCounter,
             layoutElement,
             items,
-            childKey = 0,
             data,
             header,
         } = this.state;
@@ -176,7 +175,6 @@ class DashboardLayout extends Component {
         if (values.element === 'linechart') {
             el = (
                 <LineChart
-                    childKey={childKey}
                     data={lineChartDataset}
                     title="Gráfico de Linhas"
                 />
@@ -185,7 +183,6 @@ class DashboardLayout extends Component {
         if (values.element === 'barchart') {
             el = (
                 <BarChart
-                    childKey={childKey}
                     data={barChartDataset}
                     title="Gráfico de Barras"
                 />
@@ -194,7 +191,6 @@ class DashboardLayout extends Component {
         if (values.element === 'piechart') {
             el = (
                 <PieChart
-                    childKey={childKey}
                     data={pieChartDataset}
                     title="Gráfico de Pizza"
                 />
@@ -203,7 +199,6 @@ class DashboardLayout extends Component {
         if (values.element === 'radarchart') {
             el = (
                 <RadarChart
-                    childKey={childKey}
                     data={lineChartDataset}
                     title="Gráfico de Radar"
                 />
@@ -223,7 +218,6 @@ class DashboardLayout extends Component {
             layoutElement: [...layoutElement, this.generateDOM(newPoints, el)],
             newCounter: newCounter + 1,
             items: items.concat(newPoints),
-            childKey: prevState.childKey + 1,
         }));
     }
 

@@ -9,6 +9,8 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import styles from './_styles';
 
+const uuidv1 = require('uuid/v1');
+
 const useStyles = makeStyles(styles);
 
 function CustomPieChart(props) {
@@ -52,8 +54,7 @@ function CustomPieChart(props) {
                     >
                         {chartData.map((entry, index) => {
                             const colorIndex = index % colors.length;
-                            const childKey = index + 1;
-                            return <Cell key={`cell-${childKey}`} fill={colors[colorIndex].fill} />;
+                            return <Cell key={`cell-${uuidv1()}`} fill={colors[colorIndex].fill} />;
                         })}
                     </Pie>
                     <Tooltip />
