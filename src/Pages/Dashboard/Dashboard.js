@@ -7,6 +7,7 @@ import Fab from '@material-ui/core/Fab';
 import withStyles from '@material-ui/styles/withStyles';
 import CloseIcon from '@material-ui/icons/Close';
 import InputLabel from '@material-ui/core/InputLabel';
+import Grid from '@material-ui/core/Grid';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
@@ -104,13 +105,7 @@ class DashboardLayout extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            items: [0, 1, 2, 3, 4].map((i) => ({
-                i: i.toString(),
-                x: i * 2,
-                y: Math.floor(i / 6),
-                w: 1 + Math.floor(Math.random() * 2),
-                h: 1 + Math.floor(Math.random() * 2),
-            })),
+            items: [],
             values: { element: '' },
             newCounter: 0,
             header: [],
@@ -287,7 +282,7 @@ class DashboardLayout extends Component {
 
     resetLayout() {
         this.setState({
-            layout: [],
+            layoutElement: [],
         });
     }
 
@@ -328,7 +323,10 @@ class DashboardLayout extends Component {
         const { classes } = this.props;
 
         return (
-            <div className={classes.root}>
+            <Grid
+                container
+                spacing={2}
+            >
                 <FormControl className={classes.formControl}>
                     <InputLabel htmlFor="addElement">New Element</InputLabel>
                     <Select
@@ -349,15 +347,14 @@ class DashboardLayout extends Component {
                         <MenuItem value="table">Table</MenuItem>
                         <MenuItem value="empty">Box</MenuItem>
                     </Select>
-                    <Button onClick={this.onAddItem} type="button" size="small">
+
+                    <Button className={classes.button} onClick={this.onAddItem} type="button" size="small">
                         Add Item
                     </Button>
-                    <br />
                     <Button onClick={this.resetLayout} type="button" size="small">
                         Reset Layout
                     </Button>
                 </FormControl>
-                <br />
                 <ResponsiveReactGridLayout
                     {...configs}
                     className={classes.reactGridLayout}
@@ -371,7 +368,7 @@ class DashboardLayout extends Component {
                     data.length === 0
                         ? <Toast message={`${error}`} open showToast={showToast} /> : ''
                 }
-            </div>
+            </Grid>
         );
     }
 }
