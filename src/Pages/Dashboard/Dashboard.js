@@ -12,7 +12,6 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import CustomMap from '../../Components/CustomMap/CustomMap';
 
-
 import LineChart from '../../Components/Charts/LineChart/LineChart';
 import BarChart from '../../Components/Charts/BarChart/BarChart';
 import PieChart from '../../Components/Charts/PieChart/PieChart';
@@ -21,36 +20,12 @@ import RadarChart from '../../Components/Charts/RadarChart/RadarChart';
 import Button from '../../Components/Button/Button';
 import Avatar from '../../Components/Avatar/Avatar';
 import SimpleTable from '../../Components/Table/SimpleTable';
+import Toast from '../../Components/Toast/Toast';
 
 import Users from '../../Services/Users';
 import styles from './_styles';
 
-function getFromLS(key) {
-    let ls = {};
-    if (global.localStorage) {
-        try {
-            ls = JSON.parse(global.localStorage.getItem('rgl-7')) || {};
-        } catch (e) {
-            /* Ignore */
-        }
-    }
-    console.log('ls', ls);
-    return ls[key];
-}
-
-function saveToLS(key, value) {
-    if (global.localStorage) {
-        global.localStorage.setItem(
-            'rgl-7',
-            JSON.stringify({
-                [key]: value,
-            }),
-        );
-    }
-}
-
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
-const originalLayout = getFromLS('layout') || [];
 
 /**
  * This layout demonstrates how to use a grid with a dynamic number of elements.
@@ -100,17 +75,50 @@ const pieChartDataset = [
     { label: 'Protocolo C', value: 6 },
 ];
 
+function getFromLS(key) {
+    let ls = {};
+    if (global.localStorage) {
+        try {
+            ls = JSON.parse(global.localStorage.getItem('rgl-7')) || {};
+        } catch (e) {
+            /* Ignore */
+        }
+    }
+    return ls[key];
+}
+
+function saveToLS(key, value) {
+    if (global.localStorage) {
+        global.localStorage.setItem(
+            'rgl-7',
+            JSON.stringify({
+                [key]: value,
+            }),
+        );
+    }
+}
+
+const originalLayout = getFromLS('layout') || [];
+
 class DashboardLayout extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            items: JSON.parse(JSON.stringify(originalLayout)),
+            items: [0, 1, 2, 3, 4].map((i) => ({
+                i: i.toString(),
+                x: i * 2,
+                y: Math.floor(i / 6),
+                w: 1 + Math.floor(Math.random() * 2),
+                h: 1 + Math.floor(Math.random() * 2),
+            })),
             values: { element: '' },
             newCounter: 0,
             header: [],
             data: [],
             layoutElement: [],
-            layout: JSON.parse(JSON.stringify(originalLayout)),
+            showToast: false,
+            error: '',
+            layout: [...originalLayout],
         };
 
         this.generateDOM = this.generateDOM.bind(this);
@@ -141,12 +149,12 @@ class DashboardLayout extends Component {
 
     componentDidMount() {
         this.data = this.getUsers();
-        const layout = [];
-        const { items } = this.state;
-        items.forEach((el) => {
-            layout.push(this.generateDOM(el, <span className="text">{el.i}</span>));
+        const boxes = [];
+        const { layout } = this.state;
+        layout.forEach((el) => {
+            boxes.push(this.generateDOM(el, <span className="text">{el.i}</span>));
         });
-        this.setState({ layoutElement: layout });
+        this.setState({ layoutElement: boxes });
     }
 
     /**
@@ -159,7 +167,7 @@ class DashboardLayout extends Component {
      * @memberof DashboardLayout
      */
     onRemoveItem(event, index) {
-        //     const index = event.target.dataset.itemKey;
+        //   const index = event.target.dataset.itemKey;
         //   console.log('items', items, layoutElement, newCounter);
         const { layoutElement, items } = this.state;
         const xItems = items.filter((item) => item.i !== index);
@@ -180,11 +188,9 @@ class DashboardLayout extends Component {
             newCounter,
             layoutElement,
             items,
-            childKey = 0,
             data,
             header,
         } = this.state;
-
         const newPoints = {
             i: `n${newCounter}`,
             x: 2,
@@ -200,7 +206,6 @@ class DashboardLayout extends Component {
         if (values.element === 'linechart') {
             el = (
                 <LineChart
-                    childKey={childKey}
                     data={lineChartDataset}
                     title="Gráfico de Linhas"
                 />
@@ -209,7 +214,6 @@ class DashboardLayout extends Component {
         if (values.element === 'barchart') {
             el = (
                 <BarChart
-                    childKey={childKey}
                     data={barChartDataset}
                     title="Gráfico de Barras"
                 />
@@ -218,7 +222,6 @@ class DashboardLayout extends Component {
         if (values.element === 'piechart') {
             el = (
                 <PieChart
-                    childKey={childKey}
                     data={pieChartDataset}
                     title="Gráfico de Pizza"
                 />
@@ -227,7 +230,6 @@ class DashboardLayout extends Component {
         if (values.element === 'radarchart') {
             el = (
                 <RadarChart
-                    childKey={childKey}
                     data={lineChartDataset}
                     title="Gráfico de Radar"
                 />
@@ -243,12 +245,12 @@ class DashboardLayout extends Component {
             el = <Avatar />;
         }
 
-        this.setState((prevState) => ({
+        this.setState({
             layoutElement: [...layoutElement, this.generateDOM(newPoints, el)],
             newCounter: newCounter + 1,
             items: items.concat(newPoints),
-            childKey: prevState.childKey + 1,
-        }));
+            showToast: false,
+        });
     }
 
     onLayoutChange(layout) {
@@ -261,14 +263,26 @@ class DashboardLayout extends Component {
 
     getUsers = async () => {
         const header = ['id', 'email', 'first_name', 'last_name', 'avatar'];
-        const dt = await Users.getUsers();
-        const data = dt.map((i) => [
-            i.email,
-            i.first_name,
-            i.id,
-            i.last_name,
-        ]);
-        this.setState({ header, data });
+        const usersData = await Users.getUsers();
+        if (Array.isArray(usersData)) {
+            const data = usersData.map((i) => [
+                i.email,
+                i.first_name,
+                i.id,
+                i.last_name,
+            ]);
+            this.setState({
+                header,
+                data,
+                showToast: false,
+            });
+        } else {
+            this.setState({
+                data: [],
+                showToast: true,
+                error: usersData,
+            });
+        }
     };
 
     resetLayout() {
@@ -302,9 +316,17 @@ class DashboardLayout extends Component {
     }
 
     render() {
-        const { values, configs, layoutElement } = this.state;
+        const {
+            values,
+            configs,
+            layoutElement,
+            data,
+            error,
+            showToast,
+            layout,
+        } = this.state;
         const { classes } = this.props;
-        const { layout } = this.state;
+
         return (
             <div className={classes.root}>
                 <FormControl className={classes.formControl}>
@@ -330,6 +352,10 @@ class DashboardLayout extends Component {
                     <Button onClick={this.onAddItem} type="button" size="small">
                         Add Item
                     </Button>
+                    <br />
+                    <Button onClick={this.resetLayout} type="button" size="small">
+                        Reset Layout
+                    </Button>
                 </FormControl>
                 <br />
                 <ResponsiveReactGridLayout
@@ -341,10 +367,15 @@ class DashboardLayout extends Component {
                 >
                     {layoutElement}
                 </ResponsiveReactGridLayout>
+                {
+                    data.length === 0
+                        ? <Toast message={`${error}`} open showToast={showToast} /> : ''
+                }
             </div>
         );
     }
 }
+
 DashboardLayout.defaultProps = {
     onLayoutChange() {},
 };
@@ -354,4 +385,4 @@ DashboardLayout.propTypes = {
     onLayoutChange: PropTypes.func,
 };
 
-export default (withStyles(styles)(DashboardLayout));
+export default withStyles(styles)(DashboardLayout);
