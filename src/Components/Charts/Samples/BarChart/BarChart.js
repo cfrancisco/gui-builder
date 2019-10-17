@@ -9,6 +9,8 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import styles from './_styles';
 
+const uuidv1 = require('uuid/v1');
+
 const useStyles = makeStyles(styles);
 
 const parseDataset = ({ props }) => {
@@ -74,10 +76,9 @@ function CustomBarChart(props) {
                     />
                     {datasets.map((set, index) => {
                         const colorIndex = index % colors.length;
-                        const childKey = index + 1;
                         return (
                             <Bar
-                                key={childKey}
+                                key={uuidv1()}
                                 dataKey={set.label}
                                 fill={colors[colorIndex].fill}
                             />
