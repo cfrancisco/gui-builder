@@ -15,7 +15,7 @@ const useStyles = makeStyles(styles);
 const Toast = (props) => {
     const classes = useStyles();
     const { message, showToast } = props;
-    const [open, setOpen] = React.useState(true);
+    const [open, setOpen] = React.useState(showToast);
 
     const handleClose = (event, reason) => {
         if (reason === 'clickaway') {

@@ -39,11 +39,11 @@ function CustomLineChart(props) {
         theme,
     } = props;
 
-    const { primary, secondary, error } = theme.palette;
+    /*  const { primary, secondary, error } = theme.palette;
     const presetColors = [
         primary, secondary, error,
     ];
-    const colors = presetColors.map((color) => ({ stroke: color.main, fill: color.light }));
+    const colors = presetColors.map((color) => ({ stroke: color.main, fill: color.light })); */
     const fontColor = theme.typography.subtitle1.color;
 
     // Loads data from children into a known structure
@@ -93,20 +93,17 @@ function CustomLineChart(props) {
                             />
                         )
                     }
-                    {datasets.map((set, index) => {
-                        const colorIndex = index % colors.length;
-                        return (
-                            <Line
-                                className={classes.mySvg}
-                                key={uuidv1()}
-                                type="monotone"
-                                isAnimationActive={false}
-                                dataKey={set.label}
-                                // stroke={colors[colorIndex].stroke}
-                                activeDot={{ r: 8 }}
-                            />
-                        );
-                    })}
+                    {datasets.map((set) => (
+                        <Line
+                            className={classes.mySvg}
+                            key={uuidv1()}
+                            type="monotone"
+                            isAnimationActive={false}
+                            dataKey={set.label}
+                            // stroke={colors[colorIndex].stroke}
+                            activeDot={{ r: 8 }}
+                        />
+                    ))}
                 </LineChart>
             </ResponsiveContainer>
         </div>
