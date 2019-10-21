@@ -20,7 +20,6 @@ import RadarChart from '../../Components/Charts/RadarChart/RadarChart';
 
 import Button from '../../Components/Button/Button';
 import SimpleTable from '../../Components/Table/SimpleTable';
-import Toast from '../../Components/Toast/Toast';
 
 import Users from '../../Services/Users';
 import styles from './_styles';
@@ -111,8 +110,6 @@ class DashboardLayout extends Component {
             header: [],
             data: [],
             layoutElement: [],
-            showToast: false,
-            error: '',
             layout: [...originalLayout],
         };
 
@@ -147,6 +144,7 @@ class DashboardLayout extends Component {
         const boxes = [];
         const { layout } = this.state;
         layout.forEach((el) => {
+            console.log('elementooooo', el);
             boxes.push(this.generateDOM(el, <span className="text">{el.i}</span>));
         });
         this.setState({ layoutElement: boxes });
@@ -185,16 +183,19 @@ class DashboardLayout extends Component {
             data,
             header,
         } = this.state;
+
         const newPoints = {
             i: uuidv1(),
             x: 2,
             y: Infinity, // puts it at the bottom
             w: 2,
             h: 2,
+            type: values.element,
+            endpoint: 'https://endpoint.dojot.com.br/devices/0928439',
         };
         let el;
 
-        switch (values.element) {
+        switch (newPoints.type) {
         case ('map'):
             el = <CustomMap />;
             break;
@@ -241,27 +242,27 @@ class DashboardLayout extends Component {
         this.setState({
             layoutElement: [...layoutElement, this.generateDOM(newPoints, el)],
             items: items.concat(newPoints),
-            showToast: false,
         });
     }
 
     onLayoutChange(layout) {
         const { onLayoutChange } = this.props;
-        const items = layout;
-        const { values } = this.state;
-        if ((items.i === layout.i) && (items.length > 0)) {
-            items[items.length - 1].type = values.element;
-            items[items.length - 1].dataSource = 'http://endpoint.dojot.com.br';
-        }
-
-        console.log('items', items);
-
-        saveToLS('layout', items);
-        this.setState({
-            layout,
-            items,
+        const { items } = this.state;
+        const newDashboardLayout = layout.map((element) => {
+            for (let i = 0; i < items.length; i += 1) {
+                if (element.i === items[i].i) {
+                    element.type = items[i].type;
+                    element.endpoint = items[i].endpoint;
+                }
+            }
+            return element;
         });
-        onLayoutChange(items); // updates status display
+
+        saveToLS('layout', newDashboardLayout);
+        this.setState({
+            layout: newDashboardLayout,
+        });
+        onLayoutChange(newDashboardLayout); // updates status display
     }
 
     getUsers = async () => {
@@ -277,13 +278,10 @@ class DashboardLayout extends Component {
             this.setState({
                 header,
                 data,
-                showToast: false,
             });
         } else {
             this.setState({
                 data: [],
-                showToast: true,
-                error: usersData,
             });
         }
     };
@@ -296,6 +294,8 @@ class DashboardLayout extends Component {
     }
 
     generateDOM(el, elem) {
+        console.log('el', el);
+        console.log('elem', elem);
         const { classes } = this.props;
         return (
             <div key={el.i} data-grid={el}>
@@ -324,9 +324,6 @@ class DashboardLayout extends Component {
             values,
             configs,
             layoutElement,
-            data,
-            error,
-            showToast,
         } = this.state;
         const { classes } = this.props;
 
@@ -370,10 +367,6 @@ class DashboardLayout extends Component {
                 >
                     {layoutElement}
                 </ResponsiveReactGridLayout>
-                {
-                    data.length === 0
-                        ? <Toast message={`${error}`} open showToast={showToast} /> : ''
-                }
             </Grid>
         );
     }
