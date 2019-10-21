@@ -14,6 +14,8 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import styles from './_styles';
 
+const uuidv1 = require('uuid/v1');
+
 const useStyles = makeStyles(styles);
 
 const parseDataset = ({ props }) => {
@@ -73,10 +75,9 @@ function CustomRadarChart(props) {
                     <PolarRadiusAxis />
                     {datasets.map((set, index) => {
                         const colorIndex = index % colors.length;
-                        const childkey = index + 1;
                         return (
                             <Radar
-                                key={childkey}
+                                key={uuidv1()}
                                 name={set.label}
                                 dataKey={set.label}
                                 stroke={colors[colorIndex].stroke}

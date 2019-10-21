@@ -16,6 +16,8 @@ import { makeStyles, withStyles } from '@material-ui/core/styles';
 
 import styles from './_styles';
 
+const uuidv1 = require('uuid/v1');
+
 const useStyles = makeStyles(styles);
 
 const parseDataset = ({ props }) => {
@@ -37,11 +39,11 @@ function CustomLineChart(props) {
         theme,
     } = props;
 
-    const { primary, secondary, error } = theme.palette;
+    /*  const { primary, secondary, error } = theme.palette;
     const presetColors = [
         primary, secondary, error,
     ];
-    const colors = presetColors.map((color) => ({ stroke: color.main, fill: color.light }));
+    const colors = presetColors.map((color) => ({ stroke: color.main, fill: color.light })); */
     const fontColor = theme.typography.subtitle1.color;
 
     // Loads data from children into a known structure
@@ -62,7 +64,7 @@ function CustomLineChart(props) {
     });
 
     return (
-        <div className={classes.chartRoot}>
+        <div className={`${classes.chartRoot} ${classes.mySvg}`}>
             {title && title}
             <ResponsiveContainer width="100%" aspect={4.0 / 3.0}>
                 <LineChart
@@ -91,11 +93,17 @@ function CustomLineChart(props) {
                             />
                         )
                     }
-                    {datasets.map((set, index) => {
-                        const colorIndex = index % colors.length;
-                        const childKey = index + 1;
-                        return <Line key={childKey} type="monotone" isAnimationActive={false} dataKey={set.label} stroke={colors[colorIndex].stroke} activeDot={{ r: 8 }} />;
-                    })}
+                    {datasets.map((set) => (
+                        <Line
+                            className={classes.mySvg}
+                            key={uuidv1()}
+                            type="monotone"
+                            isAnimationActive={false}
+                            dataKey={set.label}
+                            // stroke={colors[colorIndex].stroke}
+                            activeDot={{ r: 8 }}
+                        />
+                    ))}
                 </LineChart>
             </ResponsiveContainer>
         </div>
