@@ -6,6 +6,7 @@ const menuPT = {
     forms: 'Formulários',
     tables: 'Tabelas',
     cards: 'Fichas',
+    requests: 'Requisições',
 };
 
 const menuEN = {
@@ -16,6 +17,7 @@ const menuEN = {
     forms: 'Forms',
     tables: 'Tables',
     cards: 'Cards',
+    requests: 'Requests',
 };
 
 export default { menuPT, menuEN };
