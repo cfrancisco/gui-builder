@@ -5,7 +5,7 @@ class ClassHttp {
         this.http = null;
     }
 
-    init(timeout = 600, uri = '') {
+    init(timeout = 5000, uri = '') {
         this.http = axios.create({
             baseURL: uri,
             timeout,

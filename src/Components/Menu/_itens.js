@@ -74,7 +74,17 @@ const Menu = [
         icon: <Circles />,
         childKey: 7,
     },
-/*     {
+    {
+        label: <I18nProvider
+            localeObj={locales}
+            termKey="requests"
+        />,
+        pathname: '/requests',
+        icon: <Circles />,
+        childKey: 8,
+    },
+
+    /*     {
         label: 'Todo List',
         pathname: '/todo',
         icon: <List />,
