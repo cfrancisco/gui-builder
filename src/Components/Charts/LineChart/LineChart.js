@@ -3,18 +3,20 @@ import PropTypes from 'prop-types';
 
 import { LineChart } from '../Charts';
 
+const uuidv1 = require('uuid/v1');
+
 function CustomLineChart(props) {
-    const { data, title, childKey } = props;
-    const [lineChartData] = useState(JSON.parse(JSON.stringify(data)));
+    const { data, title } = props;
+    const [lineChartData] = useState([...data]);
 
     return (
         <LineChart title={title}>
             {lineChartData.map((set) => (
-                <LineChart.Dataset key={childKey} label={set.label}>
+                <LineChart.Dataset key={uuidv1()} label={set.label}>
                     {set.data.map(
                         (entry) => (
                             <LineChart.Data
-                                key={childKey}
+                                key={uuidv1()}
                                 label={entry.label}
                                 value={entry.value}
                             />
@@ -33,7 +35,6 @@ CustomLineChart.defaultProps = {
 CustomLineChart.propTypes = {
     data: PropTypes.instanceOf(Array).isRequired,
     title: PropTypes.string,
-    childKey: PropTypes.number.isRequired,
 };
 
 export default CustomLineChart;

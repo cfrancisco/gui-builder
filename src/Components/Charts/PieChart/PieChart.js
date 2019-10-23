@@ -2,14 +2,16 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { PieChart } from '../Charts';
 
+const uuidv1 = require('uuid/v1');
+
 function CustomPieChart(props) {
-    const { data, title, childKey } = props;
-    const [pieChartData] = useState(JSON.parse(JSON.stringify(data)));
+    const { data, title } = props;
+    const [pieChartData] = useState([...data]);
 
     return (
         <PieChart title={title}>
             {pieChartData.map((entry) => (
-                <PieChart.Data key={childKey} label={entry.label} value={entry.value} />
+                <PieChart.Data key={uuidv1()} label={entry.label} value={entry.value} />
             ))}
         </PieChart>
     );
@@ -23,7 +25,6 @@ CustomPieChart.defaultProps = {
 CustomPieChart.propTypes = {
     data: PropTypes.instanceOf(Array).isRequired,
     title: PropTypes.string,
-    childKey: PropTypes.number.isRequired,
 };
 
 

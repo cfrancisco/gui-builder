@@ -29,7 +29,7 @@ class Users {
         return http
             .get('https://reqres.in/api/users?page=1')
             .then((res) => res.data)
-            .catch(() => []);
+            .catch((error) => error);
     }
 
     static getMoreUsers() {
