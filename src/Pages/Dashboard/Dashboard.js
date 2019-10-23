@@ -140,12 +140,11 @@ class DashboardLayout extends Component {
     }
 
     componentDidMount() {
-        this.data = this.getUsers();
         const boxes = [];
         const { layout } = this.state;
         layout.forEach((el) => {
-            console.log('elementooooo', el);
-            boxes.push(this.generateDOM(el, <span className="text">{el.i}</span>));
+            console.log('el did mount', el);
+            boxes.push(this.generateDOM(el, this.retrieveWidget(el.type)));
         });
         this.setState({ layoutElement: boxes });
     }
@@ -180,8 +179,6 @@ class DashboardLayout extends Component {
             values,
             layoutElement,
             items,
-            data,
-            header,
         } = this.state;
 
         const newPoints = {
@@ -193,9 +190,44 @@ class DashboardLayout extends Component {
             type: values.element,
             endpoint: 'https://endpoint.dojot.com.br/devices/0928439',
         };
+
+        const widget = this.retrieveWidget(newPoints.type);
+
+        this.setState({
+            layoutElement: [...layoutElement, this.generateDOM(newPoints, widget)],
+            items: items.concat(newPoints),
+        });
+    }
+
+    onLayoutChange(layout) {
+        const { onLayoutChange } = this.props;
+        const { items } = this.state;
+        const newDashboardLayout = layout.map((element) => {
+            for (let i = 0; i < items.length; i += 1) {
+                if (element.i === items[i].i) {
+                    element.type = items[i].type;
+                    element.endpoint = items[i].endpoint;
+                }
+            }
+            return element;
+        });
+
+        saveToLS('layout', newDashboardLayout);
+        this.setState({
+            layout: newDashboardLayout,
+        });
+        onLayoutChange(newDashboardLayout); // updates status display
+    }
+
+    retrieveWidget(elementType) {
+        const {
+            data,
+            header,
+        } = this.state;
+
         let el;
 
-        switch (newPoints.type) {
+        switch (elementType) {
         case ('map'):
             el = <CustomMap />;
             break;
@@ -232,6 +264,7 @@ class DashboardLayout extends Component {
             );
             break;
         case ('table'):
+            this.data = this.getUsers();
             el = <SimpleTable data={data} header={header} />;
             break;
         default:
@@ -239,52 +272,8 @@ class DashboardLayout extends Component {
             break;
         }
 
-        this.setState({
-            layoutElement: [...layoutElement, this.generateDOM(newPoints, el)],
-            items: items.concat(newPoints),
-        });
+        return el;
     }
-
-    onLayoutChange(layout) {
-        const { onLayoutChange } = this.props;
-        const { items } = this.state;
-        const newDashboardLayout = layout.map((element) => {
-            for (let i = 0; i < items.length; i += 1) {
-                if (element.i === items[i].i) {
-                    element.type = items[i].type;
-                    element.endpoint = items[i].endpoint;
-                }
-            }
-            return element;
-        });
-
-        saveToLS('layout', newDashboardLayout);
-        this.setState({
-            layout: newDashboardLayout,
-        });
-        onLayoutChange(newDashboardLayout); // updates status display
-    }
-
-    getUsers = async () => {
-        const header = ['id', 'email', 'first_name', 'last_name', 'avatar'];
-        const usersData = await Users.getUsers();
-        if (Array.isArray(usersData)) {
-            const data = usersData.map((i) => [
-                i.email,
-                i.first_name,
-                i.id,
-                i.last_name,
-            ]);
-            this.setState({
-                header,
-                data,
-            });
-        } else {
-            this.setState({
-                data: [],
-            });
-        }
-    };
 
     resetLayout() {
         this.setState({
@@ -294,8 +283,6 @@ class DashboardLayout extends Component {
     }
 
     generateDOM(el, elem) {
-        console.log('el', el);
-        console.log('elem', elem);
         const { classes } = this.props;
         return (
             <div key={el.i} data-grid={el}>
