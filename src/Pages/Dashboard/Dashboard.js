@@ -22,7 +22,6 @@ import RadarChart from '../../Components/Charts/RadarChart/RadarChart';
 import Button from '../../Components/Button/Button';
 import SimpleTable from '../../Components/Table/SimpleTable';
 
-
 import styles from './_styles';
 
 import Users from '../../Services/Users';
