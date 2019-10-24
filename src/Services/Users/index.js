@@ -32,6 +32,23 @@ class Users {
             .catch((error) => error);
     }
 
+    static getPlainUsers() {
+        return http
+            .get('https://reqres.in/api/users?page=1')
+            .then((res) => {
+                const newList = [];
+                res.data.forEach((element) => {
+                    newList.push([element.id,
+                        element.email,
+                        element.first_name,
+                        element.last_name,
+                        element.avatar]);
+                });
+                return newList;
+            })
+            .catch(() => []);
+    }
+
     static getMoreUsers() {
         return http
             .get('https://reqrs.in/api/users?page=1')

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { WidthProvider, Responsive } from 'react-grid-layout';
 import 'react-grid-layout/css/styles.css';
@@ -11,6 +11,8 @@ import Grid from '@material-ui/core/Grid';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import Loader from '../../Components/Loader/Loader';
+
 import CustomMap from '../../Components/CustomMap/CustomMap';
 
 import LineChart from '../../Components/Charts/LineChart/LineChart';
@@ -21,7 +23,39 @@ import RadarChart from '../../Components/Charts/RadarChart/RadarChart';
 import Button from '../../Components/Button/Button';
 import SimpleTable from '../../Components/Table/SimpleTable';
 
+
 import styles from './_styles';
+
+import Users from '../../Services/Users';
+
+
+function withData(WrappedComponent) {
+    return (props) => {
+        const [myData, setMyData] = useState({});
+        const { promiseData, children, ...newProps } = props;
+
+        useEffect(() => {
+            promiseData().then((data) => {
+                setMyData(data);
+            });
+        }, []);
+
+        newProps.data = myData;
+
+        if (newProps.data.length) {
+            return (
+                <WrappedComponent {...newProps}>
+                    {children}
+                </WrappedComponent>
+
+            );
+        }
+        return (<Loader />);
+    };
+}
+
+const EnhancedSimpleTable = withData(SimpleTable);
+
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
@@ -155,9 +189,9 @@ class DashboardLayout extends Component {
             // console.log('el did mount', el);
             boxes.push(this.generateDOM(el, this.retrieveWidget(el.type)));
         });
-
         this.setState({ layoutElement: boxes });
     }
+
 
     /**
      * Function used to remove an item from Dashboard component. Receive an
@@ -236,6 +270,7 @@ class DashboardLayout extends Component {
         onLayoutChange(newDashboardLayout); // updates status display
     }
 
+
     retrieveWidget(elementType) {
         let {
             data,
@@ -248,47 +283,47 @@ class DashboardLayout extends Component {
         }
 
         switch (elementType) {
-        case ('map'):
-            el = <CustomMap />;
-            break;
-        case ('linechart'):
-            el = (
-                <LineChart
-                    data={lineChartDataset}
-                    title="Gráfico de Linhas"
-                />
-            );
-            break;
-        case ('barchart'):
-            el = (
-                <BarChart
-                    data={barChartDataset}
-                    title="Gráfico de Barras"
-                />
-            );
-            break;
-        case ('piechart'):
-            el = (
-                <PieChart
-                    data={pieChartDataset}
-                    title="Gráfico de Pizza"
-                />
-            );
-            break;
-        case ('radarchart'):
-            el = (
-                <RadarChart
-                    data={lineChartDataset}
-                    title="Gráfico de Radar"
-                />
-            );
-            break;
-        case ('table'):
-            el = <SimpleTable header={simpleHeader} data={data} />;
-            break;
-        default:
-            el = <br />;
-            break;
+            case ('map'):
+                el = <CustomMap />;
+                break;
+            case ('linechart'):
+                el = (
+                    <LineChart
+                        data={lineChartDataset}
+                        title="Gráfico de Linhas"
+                    />
+                );
+                break;
+            case ('barchart'):
+                el = (
+                    <BarChart
+                        data={barChartDataset}
+                        title="Gráfico de Barras"
+                    />
+                );
+                break;
+            case ('piechart'):
+                el = (
+                    <PieChart
+                        data={pieChartDataset}
+                        title="Gráfico de Pizza"
+                    />
+                );
+                break;
+            case ('radarchart'):
+                el = (
+                    <RadarChart
+                        data={lineChartDataset}
+                        title="Gráfico de Radar"
+                    />
+                );
+                break;
+            case ('table'):
+                el = <EnhancedSimpleTable data={[]} header={simpleHeader} promiseData={Users.getPlainUsers} />;
+                break;
+            default:
+                el = <br />;
+                break;
         }
 
         return el;
@@ -379,7 +414,7 @@ class DashboardLayout extends Component {
 }
 
 DashboardLayout.defaultProps = {
-    onLayoutChange() {},
+    onLayoutChange() { },
 };
 
 DashboardLayout.propTypes = {
