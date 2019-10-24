@@ -21,7 +21,6 @@ import RadarChart from '../../Components/Charts/RadarChart/RadarChart';
 import Button from '../../Components/Button/Button';
 import SimpleTable from '../../Components/Table/SimpleTable';
 
-import Users from '../../Services/Users';
 import styles from './_styles';
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
@@ -31,6 +30,10 @@ const uuidv1 = require('uuid/v1');
 /**
  * This layout demonstrates how to use a grid with a dynamic number of elements.
  */
+
+const simpleHeader = [
+    'Dessert (g)', 'Calories (g)', 'Fat (g)', 'Carbs (g)', 'Protein (g)',
+];
 
 const lineChartDataset = [
     {
@@ -49,6 +52,13 @@ const lineChartDataset = [
             { label: '07/06', value: 19 },
         ],
     },
+];
+const sampleData = [
+    ['Frozen yoghurt', 159, 6.0, 24, 4],
+    ['Ice cream sandwich', 237, 9.0, 2, 37],
+    ['Eclair', 262, 16.0, 24, 6.0],
+    ['Cupcake', 305, 3.7, 67, 4.3],
+    ['Gingerbread', 356, 16.0, 49, 3.9],
 ];
 
 const barChartDataset = [
@@ -105,10 +115,9 @@ class DashboardLayout extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            items: [],
-            values: { element: '' },
-            header: [],
             data: [],
+            items: [...originalLayout],
+            values: { element: '' },
             layoutElement: [],
             layout: [...originalLayout],
         };
@@ -143,9 +152,10 @@ class DashboardLayout extends Component {
         const boxes = [];
         const { layout } = this.state;
         layout.forEach((el) => {
-            console.log('el did mount', el);
+            // console.log('el did mount', el);
             boxes.push(this.generateDOM(el, this.retrieveWidget(el.type)));
         });
+
         this.setState({ layoutElement: boxes });
     }
 
@@ -201,31 +211,41 @@ class DashboardLayout extends Component {
 
     onLayoutChange(layout) {
         const { onLayoutChange } = this.props;
-        const { items } = this.state;
+        let { items } = this.state;
+        if (items.length === 0) {
+            items = layout;
+        }
+
         const newDashboardLayout = layout.map((element) => {
+            const el = element;
             for (let i = 0; i < items.length; i += 1) {
-                if (element.i === items[i].i) {
-                    element.type = items[i].type;
-                    element.endpoint = items[i].endpoint;
+                if (el.i === items[i].i) {
+                    el.type = items[i].type;
+                    el.endpoint = items[i].endpoint;
                 }
             }
-            return element;
+
+            return el;
         });
 
         saveToLS('layout', newDashboardLayout);
         this.setState({
             layout: newDashboardLayout,
+            items: layout,
         });
         onLayoutChange(newDashboardLayout); // updates status display
     }
 
     retrieveWidget(elementType) {
-        const {
+        let {
             data,
-            header,
         } = this.state;
 
         let el;
+
+        if (data.length === 0) {
+            data = sampleData;
+        }
 
         switch (elementType) {
         case ('map'):
@@ -264,8 +284,7 @@ class DashboardLayout extends Component {
             );
             break;
         case ('table'):
-            this.data = this.getUsers();
-            el = <SimpleTable data={data} header={header} />;
+            el = <SimpleTable header={simpleHeader} data={data} />;
             break;
         default:
             el = <br />;

@@ -11,6 +11,25 @@ import Tables from './Pages/Tables/Tables';
 import Requests from './Pages/Requests/Requests';
 import LineChart from './Components/Charts/LineChart/LineChart';
 
+const dataSample = [
+    {
+        label: 'Vácuo',
+        data: [
+            { label: '05/06', value: 1 },
+            { label: '06/06', value: 6 },
+            { label: '07/06', value: 9 },
+        ],
+    },
+    {
+        label: 'LED',
+        data: [
+            { label: '05/06', value: 4 },
+            { label: '06/06', value: 4 },
+            { label: '07/06', value: 6 },
+        ],
+    },
+];
+
 export default () => (
     <HashRouter>
         <Switch>
@@ -24,7 +43,7 @@ export default () => (
                 <Route exact path="/dashboard" component={Dashboard} />
                 <Route exact path="/maps" component={Maps} />
                 <Route exact path="/requests" component={Requests} />
-                <Route exact path="/charts" render={() => <LineChart childKey={0} />} />
+                <Route exact path="/charts" render={() => <LineChart data={dataSample} childKey={0} />} />
                 {/* <Route exact path="" component={Page404} /> */}
             </LayoutBase>
 
