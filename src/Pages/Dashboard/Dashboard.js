@@ -19,18 +19,21 @@ import PieChart from '../../Components/Charts/PieChart/PieChart';
 import RadarChart from '../../Components/Charts/RadarChart/RadarChart';
 
 import Button from '../../Components/Button/Button';
-import Avatar from '../../Components/Avatar/Avatar';
 import SimpleTable from '../../Components/Table/SimpleTable';
-import Toast from '../../Components/Toast/Toast';
 
-import Users from '../../Services/Users';
 import styles from './_styles';
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
+const uuidv1 = require('uuid/v1');
+
 /**
  * This layout demonstrates how to use a grid with a dynamic number of elements.
  */
+
+const simpleHeader = [
+    'Dessert (g)', 'Calories (g)', 'Fat (g)', 'Carbs (g)', 'Protein (g)',
+];
 
 const lineChartDataset = [
     {
@@ -49,6 +52,13 @@ const lineChartDataset = [
             { label: '07/06', value: 19 },
         ],
     },
+];
+const sampleData = [
+    ['Frozen yoghurt', 159, 6.0, 24, 4],
+    ['Ice cream sandwich', 237, 9.0, 2, 37],
+    ['Eclair', 262, 16.0, 24, 6.0],
+    ['Cupcake', 305, 3.7, 67, 4.3],
+    ['Gingerbread', 356, 16.0, 49, 3.9],
 ];
 
 const barChartDataset = [
@@ -105,14 +115,10 @@ class DashboardLayout extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            items: [],
-            values: { element: '' },
-            newCounter: 0,
-            header: [],
             data: [],
+            items: [...originalLayout],
+            values: { element: '' },
             layoutElement: [],
-            showToast: false,
-            error: '',
             layout: [...originalLayout],
         };
 
@@ -143,12 +149,13 @@ class DashboardLayout extends Component {
     }
 
     componentDidMount() {
-        this.data = this.getUsers();
         const boxes = [];
         const { layout } = this.state;
         layout.forEach((el) => {
-            boxes.push(this.generateDOM(el, <span className="text">{el.i}</span>));
+            // console.log('el did mount', el);
+            boxes.push(this.generateDOM(el, this.retrieveWidget(el.type)));
         });
+
         this.setState({ layoutElement: boxes });
     }
 
@@ -163,7 +170,7 @@ class DashboardLayout extends Component {
      */
     onRemoveItem(event, index) {
         //   const index = event.target.dataset.itemKey;
-        //   console.log('items', items, layoutElement, newCounter);
+        //   console.log('items', items, layoutElement);
         const { layoutElement, items } = this.state;
         const xItems = items.filter((item) => item.i !== index);
         const newLayout = layoutElement.filter((item) => item.key !== index);
@@ -180,109 +187,117 @@ class DashboardLayout extends Component {
     onAddItem() {
         const {
             values,
-            newCounter,
             layoutElement,
             items,
-            data,
-            header,
         } = this.state;
+
         const newPoints = {
-            i: `n${newCounter}`,
+            i: uuidv1(),
             x: 2,
             y: Infinity, // puts it at the bottom
             w: 2,
             h: 2,
+            type: values.element,
+            endpoint: 'https://endpoint.dojot.com.br/devices/0928439',
         };
+
+        const widget = this.retrieveWidget(newPoints.type);
+
+        this.setState({
+            layoutElement: [...layoutElement, this.generateDOM(newPoints, widget)],
+            items: items.concat(newPoints),
+        });
+    }
+
+    onLayoutChange(layout) {
+        const { onLayoutChange } = this.props;
+        let { items } = this.state;
+        if (items.length === 0) {
+            items = layout;
+        }
+
+        const newDashboardLayout = layout.map((element) => {
+            const el = element;
+            for (let i = 0; i < items.length; i += 1) {
+                if (el.i === items[i].i) {
+                    el.type = items[i].type;
+                    el.endpoint = items[i].endpoint;
+                }
+            }
+
+            return el;
+        });
+
+        saveToLS('layout', newDashboardLayout);
+        this.setState({
+            layout: newDashboardLayout,
+            items: layout,
+        });
+        onLayoutChange(newDashboardLayout); // updates status display
+    }
+
+    retrieveWidget(elementType) {
+        let {
+            data,
+        } = this.state;
+
         let el;
 
-        if (values.element === 'map') {
-            el = <CustomMap />;
+        if (data.length === 0) {
+            data = sampleData;
         }
-        if (values.element === 'linechart') {
+
+        switch (elementType) {
+        case ('map'):
+            el = <CustomMap />;
+            break;
+        case ('linechart'):
             el = (
                 <LineChart
                     data={lineChartDataset}
                     title="Gráfico de Linhas"
                 />
             );
-        }
-        if (values.element === 'barchart') {
+            break;
+        case ('barchart'):
             el = (
                 <BarChart
                     data={barChartDataset}
                     title="Gráfico de Barras"
                 />
             );
-        }
-        if (values.element === 'piechart') {
+            break;
+        case ('piechart'):
             el = (
                 <PieChart
                     data={pieChartDataset}
                     title="Gráfico de Pizza"
                 />
             );
-        }
-        if (values.element === 'radarchart') {
+            break;
+        case ('radarchart'):
             el = (
                 <RadarChart
                     data={lineChartDataset}
                     title="Gráfico de Radar"
                 />
             );
-        }
-        if (values.element === 'table') {
-            el = <SimpleTable data={data} header={header} />;
-        }
-        if (values.element === 'empty') {
+            break;
+        case ('table'):
+            el = <SimpleTable header={simpleHeader} data={data} />;
+            break;
+        default:
             el = <br />;
-        }
-        if (values.element === 'avatar') {
-            el = <Avatar />;
+            break;
         }
 
-        this.setState({
-            layoutElement: [...layoutElement, this.generateDOM(newPoints, el)],
-            newCounter: newCounter + 1,
-            items: items.concat(newPoints),
-            showToast: false,
-        });
+        return el;
     }
-
-    onLayoutChange(layout) {
-        const { onLayoutChange } = this.props;
-        /* eslint no-console: 0 */
-        saveToLS('layout', layout);
-        this.setState({ layout });
-        onLayoutChange(layout); // updates status display
-    }
-
-    getUsers = async () => {
-        const header = ['id', 'email', 'first_name', 'last_name', 'avatar'];
-        const usersData = await Users.getUsers();
-        if (Array.isArray(usersData)) {
-            const data = usersData.map((i) => [
-                i.email,
-                i.first_name,
-                i.id,
-                i.last_name,
-            ]);
-            this.setState({
-                header,
-                data,
-                showToast: false,
-            });
-        } else {
-            this.setState({
-                data: [],
-                showToast: true,
-                error: usersData,
-            });
-        }
-    };
 
     resetLayout() {
         this.setState({
             layoutElement: [],
+            items: [],
         });
     }
 
@@ -315,10 +330,6 @@ class DashboardLayout extends Component {
             values,
             configs,
             layoutElement,
-            data,
-            error,
-            showToast,
-            layout,
         } = this.state;
         const { classes } = this.props;
 
@@ -339,7 +350,6 @@ class DashboardLayout extends Component {
                         }}
                     >
                         <MenuItem value="map">Map</MenuItem>
-                        <MenuItem value="avatar">Avatar</MenuItem>
                         <MenuItem value="linechart">Line Chart</MenuItem>
                         <MenuItem value="barchart">Bar Chart</MenuItem>
                         <MenuItem value="piechart">Pie Chart</MenuItem>
@@ -359,15 +369,10 @@ class DashboardLayout extends Component {
                     {...configs}
                     className={classes.reactGridLayout}
                     {...this.props}
-                    layout={layout}
                     onLayoutChange={this.onLayoutChange}
                 >
                     {layoutElement}
                 </ResponsiveReactGridLayout>
-                {
-                    data.length === 0
-                        ? <Toast message={`${error}`} open showToast={showToast} /> : ''
-                }
             </Grid>
         );
     }
