@@ -10,6 +10,7 @@ class Util {
     static withData(WrappedComponent) {
         return (props) => {
             const [myData, setMyData] = useState({});
+            // eslint-disable-next-line react/prop-types
             const { promiseData, children, ...newProps } = props;
 
             useEffect(() => {
