@@ -252,7 +252,7 @@ class DashboardLayout extends Component {
         let el;
 
         if (data.length === 0) {
-            data = sampleData;
+            data = Users.getPlainUsers;
         }
 
         switch (elementType) {
@@ -296,7 +296,7 @@ class DashboardLayout extends Component {
                 <EnhancedSimpleTable
                     data={[]}
                     header={simpleHeader}
-                    promiseData={Users.getPlainUsers}
+                    promiseData={data}
                 />
             );
             break;
