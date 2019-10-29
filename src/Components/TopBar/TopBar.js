@@ -68,6 +68,7 @@ const TopBar = ({ handleDrawerToggle, open }) => {
                         </IconButton>
                         <Menu
                             id="menu-appbar"
+                            className={classes.menuContainer}
                             anchorEl={anchorEl}
                             anchorOrigin={{
                                 vertical: 'top',

@@ -9,6 +9,7 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+import clsx from 'clsx';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Itens from './_itens';
@@ -22,37 +23,47 @@ const Menu = ({ open, handleDrawerClose }) => {
     const theme = useTheme();
 
     return (
-        <Drawer
-            className={open ? classes.drawer : classes.hide}
-            variant="persistent"
-            anchor="left"
-            open={open}
-            classes={{
-                paper: classes.drawerPaper,
-            }}
-        >
-            <div className={classes.drawerHeader}>
-                <IconButton onClick={handleDrawerClose}>
-                    {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-                </IconButton>
-            </div>
-            <List>
-                {Itens.map((item) => (
-                    <ListItem
-                        button
-                        key={item.childKey}
-                        component={Link}
-                        to={item.pathname}
-                    >
-                        <ListItemIcon>
-                            {item.icon}
-                        </ListItemIcon>
-                        <ListItemText primary={item.label} />
-                    </ListItem>
-                ))}
-            </List>
-            <Divider />
-        </Drawer>
+        <div>
+            <Drawer
+                className={clsx(open ? classes.drawer : classes.hide, classes.menuOverlaid)}
+                variant="persistent"
+                anchor="left"
+                open={open}
+                classes={{
+                    paper: classes.drawerPaper,
+                }}
+                boxShadow={3}
+            >
+                <div className={classes.drawerHeader}>
+                    <IconButton onClick={handleDrawerClose}>
+                        {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+                    </IconButton>
+                </div>
+                <List>
+                    {Itens.map((item) => (
+                        <ListItem
+                            button
+                            key={item.childKey}
+                            component={Link}
+                            to={item.pathname}
+                            onClick={handleDrawerClose}
+                        >
+                            <ListItemIcon>
+                                {item.icon}
+                            </ListItemIcon>
+                            <ListItemText primary={item.label} />
+                        </ListItem>
+                    ))}
+                </List>
+                <Divider />
+            </Drawer>
+            <div
+                className={clsx(open ? classes.drawer : classes.hide, classes.boxShadow)}
+                role="presentation"
+                onClick={handleDrawerClose}
+                open={open}
+            />
+        </div>
     );
 };
 

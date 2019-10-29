@@ -1,6 +1,4 @@
-import configs from '../../settings';
-
-const styles = (theme) => ({
+const styles = () => ({
     root: {
         display: 'flex',
         flexGrow: 1,
@@ -9,17 +7,13 @@ const styles = (theme) => ({
         display: 'flex',
         width: '100%',
     },
-    containerBase: {
-        transition: theme.transitions.create(['width'], {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.enteringScreen,
-        }),
-        width: '100%',
-        marginTop: 70,
-        display: 'flex',
+    contentBlur: {
+        opacity: 0.2,
     },
-    containerBaseShift: {
-        width: `calc(100% - ${configs.drawerWidth}px)`,
+    containerBase: {
+        display: 'flex',
+        marginTop: 70,
+        width: '100%',
     },
 });
 
