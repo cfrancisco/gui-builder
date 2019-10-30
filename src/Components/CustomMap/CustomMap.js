@@ -1,12 +1,12 @@
 import React, { useEffect, useRef } from 'react';
 import L from 'leaflet';
 import PropTypes from 'prop-types';
-import Util from '../../utils';
+import { sid } from 'utils';
 
 
 const CustomMap = ({ markersData, center, zoom }) => {
     // create map
-    const mapid = Util.sid();
+    const mapid = sid();
     const mapRef = useRef(mapid);
     const xCenter = center || [49.8419, 24.0315];
     const xZoom = zoom || 16;

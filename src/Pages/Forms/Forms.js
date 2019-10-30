@@ -5,7 +5,7 @@ import { LinearProgress, MenuItem } from '@material-ui/core';
 import { Formik, Field, Form } from 'formik';
 import { TextField } from 'formik-material-ui';
 import * as Yup from 'yup';
-import { DojotButton } from '../../Components/Button';
+import { DojotButton } from 'Components/Button';
 import styles from './_styles';
 
 //

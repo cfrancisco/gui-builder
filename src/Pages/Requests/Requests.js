@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Highlight from 'react-highlight.js';
 import styles from './_styles';
-import Users from '../../Services/Users';
+import Users from 'Services/Users';
 
 const useStyles = makeStyles(styles);
 

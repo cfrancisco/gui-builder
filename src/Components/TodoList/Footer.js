@@ -1,7 +1,7 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
-import FilterLink from '../../Pages/TodoList/FilterLink/FilterLink';
-import { VisibilityFilters } from '../../Pages/TodoList/VisibleTodoList/Action';
+import FilterLink from 'Pages/TodoList/FilterLink/FilterLink';
+import { VisibilityFilters } from 'Pages/TodoList/VisibleTodoList/Action';
 
 import I18nProvider from '../i18nProvider/i18nProvider';
 import * as locales from './locales/Footer';

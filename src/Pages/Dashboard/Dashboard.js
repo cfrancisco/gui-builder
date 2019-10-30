@@ -12,23 +12,21 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 
-import CustomMap from '../../Components/CustomMap/CustomMap';
+import CustomMap from 'Components/CustomMap/CustomMap';
 
-import LineChart from '../../Components/Charts/LineChart/LineChart';
-import BarChart from '../../Components/Charts/BarChart/BarChart';
-import PieChart from '../../Components/Charts/PieChart/PieChart';
-import RadarChart from '../../Components/Charts/RadarChart/RadarChart';
+import LineChart from 'Components/Charts/LineChart/LineChart';
+import BarChart from 'Components/Charts/BarChart/BarChart';
+import PieChart from 'Components/Charts/PieChart/PieChart';
+import RadarChart from 'Components/Charts/RadarChart/RadarChart';
 
-import Button from '../../Components/Button/Button';
-import SimpleTable from '../../Components/Table/SimpleTable';
+import Button from 'Components/Button/Button';
+import SimpleTable from 'Components/Table/SimpleTable';
 
+import Users from 'Services/Users';
+import { withData } from 'utils';
 import styles from './_styles';
 
-import Users from '../../Services/Users';
-import Util from '../../utils';
-
-
-const EnhancedSimpleTable = Util.withData(SimpleTable);
+const EnhancedSimpleTable = withData(SimpleTable);
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 

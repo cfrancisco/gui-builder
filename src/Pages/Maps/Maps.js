@@ -6,7 +6,7 @@ import {
 } from 'react-leaflet';
 import L from 'leaflet';
 import Paper from '@material-ui/core/Paper';
-import CustomMap from '../../Components/CustomMap/CustomMap';
+import CustomMap from 'Components/CustomMap/CustomMap';
 import 'leaflet/dist/leaflet.css';
 import styles from './_styles';
 

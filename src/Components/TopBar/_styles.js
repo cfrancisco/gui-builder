@@ -1,4 +1,4 @@
-import configs from '../../settings';
+import configs from 'settings';
 
 const styles = (theme) => ({
     appBar: {

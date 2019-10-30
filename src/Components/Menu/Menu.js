@@ -32,7 +32,6 @@ const Menu = ({ open, handleDrawerClose }) => {
                 classes={{
                     paper: classes.drawerPaper,
                 }}
-                boxShadow={3}
             >
                 <div className={classes.drawerHeader}>
                     <IconButton onClick={handleDrawerClose}>

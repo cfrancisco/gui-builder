@@ -1,4 +1,4 @@
-import configs from '../../settings';
+import configs from 'settings';
 
 const styles = (theme) => ({
     menuButton: {
@@ -16,7 +16,7 @@ const styles = (theme) => ({
     },
     menuOverlaid: {
         position: 'absolute',
-        'z-index': 1900,
+        zIndex: theme.zIndex.modal,
     },
     boxShadow: {
         backgroundColor: '#000',
@@ -26,7 +26,7 @@ const styles = (theme) => ({
         position: 'fixed',
         top: 0,
         width: '100%',
-        'z-index': 1800,
+        zIndex: theme.zIndex.drawer,
     },
 });
 

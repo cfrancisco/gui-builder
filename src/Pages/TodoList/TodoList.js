@@ -1,8 +1,8 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
+import Footer from 'Components/TodoList/Footer';
 import AddTodo from './AddTodo/AddTodo';
 import VisibleTodoList from './VisibleTodoList/VisibleTodoList';
-import Footer from '../../Components/TodoList/Footer';
 
 export default () => (
     <Grid

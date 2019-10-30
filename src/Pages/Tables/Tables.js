@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import MaterialTable from 'material-table';
-import SimpleTable from '../../Components/Table/SimpleTable';
+import SimpleTable from 'Components/Table/SimpleTable';
+import tableIcons from 'Components/MaterialTable/icons';
 import styles from './_styles';
-import tableIcons from '../../Components/MaterialTable/icons';
 
 const useStyles = makeStyles(styles);
 
