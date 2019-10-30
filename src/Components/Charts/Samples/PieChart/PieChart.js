@@ -1,6 +1,7 @@
 import React from 'react';
-
 import PropTypes from 'prop-types';
+
+import uuid from 'uuid';
 import {
     PieChart, Pie, Cell, ResponsiveContainer, Tooltip,
 } from 'recharts';
@@ -8,8 +9,6 @@ import {
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import styles from './_styles';
-
-const uuidv1 = require('uuid/v1');
 
 const useStyles = makeStyles(styles);
 
@@ -54,7 +53,7 @@ function CustomPieChart(props) {
                     >
                         {chartData.map((entry, index) => {
                             const colorIndex = index % colors.length;
-                            return <Cell key={`cell-${uuidv1()}`} fill={colors[colorIndex].fill} />;
+                            return <Cell key={`cell-${uuid.v1()}`} fill={colors[colorIndex].fill} />;
                         })}
                     </Pie>
                     <Tooltip />

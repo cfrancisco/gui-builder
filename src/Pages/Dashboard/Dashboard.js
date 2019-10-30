@@ -22,6 +22,7 @@ import RadarChart from 'Components/Charts/RadarChart/RadarChart';
 import Button from 'Components/Button/Button';
 import SimpleTable from 'Components/Table/SimpleTable';
 
+import uuid from 'uuid';
 import Users from 'Services/Users';
 import { withData } from 'utils';
 import styles from './_styles';
@@ -30,7 +31,6 @@ const EnhancedSimpleTable = withData(SimpleTable);
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
-const uuidv1 = require('uuid/v1');
 
 /**
  * This layout demonstrates how to use a grid with a dynamic number of elements.
@@ -190,7 +190,7 @@ class DashboardLayout extends Component {
         } = this.state;
 
         const newPoints = {
-            i: uuidv1(),
+            i: uuid.v1(),
             x: 2,
             y: Infinity, // puts it at the bottom
             w: 2,

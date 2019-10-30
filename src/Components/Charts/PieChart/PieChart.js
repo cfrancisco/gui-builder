@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+
+import uuid from 'uuid';
 import { PieChart } from '../Charts';
 
-const uuidv1 = require('uuid/v1');
 
 function CustomPieChart(props) {
     const { data, title } = props;
@@ -11,7 +12,7 @@ function CustomPieChart(props) {
     return (
         <PieChart title={title}>
             {pieChartData.map((entry) => (
-                <PieChart.Data key={uuidv1()} label={entry.label} value={entry.value} />
+                <PieChart.Data key={uuid.v1()} label={entry.label} value={entry.value} />
             ))}
         </PieChart>
     );

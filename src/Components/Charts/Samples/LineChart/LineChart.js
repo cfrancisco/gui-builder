@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import uuid from 'uuid';
 import {
     LineChart,
     Line,
@@ -16,7 +17,6 @@ import { makeStyles, withStyles } from '@material-ui/core/styles';
 
 import styles from './_styles';
 
-const uuidv1 = require('uuid/v1');
 
 const useStyles = makeStyles(styles);
 
@@ -96,7 +96,7 @@ function CustomLineChart(props) {
                     {datasets.map((set) => (
                         <Line
                             className={classes.mySvg}
-                            key={uuidv1()}
+                            key={uuid.v1()}
                             type="monotone"
                             isAnimationActive={false}
                             dataKey={set.label}

@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
+import uuid from 'uuid';
 import {
     Radar,
     RadarChart,
@@ -13,8 +15,6 @@ import {
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import styles from './_styles';
-
-const uuidv1 = require('uuid/v1');
 
 const useStyles = makeStyles(styles);
 
@@ -77,7 +77,7 @@ function CustomRadarChart(props) {
                         const colorIndex = index % colors.length;
                         return (
                             <Radar
-                                key={uuidv1()}
+                                key={uuid.v1()}
                                 name={set.label}
                                 dataKey={set.label}
                                 stroke={colors[colorIndex].stroke}
