@@ -62,7 +62,6 @@ const pieChartDataset = [
 ];
 
 const Widget = ({ elementType }) => {
-
     const data = Users.getPlainUsers;
 
     let el;
