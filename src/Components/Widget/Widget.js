@@ -62,62 +62,56 @@ const pieChartDataset = [
 ];
 
 const Widget = ({ elementType }) => {
-
     const data = Users.getPlainUsers;
 
-    let el;
+    const el = {
+        map() {
+            return <CustomMap />;
+        },
+        linechart() {
+            return (
+                <LineChart
+                    data={lineChartDataset}
+                    title="Gráfico de Linhas"
+                />
+            );
+        },
+        barchart() {
+            return (
+                <BarChart
+                    data={barChartDataset}
+                    title="Gráfico de Barras"
+                />
+            );
+        },
+        piechart() {
+            return (
+                <PieChart
+                    data={pieChartDataset}
+                    title="Gráfico de Pizza"
+                />
+            );
+        },
+        radarchart() {
+            return (
+                <RadarChart
+                    data={lineChartDataset}
+                    title="Gráfico de Radar"
+                />
+            );
+        },
+        table() {
+            return (
+                <EnhancedSimpleTable
+                    data={[]}
+                    header={simpleHeader}
+                    promiseData={data}
+                />
+            );
+        },
+    };
 
-    switch (elementType) {
-    case ('map'):
-        el = <CustomMap />;
-        break;
-    case ('linechart'):
-        el = (
-            <LineChart
-                data={lineChartDataset}
-                title="Gráfico de Linhas"
-            />
-        );
-        break;
-    case ('barchart'):
-        el = (
-            <BarChart
-                data={barChartDataset}
-                title="Gráfico de Barras"
-            />
-        );
-        break;
-    case ('piechart'):
-        el = (
-            <PieChart
-                data={pieChartDataset}
-                title="Gráfico de Pizza"
-            />
-        );
-        break;
-    case ('radarchart'):
-        el = (
-            <RadarChart
-                data={lineChartDataset}
-                title="Gráfico de Radar"
-            />
-        );
-        break;
-    case ('table'):
-        el = (
-            <EnhancedSimpleTable
-                data={[]}
-                header={simpleHeader}
-                promiseData={data}
-            />
-        );
-        break;
-    default:
-        el = <br />;
-        break;
-    }
-
-    return el;
+    return (el[elementType])();
 };
 
 Widget.propTypes = {
