@@ -18,6 +18,15 @@ const styles = (theme) => ({
     menuButton: {
         marginRight: theme.spacing(2),
     },
+    localeButton: {
+        paddingTop: theme.spacing(1),
+        paddingBottom: theme.spacing(1),
+        paddingLeft: theme.spacing(2),
+        paddingRight: theme.spacing(2),
+        height: 'unset',
+        background: 'unset',
+        boxShadow: 'unset',
+    },
     title: {
         flexGrow: 1,
     },

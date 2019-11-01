@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import MaterialTable from 'material-table';
+import { useTranslation, useStrings } from 'react-language-kit';
+import i18nMap from './i18n';
 import SimpleTable from '../../Components/Table/SimpleTable';
 import styles from './_styles';
 import tableIcons from '../../Components/MaterialTable/icons';
@@ -10,15 +12,27 @@ const useStyles = makeStyles(styles);
 
 const Tables = () => {
     const classes = useStyles();
+    const t = useTranslation(i18nMap);
+    const strings = useStrings(i18nMap);
+
     const simpleHeader = [
-        'Dessert (g)', 'Calories (g)', 'Fat (g)', 'Carbs (g)', 'Protein (g)',
+        t('simpleTable.headers.desserts'),
+        t('simpleTable.headers.calories'),
+        t('simpleTable.headers.fat'),
+        t('simpleTable.headers.carbs'),
+        t('simpleTable.headers.protein'),
     ];
+
+    const grams = 'simpleTable.data.units.grams';
+
     const simpleData = [
-        ['Frozen yoghurt', 159, 6.0, 24, 4],
-        ['Ice cream sandwich', 237, 9.0, 2, 37],
-        ['Eclair', 262, 16.0, 24, 6.0],
-        ['Cupcake', 305, 3.7, 67, 4.3],
-        ['Gingerbread', 356, 16.0, 49, 3.9],
+        [t('simpleTable.data.desserts.frozenYoghurt'), t(grams, { g: 159 }), t(grams, { g: 6.0 }), t(grams, { g: 24 }), t(grams, { g: 4 })],
+        [t('simpleTable.data.desserts.iceCreamSandwich'), t(grams, { g: 237 }), t(grams, { g: 9.0 }), t(grams, { g: 2 }), t(grams, { g: 37 })],
+        [t('simpleTable.data.desserts.eclair'), t(grams, { g: 262 }), t(grams, { g: 16.0 }), t(grams, { g: 24 }), t(grams, { g: 6.0 })],
+        [t('simpleTable.data.desserts.cupcake'), t(grams, { g: 305 }), t(grams, { g: 3.7 }), t(grams, { g: 67 }), t(grams, { g: 4.3 })],
+        [t('simpleTable.data.desserts.gingerbread'), t(grams, { g: 356 }), t(grams, { g: 16.0 }), t(grams, { g: 49 }), t(grams, { g: 3.9 })],
+        [t('simpleTable.data.desserts.frozenBananaCerealPops'), t(grams, { g: 316 }), t(grams, { g: 1 }), t(grams, { g: 12 }), t(grams, { g: 2.3 })],
+        [t('simpleTable.data.desserts.chilledStrawberries'), t(grams, { g: 33 }), t(grams, { g: 0.3 }), t(grams, { g: 8 }), t(grams, { g: 0 })],
     ];
     const [rawData, setRawData] = useState([]);
 
@@ -34,11 +48,11 @@ const Tables = () => {
     }, []);
 
     const columns = [
-        { title: 'Name', field: 'name' },
-        { title: 'Surname', field: 'surname', initialEditValue: 'initial edit value' },
-        { title: 'Birth Year', field: 'birthYear', type: 'numeric' },
+        { title: t('materialTable.columns.name'), field: 'name' },
+        { title: t('materialTable.columns.surname.title'), field: 'surname', initialEditValue: t('materialTable.columns.surname.initialEditValue') },
+        { title: t('materialTable.columns.birthYear'), field: 'birthYear', type: 'numeric' },
         {
-            title: 'Birth Place',
+            title: t('materialTable.columns.birthPlace'),
             field: 'birthCity',
             lookup: { 34: 'İstanbul', 63: 'Şanlıurfa' },
         },
@@ -77,7 +91,7 @@ const Tables = () => {
                 <Grid item xs={12} md={12}>
                     <MaterialTable
                         icons={tableIcons}
-                        title="Editable Table"
+                        title={t('materialTable.title')}
                         columns={columns}
                         data={rawData}
                         editable={{
@@ -85,6 +99,7 @@ const Tables = () => {
                             onRowUpdate: onRowUpdateMethod,
                             onRowDelete: onRowDeleteMethod,
                         }}
+                        localization={strings.materialTable.localization}
                     />
                 </Grid>
             </Grid>
