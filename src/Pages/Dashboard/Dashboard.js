@@ -94,7 +94,7 @@ class DashboardLayout extends Component {
         const { layout } = this.state;
         layout.forEach((el) => {
             // console.log('el did mount', el);
-            boxes.push(this.generateDOM(el, this.retrieveWidget(el.type)));
+            boxes.push(this.generateDOM(el, this.retrieveWidget(el.type, el.endpoint)));
         });
         this.setState({ layoutElement: boxes });
     }
@@ -139,10 +139,10 @@ class DashboardLayout extends Component {
             w: 2,
             h: 2,
             type: values.element,
-            endpoint: 'https://endpoint.dojot.com.br/devices/0928439',
+            endpoint: 'https://reqres.in/api/users?page=1',
         };
 
-        const widget = this.retrieveWidget(newPoints.type);
+        const widget = this.retrieveWidget(newPoints.type, newPoints.endpoint);
 
         this.setState({
             layoutElement: [...layoutElement, this.generateDOM(newPoints, widget)],
@@ -177,10 +177,11 @@ class DashboardLayout extends Component {
         onLayoutChange(newDashboardLayout); // updates status display
     }
 
-    retrieveWidget(elementType) {
+    retrieveWidget(elementType, endpoint) {
         const el = (
             <Widget
                 elementType={elementType}
+                endpoint={endpoint}
             />
         );
         return el;

@@ -14,7 +14,11 @@ import { withData } from 'utils';
 const EnhancedSimpleTable = withData(SimpleTable);
 
 const simpleHeader = [
-    'Dessert (g)', 'Calories (g)', 'Fat (g)', 'Carbs (g)', 'Protein (g)',
+    'id',
+    'email',
+    'first_name',
+    'last_name',
+    'avatar',
 ];
 
 const lineChartDataset = [
@@ -61,10 +65,11 @@ const pieChartDataset = [
     { label: 'Protocolo C', value: 6 },
 ];
 
+
 const Widget = ({ elementType }) => {
     const data = Users.getPlainUsers;
 
-    const el = {
+    const element = {
         map() {
             return <CustomMap />;
         },
@@ -103,7 +108,7 @@ const Widget = ({ elementType }) => {
         table() {
             return (
                 <EnhancedSimpleTable
-                    data={[]}
+                    data={data}
                     header={simpleHeader}
                     promiseData={data}
                 />
@@ -111,11 +116,11 @@ const Widget = ({ elementType }) => {
         },
     };
 
-    return (el[elementType])();
+    return (element[elementType])();
 };
 
 Widget.propTypes = {
-    elementType: PropTypes.objectOf(PropTypes.shape).isRequired,
+    elementType: PropTypes.string.isRequired,
 };
 
 export default Widget;

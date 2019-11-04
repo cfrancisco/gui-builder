@@ -36,20 +36,7 @@ class Users {
         return http
             .get('https://reqres.in/api/users?page=1')
             .then((res) => {
-                const newList = [];
-                res.data.forEach(({
-                    id,
-                    email,
-                    first_name,
-                    last_name,
-                    avatar,
-                }) => newList.push([
-                    id,
-                    email,
-                    first_name,
-                    last_name,
-                    avatar,
-                ]));
+                const newList = res.data.map(Object.values);
                 return newList;
             })
             .catch(() => []);
