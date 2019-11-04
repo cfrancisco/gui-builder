@@ -177,6 +177,7 @@ class DashboardLayout extends Component {
         onLayoutChange(newDashboardLayout); // updates status display
     }
 
+    // eslint-disable-next-line class-methods-use-this
     retrieveWidget(elementType, endpoint) {
         const el = (
             <Widget
