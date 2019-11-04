@@ -122,7 +122,13 @@ const TopBar = ({ handleDrawerToggle, open }) => {
                             onClose={handleClose}
                         >
                             {languages.map((lang) => (
-                                <MenuItem key={lang} selected={lang === language} onClick={() => handleSelectedLang(lang)}>{lang}</MenuItem>
+                                <MenuItem
+                                    key={lang}
+                                    selected={lang === language}
+                                    onClick={() => handleSelectedLang(lang)}
+                                >
+                                    {lang}
+                                </MenuItem>
                             ))}
                         </Menu>
 
