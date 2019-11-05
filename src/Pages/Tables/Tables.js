@@ -90,7 +90,7 @@ const Tables = () => {
         }, {
             title: translate('materialTable.columns.surname.title'),
             field: 'surname',
-            initialEditValue: translate('materialTable.columns.surname.initialEditValue')
+            initialEditValue: translate('materialTable.columns.surname.initialEditValue'),
         }, {
             title: translate('materialTable.columns.birthYear'),
             field: 'birthYear',
