@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import MaterialTable from 'material-table';
 import { useTranslation, useStrings } from 'react-language-kit';
-import i18nMap from './i18n';
+import locales from './locales';
 import SimpleTable from '../../Components/Table/SimpleTable';
 import styles from './_styles';
 import tableIcons from '../../Components/MaterialTable/icons';
@@ -12,27 +12,63 @@ const useStyles = makeStyles(styles);
 
 const Tables = () => {
     const classes = useStyles();
-    const t = useTranslation(i18nMap);
-    const strings = useStrings(i18nMap);
+    const translate = useTranslation(locales);
+    const strings = useStrings(locales);
 
     const simpleHeader = [
-        t('simpleTable.headers.desserts'),
-        t('simpleTable.headers.calories'),
-        t('simpleTable.headers.fat'),
-        t('simpleTable.headers.carbs'),
-        t('simpleTable.headers.protein'),
+        translate('simpleTable.headers.desserts'),
+        translate('simpleTable.headers.calories'),
+        translate('simpleTable.headers.fat'),
+        translate('simpleTable.headers.carbs'),
+        translate('simpleTable.headers.protein'),
     ];
 
     const grams = 'simpleTable.data.units.grams';
 
     const simpleData = [
-        [t('simpleTable.data.desserts.frozenYoghurt'), t(grams, { g: 159 }), t(grams, { g: 6.0 }), t(grams, { g: 24 }), t(grams, { g: 4 })],
-        [t('simpleTable.data.desserts.iceCreamSandwich'), t(grams, { g: 237 }), t(grams, { g: 9.0 }), t(grams, { g: 2 }), t(grams, { g: 37 })],
-        [t('simpleTable.data.desserts.eclair'), t(grams, { g: 262 }), t(grams, { g: 16.0 }), t(grams, { g: 24 }), t(grams, { g: 6.0 })],
-        [t('simpleTable.data.desserts.cupcake'), t(grams, { g: 305 }), t(grams, { g: 3.7 }), t(grams, { g: 67 }), t(grams, { g: 4.3 })],
-        [t('simpleTable.data.desserts.gingerbread'), t(grams, { g: 356 }), t(grams, { g: 16.0 }), t(grams, { g: 49 }), t(grams, { g: 3.9 })],
-        [t('simpleTable.data.desserts.frozenBananaCerealPops'), t(grams, { g: 316 }), t(grams, { g: 1 }), t(grams, { g: 12 }), t(grams, { g: 2.3 })],
-        [t('simpleTable.data.desserts.chilledStrawberries'), t(grams, { g: 33 }), t(grams, { g: 0.3 }), t(grams, { g: 8 }), t(grams, { g: 0 })],
+        [
+            translate('simpleTable.data.desserts.frozenYoghurt'),
+            translate(grams, { g: 159 }),
+            translate(grams, { g: 6.0 }),
+            translate(grams, { g: 24 }),
+            translate(grams, { g: 4 }),
+        ], [
+            translate('simpleTable.data.desserts.iceCreamSandwich'),
+            translate(grams, { g: 237 }),
+            translate(grams, { g: 9.0 }),
+            translate(grams, { g: 2 }),
+            translate(grams, { g: 37 }),
+        ], [
+            translate('simpleTable.data.desserts.eclair'),
+            translate(grams, { g: 262 }),
+            translate(grams, { g: 16.0 }),
+            translate(grams, { g: 24 }),
+            translate(grams, { g: 6.0 }),
+        ], [
+            translate('simpleTable.data.desserts.cupcake'),
+            translate(grams, { g: 305 }),
+            translate(grams, { g: 3.7 }),
+            translate(grams, { g: 67 }),
+            translate(grams, { g: 4.3 }),
+        ], [
+            translate('simpleTable.data.desserts.gingerbread'),
+            translate(grams, { g: 356 }),
+            translate(grams, { g: 16.0 }),
+            translate(grams, { g: 49 }),
+            translate(grams, { g: 3.9 }),
+        ], [
+            translate('simpleTable.data.desserts.frozenBananaCerealPops'),
+            translate(grams, { g: 316 }),
+            translate(grams, { g: 1 }),
+            translate(grams, { g: 12 }),
+            translate(grams, { g: 2.3 }),
+        ], [
+            translate('simpleTable.data.desserts.chilledStrawberries'),
+            translate(grams, { g: 33 }),
+            translate(grams, { g: 0.3 }),
+            translate(grams, { g: 8 }),
+            translate(grams, { g: 0 }),
+        ],
     ];
     const [rawData, setRawData] = useState([]);
 
@@ -48,11 +84,19 @@ const Tables = () => {
     }, []);
 
     const columns = [
-        { title: t('materialTable.columns.name'), field: 'name' },
-        { title: t('materialTable.columns.surname.title'), field: 'surname', initialEditValue: t('materialTable.columns.surname.initialEditValue') },
-        { title: t('materialTable.columns.birthYear'), field: 'birthYear', type: 'numeric' },
         {
-            title: t('materialTable.columns.birthPlace'),
+            title: translate('materialTable.columns.name'),
+            field: 'name',
+        }, {
+            title: translate('materialTable.columns.surname.title'),
+            field: 'surname',
+            initialEditValue: translate('materialTable.columns.surname.initialEditValue')
+        }, {
+            title: translate('materialTable.columns.birthYear'),
+            field: 'birthYear',
+            type: 'numeric',
+        }, {
+            title: translate('materialTable.columns.birthPlace'),
             field: 'birthCity',
             lookup: { 34: 'İstanbul', 63: 'Şanlıurfa' },
         },
@@ -91,7 +135,7 @@ const Tables = () => {
                 <Grid item xs={12} md={12}>
                     <MaterialTable
                         icons={tableIcons}
-                        title={t('materialTable.title')}
+                        title={translate('materialTable.title')}
                         columns={columns}
                         data={rawData}
                         editable={{

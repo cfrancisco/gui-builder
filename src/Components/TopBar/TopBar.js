@@ -97,7 +97,7 @@ const TopBar = ({ handleDrawerToggle, open }) => {
                 {auth && (
                     <>
                         <Button
-                            aria-controls="customized-menu"
+                            aria-controls="locale-menu"
                             aria-haspopup="true"
                             className={classes.localeButton}
                             onClick={handleLocaleClick}
