@@ -4,21 +4,71 @@ import Grid from '@material-ui/core/Grid';
 import MaterialTable from 'material-table';
 import SimpleTable from 'Components/Table/SimpleTable';
 import tableIcons from 'Components/MaterialTable/icons';
+import { useTranslation, useStrings } from 'react-language-kit';
+import locales from './locales';
 import styles from './_styles';
 
 const useStyles = makeStyles(styles);
 
 const Tables = () => {
     const classes = useStyles();
+    const translate = useTranslation(locales);
+    const strings = useStrings(locales);
+
     const simpleHeader = [
-        'Dessert (g)', 'Calories (g)', 'Fat (g)', 'Carbs (g)', 'Protein (g)',
+        translate('simpleTable.headers.desserts'),
+        translate('simpleTable.headers.calories'),
+        translate('simpleTable.headers.fat'),
+        translate('simpleTable.headers.carbs'),
+        translate('simpleTable.headers.protein'),
     ];
+
+    const grams = 'simpleTable.data.units.grams';
+
     const simpleData = [
-        ['Frozen yoghurt', 159, 6.0, 24, 4],
-        ['Ice cream sandwich', 237, 9.0, 2, 37],
-        ['Eclair', 262, 16.0, 24, 6.0],
-        ['Cupcake', 305, 3.7, 67, 4.3],
-        ['Gingerbread', 356, 16.0, 49, 3.9],
+        [
+            translate('simpleTable.data.desserts.frozenYoghurt'),
+            translate(grams, { g: 159 }),
+            translate(grams, { g: 6.0 }),
+            translate(grams, { g: 24 }),
+            translate(grams, { g: 4 }),
+        ], [
+            translate('simpleTable.data.desserts.iceCreamSandwich'),
+            translate(grams, { g: 237 }),
+            translate(grams, { g: 9.0 }),
+            translate(grams, { g: 2 }),
+            translate(grams, { g: 37 }),
+        ], [
+            translate('simpleTable.data.desserts.eclair'),
+            translate(grams, { g: 262 }),
+            translate(grams, { g: 16.0 }),
+            translate(grams, { g: 24 }),
+            translate(grams, { g: 6.0 }),
+        ], [
+            translate('simpleTable.data.desserts.cupcake'),
+            translate(grams, { g: 305 }),
+            translate(grams, { g: 3.7 }),
+            translate(grams, { g: 67 }),
+            translate(grams, { g: 4.3 }),
+        ], [
+            translate('simpleTable.data.desserts.gingerbread'),
+            translate(grams, { g: 356 }),
+            translate(grams, { g: 16.0 }),
+            translate(grams, { g: 49 }),
+            translate(grams, { g: 3.9 }),
+        ], [
+            translate('simpleTable.data.desserts.frozenBananaCerealPops'),
+            translate(grams, { g: 316 }),
+            translate(grams, { g: 1 }),
+            translate(grams, { g: 12 }),
+            translate(grams, { g: 2.3 }),
+        ], [
+            translate('simpleTable.data.desserts.chilledStrawberries'),
+            translate(grams, { g: 33 }),
+            translate(grams, { g: 0.3 }),
+            translate(grams, { g: 8 }),
+            translate(grams, { g: 0 }),
+        ],
     ];
     const [rawData, setRawData] = useState([]);
 
@@ -34,11 +84,19 @@ const Tables = () => {
     }, []);
 
     const columns = [
-        { title: 'Name', field: 'name' },
-        { title: 'Surname', field: 'surname', initialEditValue: 'initial edit value' },
-        { title: 'Birth Year', field: 'birthYear', type: 'numeric' },
         {
-            title: 'Birth Place',
+            title: translate('materialTable.columns.name'),
+            field: 'name',
+        }, {
+            title: translate('materialTable.columns.surname.title'),
+            field: 'surname',
+            initialEditValue: translate('materialTable.columns.surname.initialEditValue'),
+        }, {
+            title: translate('materialTable.columns.birthYear'),
+            field: 'birthYear',
+            type: 'numeric',
+        }, {
+            title: translate('materialTable.columns.birthPlace'),
             field: 'birthCity',
             lookup: { 34: 'İstanbul', 63: 'Şanlıurfa' },
         },
@@ -77,7 +135,7 @@ const Tables = () => {
                 <Grid item xs={12} md={12}>
                     <MaterialTable
                         icons={tableIcons}
-                        title="Editable Table"
+                        title={translate('materialTable.title')}
                         columns={columns}
                         data={rawData}
                         editable={{
@@ -85,6 +143,7 @@ const Tables = () => {
                             onRowUpdate: onRowUpdateMethod,
                             onRowDelete: onRowDeleteMethod,
                         }}
+                        localization={strings.materialTable.localization}
                     />
                 </Grid>
             </Grid>
