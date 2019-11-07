@@ -180,6 +180,10 @@ class DashboardLayout extends Component {
         onLayoutChange(newDashboardLayout); // updates status display
     }
 
+    closeToast = () => {
+        this.setState({ needToSave: false });
+    }
+
     // eslint-disable-next-line class-methods-use-this
     retrieveWidget(elementType, endpoint) {
         const el = (
@@ -220,10 +224,6 @@ class DashboardLayout extends Component {
         const { values } = this.state;
         values[event.target.name] = event.target.value;
         this.setState({ values });
-    }
-
-    closeToast = () => {
-        this.setState({ needToSave: false });
     }
 
     render() {
