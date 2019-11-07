@@ -14,6 +14,7 @@ import Select from '@material-ui/core/Select';
 
 import Widget from 'Components/Widget/Widget';
 
+import Toast from 'Components/Toast/Toast';
 import Button from 'Components/Button/Button';
 
 import uuid from 'uuid';
@@ -61,6 +62,7 @@ class DashboardLayout extends Component {
             values: { element: '' },
             layoutElement: [],
             layout: [...originalLayout],
+            needToSave: false,
         };
 
         this.generateDOM = this.generateDOM.bind(this);
@@ -173,6 +175,7 @@ class DashboardLayout extends Component {
         this.setState({
             layout: newDashboardLayout,
             items: layout,
+            needToSave: true,
         });
         onLayoutChange(newDashboardLayout); // updates status display
     }
@@ -219,10 +222,15 @@ class DashboardLayout extends Component {
         this.setState({ values });
     }
 
+    closeToast = () => {
+        this.setState({ needToSave: false });
+    }
+
     render() {
         const {
             values,
             layoutElement,
+            needToSave,
         } = this.state;
         const { classes } = this.props;
 
@@ -258,6 +266,20 @@ class DashboardLayout extends Component {
                         Reset Layout
                     </Button>
                 </FormControl>
+                {
+                    needToSave
+                        ? (
+                            <Toast
+                                open
+                                closeToast={this.closeToast}
+                                variant="warning"
+                                message="Layout not saved"
+                                originHorizontal="right"
+                                originVertical="top"
+                            />
+                        )
+                        : ''
+                }
                 <ResponsiveReactGridLayout
                     className={classes.reactGridLayout}
                     {...this.props}
