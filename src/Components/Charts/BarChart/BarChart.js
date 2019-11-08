@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+
+import uuid from 'uuid';
 import { BarChart } from '../Charts';
 
-const uuidv1 = require('uuid/v1');
 
 function CustomBarChart(props) {
     const { data, title } = props;
@@ -11,12 +12,12 @@ function CustomBarChart(props) {
     return (
         <BarChart title={title}>
             {barChartData.map((set) => (
-                <BarChart.Dataset label={set.label} key={uuidv1()}>
+                <BarChart.Dataset label={set.label} key={uuid.v1()}>
                     {set.data.map((entry) => (
                         <BarChart.Data
                             label={entry.label}
                             value={entry.value}
-                            key={uuidv1()}
+                            key={uuid.v1()}
                         />
                     ))}
                 </BarChart.Dataset>

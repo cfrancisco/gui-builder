@@ -9863,10 +9863,10 @@ react-is@^16.6.0, react-is@^16.7.0, react-is@^16.8.1, react-is@^16.8.4, react-is
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.10.2.tgz#984120fd4d16800e9a738208ab1fba422d23b5ab"
   integrity sha512-INBT1QEgtcCCgvccr5/86CfD71fw9EPmDxgiJX4I2Ddr6ZsV6iFXsuby+qWJPtmNuMY0zByTsG4468P7nHuNWA==
 
-react-language-kit@^1.2.0-rc.0:
-  version "1.2.0-rc.0"
-  resolved "https://registry.yarnpkg.com/react-language-kit/-/react-language-kit-1.2.0-rc.0.tgz#a5669ee8eabf76383c08160993f8f91016f8bcdf"
-  integrity sha512-/whoJwI2YQERvoxofkEXXiYKqBigsJsxJUmyPV6zSx1Khw1B44NntO1ibxVy87EQY80jZe5sPIrAxgDNypLeGQ==
+react-language-kit@^1.2.0-rc.1:
+  version "1.2.0-rc.1"
+  resolved "https://registry.yarnpkg.com/react-language-kit/-/react-language-kit-1.2.0-rc.1.tgz#76029ef1fef449e71d58acf334b70a831eae19e6"
+  integrity sha512-Oo3pekl96ie07GDxT3kRzqeJ4MmakY8lDcbDwo5uLAokbUSW7DfW/p+ZGomAbohhfBtIZPEFWPGvN1R47szdoA==
   dependencies:
     intl-messageformat "^7.3.3"
 

@@ -10,7 +10,6 @@ import styles from './_styles';
 
 const useStyles = makeStyles(styles);
 
-
 const LayoutBase = (props) => {
     const classes = useStyles();
     const [open, setOpen] = useState(false);
@@ -22,14 +21,17 @@ const LayoutBase = (props) => {
     function handleDrawerClose() {
         setOpen(false);
     }
+
     const { children } = props;
 
     return (
         <div className={classes.root}>
             <CssBaseline />
             <TopBar open={open} handleDrawerToggle={handleDrawerToggle} />
-            <div className={classes.content}>
-                <Menu open={open} handleDrawerClose={handleDrawerClose} />
+            <Menu open={open} handleDrawerClose={handleDrawerClose} />
+            <div
+                className={clsx(classes.content, open ? classes.contentBlur : '')}
+            >
                 <Container
                     className={clsx(classes.containerBase, {
                         [classes.containerBaseShift]: open,

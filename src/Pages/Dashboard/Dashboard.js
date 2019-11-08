@@ -11,80 +11,23 @@ import Grid from '@material-ui/core/Grid';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import CustomMap from '../../Components/CustomMap/CustomMap';
 
-import LineChart from '../../Components/Charts/LineChart/LineChart';
-import BarChart from '../../Components/Charts/BarChart/BarChart';
-import PieChart from '../../Components/Charts/PieChart/PieChart';
-import RadarChart from '../../Components/Charts/RadarChart/RadarChart';
+import Widget from 'Components/Widget/Widget';
 
-import Button from '../../Components/Button/Button';
-import SimpleTable from '../../Components/Table/SimpleTable';
+import Toast from 'Components/Toast/Toast';
+import Button from 'Components/Button/Button';
+
+import uuid from 'uuid';
 
 import styles from './_styles';
 
+
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
-const uuidv1 = require('uuid/v1');
 
 /**
  * This layout demonstrates how to use a grid with a dynamic number of elements.
  */
-
-const simpleHeader = [
-    'Dessert (g)', 'Calories (g)', 'Fat (g)', 'Carbs (g)', 'Protein (g)',
-];
-
-const lineChartDataset = [
-    {
-        label: 'Temperatura',
-        data: [
-            { label: '05/06', value: 19 },
-            { label: '06/06', value: 26 },
-            { label: '07/06', value: 31 },
-        ],
-    },
-    {
-        label: 'Umidade',
-        data: [
-            { label: '05/06', value: 40 },
-            { label: '06/06', value: 32 },
-            { label: '07/06', value: 19 },
-        ],
-    },
-];
-const sampleData = [
-    ['Frozen yoghurt', 159, 6.0, 24, 4],
-    ['Ice cream sandwich', 237, 9.0, 2, 37],
-    ['Eclair', 262, 16.0, 24, 6.0],
-    ['Cupcake', 305, 3.7, 67, 4.3],
-    ['Gingerbread', 356, 16.0, 49, 3.9],
-];
-
-const barChartDataset = [
-    {
-        label: 'LineDataset01',
-        data: [
-            { label: 'data01', value: 1 },
-            { label: 'data02', value: 13 },
-            { label: 'data03', value: 6 },
-        ],
-    },
-    {
-        label: 'LineDataset02',
-        data: [
-            { label: 'data01', value: 6 },
-            { label: 'data02', value: 1 },
-            { label: 'data03', value: -3 },
-        ],
-    },
-];
-
-const pieChartDataset = [
-    { label: 'Protocolo A', value: 9 },
-    { label: 'Protocolo B', value: 13 },
-    { label: 'Protocolo C', value: 6 },
-];
 
 function getFromLS(key) {
     let ls = {};
@@ -115,11 +58,11 @@ class DashboardLayout extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: [],
             items: [...originalLayout],
             values: { element: '' },
             layoutElement: [],
             layout: [...originalLayout],
+            needToSave: true,
         };
 
         this.generateDOM = this.generateDOM.bind(this);
@@ -153,11 +96,11 @@ class DashboardLayout extends Component {
         const { layout } = this.state;
         layout.forEach((el) => {
             // console.log('el did mount', el);
-            boxes.push(this.generateDOM(el, this.retrieveWidget(el.type)));
+            boxes.push(this.generateDOM(el, this.retrieveWidget(el.type, el.endpoint)));
         });
-
         this.setState({ layoutElement: boxes });
     }
+
 
     /**
      * Function used to remove an item from Dashboard component. Receive an
@@ -192,16 +135,16 @@ class DashboardLayout extends Component {
         } = this.state;
 
         const newPoints = {
-            i: uuidv1(),
+            i: uuid.v1(),
             x: 2,
             y: Infinity, // puts it at the bottom
             w: 2,
             h: 2,
             type: values.element,
-            endpoint: 'https://endpoint.dojot.com.br/devices/0928439',
+            endpoint: 'https://reqres.in/api/users?page=1',
         };
 
-        const widget = this.retrieveWidget(newPoints.type);
+        const widget = this.retrieveWidget(newPoints.type, newPoints.endpoint);
 
         this.setState({
             layoutElement: [...layoutElement, this.generateDOM(newPoints, widget)],
@@ -229,68 +172,26 @@ class DashboardLayout extends Component {
         });
 
         saveToLS('layout', newDashboardLayout);
-        this.setState({
+        this.setState((prevState) => ({
             layout: newDashboardLayout,
             items: layout,
-        });
+            needToSave: !prevState.needToSave,
+        }));
         onLayoutChange(newDashboardLayout); // updates status display
     }
 
-    retrieveWidget(elementType) {
-        let {
-            data,
-        } = this.state;
+    closeToast = () => {
+        this.setState({ needToSave: false });
+    }
 
-        let el;
-
-        if (data.length === 0) {
-            data = sampleData;
-        }
-
-        switch (elementType) {
-        case ('map'):
-            el = <CustomMap />;
-            break;
-        case ('linechart'):
-            el = (
-                <LineChart
-                    data={lineChartDataset}
-                    title="Gráfico de Linhas"
-                />
-            );
-            break;
-        case ('barchart'):
-            el = (
-                <BarChart
-                    data={barChartDataset}
-                    title="Gráfico de Barras"
-                />
-            );
-            break;
-        case ('piechart'):
-            el = (
-                <PieChart
-                    data={pieChartDataset}
-                    title="Gráfico de Pizza"
-                />
-            );
-            break;
-        case ('radarchart'):
-            el = (
-                <RadarChart
-                    data={lineChartDataset}
-                    title="Gráfico de Radar"
-                />
-            );
-            break;
-        case ('table'):
-            el = <SimpleTable header={simpleHeader} data={data} />;
-            break;
-        default:
-            el = <br />;
-            break;
-        }
-
+    // eslint-disable-next-line class-methods-use-this
+    retrieveWidget(elementType, endpoint) {
+        const el = (
+            <Widget
+                elementType={elementType}
+                endpoint={endpoint}
+            />
+        );
         return el;
     }
 
@@ -328,8 +229,8 @@ class DashboardLayout extends Component {
     render() {
         const {
             values,
-            configs,
             layoutElement,
+            needToSave,
         } = this.state;
         const { classes } = this.props;
 
@@ -365,8 +266,21 @@ class DashboardLayout extends Component {
                         Reset Layout
                     </Button>
                 </FormControl>
+                {
+                    needToSave
+                        ? (
+                            <Toast
+                                open
+                                closeToast={this.closeToast}
+                                variant="warning"
+                                message="Dashboard not saved"
+                                originHorizontal="right"
+                                originVertical="top"
+                            />
+                        )
+                        : ''
+                }
                 <ResponsiveReactGridLayout
-                    {...configs}
                     className={classes.reactGridLayout}
                     {...this.props}
                     onLayoutChange={this.onLayoutChange}
@@ -379,7 +293,7 @@ class DashboardLayout extends Component {
 }
 
 DashboardLayout.defaultProps = {
-    onLayoutChange() {},
+    onLayoutChange() { },
 };
 
 DashboardLayout.propTypes = {

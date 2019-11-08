@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
+import uuid from 'uuid';
 import { LineChart } from '../Charts';
 
-const uuidv1 = require('uuid/v1');
 
 function CustomLineChart(props) {
     const { data, title } = props;
@@ -12,11 +12,11 @@ function CustomLineChart(props) {
     return (
         <LineChart title={title}>
             {lineChartData.map((set) => (
-                <LineChart.Dataset key={uuidv1()} label={set.label}>
+                <LineChart.Dataset key={uuid.v1()} label={set.label}>
                     {set.data.map(
                         (entry) => (
                             <LineChart.Data
-                                key={uuidv1()}
+                                key={uuid.v1()}
                                 label={entry.label}
                                 value={entry.value}
                             />

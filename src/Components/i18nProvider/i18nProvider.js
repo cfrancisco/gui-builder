@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import intl from 'react-intl-universal';
-import config from '../../config';
+import config from 'config';
 
 const i18nProvider = ({ localeObj, termKey }) => {
     const lang = config.language ? config.language.code : window.navigator.language;

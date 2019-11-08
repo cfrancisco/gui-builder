@@ -31,7 +31,7 @@
     "react-grid-layout": "^0.16.6",
     "react-highlight.js": "^1.0.7",
     "react-intl-universal": "^2.1.4",
-    "react-language-kit": "^1.2.0-rc.0",
+    "react-language-kit": "^1.2.0-rc.1",
     "react-leaflet": "^2.4.0",
     "react-redux": "^7.1.1",
     "react-resizable": "^1.8.0",

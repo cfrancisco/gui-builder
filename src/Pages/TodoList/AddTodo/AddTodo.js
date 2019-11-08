@@ -11,9 +11,9 @@ import {
 import Grid from '@material-ui/core/Grid';
 
 import { connect } from 'react-redux';
+import Button from 'Components/Button/Button';
+import I18nProvider from 'Components/i18nProvider/i18nProvider';
 import addTodo from './Action';
-import Button from '../../../Components/Button/Button';
-import I18nProvider from '../../../Components/i18nProvider/i18nProvider';
 import * as locales from './locales/AddTodo';
 
 class AddTodo extends Component {

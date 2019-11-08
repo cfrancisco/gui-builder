@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-
 import PropTypes from 'prop-types';
+
+import uuid from 'uuid';
 import { RadarChart } from '../Charts';
 
-const uuidv1 = require('uuid/v1');
 
 function CustomRadarChart(props) {
     const { data, title } = props;
@@ -12,10 +12,10 @@ function CustomRadarChart(props) {
     return (
         <RadarChart title={title}>
             {radarChartData.map((set) => (
-                <RadarChart.Dataset key={uuidv1()} label={set.label}>
+                <RadarChart.Dataset key={uuid.v1()} label={set.label}>
                     {set.data.map((entry) => (
                         <RadarChart.Data
-                            key={uuidv1()}
+                            key={uuid.v1()}
                             label={entry.label}
                             value={entry.value}
                         />

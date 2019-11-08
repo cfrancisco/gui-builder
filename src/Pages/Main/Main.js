@@ -5,9 +5,9 @@ import {
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import { DatePicker } from 'antd';
-import Loader from '../../Components/Loader/Loader';
-import Avatar from '../../Components/Avatar/Avatar';
-import { DojotButton, CleanButton, CustomButton } from '../../Components/Button';
+import Loader from 'Components/Loader/Loader';
+import Avatar from 'Components/Avatar/Avatar';
+import { DojotButton, CleanButton, CustomButton } from 'Components/Button';
 import 'antd/dist/antd.css';
 import styles from './_styles';
 

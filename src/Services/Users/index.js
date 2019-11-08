@@ -32,6 +32,16 @@ class Users {
             .catch((error) => error);
     }
 
+    static getPlainUsers() {
+        return http
+            .get('https://reqres.in/api/users?page=1')
+            .then((res) => {
+                const newList = res.data.map(Object.values);
+                return newList;
+            })
+            .catch(() => []);
+    }
+
     static getMoreUsers() {
         return http
             .get('https://reqrs.in/api/users?page=1')
