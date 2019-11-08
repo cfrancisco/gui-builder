@@ -62,7 +62,7 @@ class DashboardLayout extends Component {
             values: { element: '' },
             layoutElement: [],
             layout: [...originalLayout],
-            needToSave: false,
+            needToSave: true,
         };
 
         this.generateDOM = this.generateDOM.bind(this);
@@ -172,11 +172,11 @@ class DashboardLayout extends Component {
         });
 
         saveToLS('layout', newDashboardLayout);
-        this.setState({
+        this.setState((prevState) => ({
             layout: newDashboardLayout,
             items: layout,
-            needToSave: true,
-        });
+            needToSave: !prevState.needToSave,
+        }));
         onLayoutChange(newDashboardLayout); // updates status display
     }
 
@@ -273,7 +273,7 @@ class DashboardLayout extends Component {
                                 open
                                 closeToast={this.closeToast}
                                 variant="warning"
-                                message="Layout not saved"
+                                message="Dashboard not saved"
                                 originHorizontal="right"
                                 originVertical="top"
                             />

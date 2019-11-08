@@ -70,6 +70,9 @@ const useStyles2 = makeStyles((theme) => ({
     margin: {
         margin: theme.spacing(1),
     },
+    topRight: {
+        margin: theme.spacing(4),
+    },
 }));
 
 function Toast(props) {
@@ -97,6 +100,7 @@ function Toast(props) {
     return (
         <div>
             <Snackbar
+                className={classes.topRight}
                 anchorOrigin={{
                     horizontal: `${originHorizontal}`,
                     vertical: `${originVertical}`,
